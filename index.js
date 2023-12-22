@@ -7,7 +7,7 @@ const https = require('https');
 
 // Serve static files from your existing website directory (bandobot.xyz)
 const app = express();
-const PORT = process.env.PORT || 443; // Change to the desired HTTPS port
+const PORT = process.env.PORT || 8080; // Change to the desired HTTPS port
 const fs = require('fs');
 
 // Serve static files from your existing website directory (bandobot.xyz)
@@ -35,20 +35,20 @@ app.get('/githubdata', async (req, res) => {
   }
 });
 
-// const options = 
-// {
-//   key: fs.readFileSync('./bandobot.key'),  
-//   cert: fs.readFileSync('./bandobot.crt'), 
-// };
-// var server;
+const options = 
+{
+  key: fs.readFileSync('./bandobot.key'),  
+  cert: fs.readFileSync('./bandobot.crt'), 
+};
+var server;
 
-//   server = https.createServer(options, app);
+  server = https.createServer(options, app);
 
 
 
-// server.listen(PORT, () => {
-//   console.log(`Server running on port ${PORT}`);
-// });
+server.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
 
 const ALL_INTENTS = 
     (1 << 0) +  // GUILDS
