@@ -1,0 +1,19 @@
+{
+	"prefix": "bnd",
+	"verifyRole": "962484733932093500",
+	"messages": {
+		"COOLDOWN_MESSAGE": "You are on `<duration>` cooldown!"
+	},
+    "name": "Music Disc",
+    "playing": "bndhelp | music",
+    "color": "#FFFFFF",
+    "defaultVolume": 50,
+    "autoLeave": true,
+    "autoSelfDeaf": false,
+    "displayVoiceState": true,
+    "port": 33333,
+    
+  "scripts": {
+    "lint": "eslint ./index.js"
+  }
+}
