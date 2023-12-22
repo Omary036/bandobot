@@ -217,7 +217,7 @@ eventModel.find({event:"Events"}).then(async(documents)=>{documents.forEach(asyn
  
 
 
- client.login(process.env.TOKEN)
+ client.login(process.env.token)
 
 //====================================================================
 
