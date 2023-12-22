@@ -35,21 +35,24 @@ app.get('/githubdata', async (req, res) => {
   }
 });
 
-const options = 
-{
-  key: fs.readFileSync('./bandobot.key'),  
-  cert: fs.readFileSync('./bandobot.crt'), 
-};
-var server;
+try {
+  const options = {
+    key: fs.readFileSync('./bandobot.key'),  
+    cert: fs.readFileSync('./bandobot.crt'), 
+  };
+  
+  var server = https.createServer(options, app);
 
-  server = https.createServer(options, app);
+  server.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+  });
+} catch (error) {
+  console.error('Error reading certificate or key files:', error);
+}
 
-
-
-server.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+server.on('error', (error) => {
+  console.error('Server error:', error);
 });
-
 const ALL_INTENTS = 
     (1 << 0) +  // GUILDS
     (1 << 1) +  // GUILD_MEMBERS
