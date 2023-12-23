@@ -39,10 +39,13 @@ let options = {
 
   var server = https.createServer(options, app);
 
-  server.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-  });
+  // server.listen(PORT, () => {
+  //   console.log(`Server running on port ${PORT}`);
+  // });
 
+app.listen(3000, () => {
+console.log(`Server running on port ${PORT}`);
+});
 
 server.on('error', (error) => {
   console.error('Server error:', error);
