@@ -35,19 +35,11 @@ const options = {
   key: fs.readFileSync('./ssl/bandobot.key')
 };
 
-const server = https.createServer(options, app);
+const server = http.createServer(app);
 
-server.on('error', (error) => {
-  console.error('Server error:', error);
+server.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
-
-try {
-  server.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-  });
-} catch (err) {
-  console.error('Error starting server:', err);
-}
 
 
 
