@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 443; // Change to the desired HTTPS port
 const fs = require('fs');
 
 // Serve static files from your existing website directory (bandobot.xyz)
-//app.use(express.static(path.join(__dirname, 'bandobot.xyz')));
+app.use(express.static(path.join(__dirname, 'bandobot.xyz')));
 
 // Serve index.html file directly (change the path according to your directory structure)
 app.get('/', (req, res) => {
@@ -25,31 +25,34 @@ app.use('/css', express.static(path.join(__dirname, 'css')));
 
 // Example endpoint to fetch data from GitHub
 
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '404.html'));
+});
 
 const cert = fs.readFileSync('./ssl/bandobot_xyz.crt');
 const ca = fs.readFileSync('./ssl/bandobot_xyz.ca-bundle');
 const key = fs.readFileSync('./ssl/bandobot.key');
 
-// let options = {
-//    cert: cert, // fs.readFileSync('./ssl/example.crt');
-//    ca: ca, // fs.readFileSync('./ssl/example.ca-bundle');
-//    key: key // fs.readFileSync('./ssl/example.key');
-// };
+let options = {
+   cert: cert, // fs.readFileSync('./ssl/example.crt');
+   ca: ca, // fs.readFileSync('./ssl/example.ca-bundle');
+   key: key // fs.readFileSync('./ssl/example.key');
+};
 
 
-  // var server = https.createServer(options, app);
+ var server = https.createServer(options, app);
 
-  // server.listen(PORT, () => {
-  //   console.log(`Server running on port ${PORT}`);
-  // });
 
-app.listen(PORT, () => {
+try {
+server.listen(PORT, () => {
 console.log(`Server running on port ${PORT}`);
 });
+	
+} catch(err) {
 
-// server.on('error', (error) => {
-//   console.error('Server error:', error);
-// });
+	console.log(err)
+}
+
 
 
 
