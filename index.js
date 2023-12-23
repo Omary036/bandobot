@@ -38,8 +38,8 @@ const options = {
 var httpServer = http.createServer(app);
 var httpsServer = https.createServer(options, app);
 
-httpServer.listen(PORT);
-httpsServer.listen(PORT + 443);
+httpServer.listen(8000);
+httpsServer.listen(8443);
 
 
 
