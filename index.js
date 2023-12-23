@@ -141,6 +141,18 @@ const mongoDBConnected = mongoose.connect(process.env.MNGS, {
             console.warn('Connection Disconnected!');
         });
 
+        if (process.env.NODE_ENV === 'production') {
+          // Set up production error handling
+          app.use((err, req, res, next) => {
+            res.status(500).send('Something went wrong!');
+          });
+        } else {
+          // Development mode - show detailed error messages
+          app.use((err, req, res, next) => {
+            res.status(500).send(err.stack);
+          });
+        }
+
 const eventModel = require('./database/code');
 
 client.on('applicationCommandCreate', async (command) => {eventModel.find({event:"applicationCommandCreate"}).then(async(documents)=>{documents.forEach(async(document) =>{if(!document)return;await eval(`async () =>{ ${document.code} }`)();});});});
