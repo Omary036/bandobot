@@ -29,28 +29,24 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '404.html'));
 });
 
-const cert = fs.readFileSync('./ssl/bandobot_xyz.crt');
-const ca = fs.readFileSync('./ssl/bandobot_xyz.ca-bundle');
-const key = fs.readFileSync('./ssl/bandobot.key');
-
-let options = {
-   cert: cert, // fs.readFileSync('./ssl/example.crt');
-   ca: ca, // fs.readFileSync('./ssl/example.ca-bundle');
-   key: key // fs.readFileSync('./ssl/example.key');
+const options = {
+  cert: fs.readFileSync('./ssl/bandobot_xyz.crt'),
+  ca: fs.readFileSync('./ssl/bandobot_xyz.ca-bundle'),
+  key: fs.readFileSync('./ssl/bandobot.key')
 };
 
+const server = https.createServer(options, app);
 
- var server = https.createServer(options, app);
-
+server.on('error', (error) => {
+  console.error('Server error:', error);
+});
 
 try {
-server.listen(PORT, () => {
-console.log(`Server running on port ${PORT}`);
-});
-	
-} catch(err) {
-
-	console.log(err)
+  server.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+  });
+} catch (err) {
+  console.error('Error starting server:', err);
 }
 
 
