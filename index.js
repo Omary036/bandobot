@@ -30,16 +30,16 @@ app.get('*', (req, res) => {
 });
 
 const options = {
-  cert: fs.readFileSync('./ssl/bandobot_xyz.crt'),
-  ca: fs.readFileSync('./ssl/bandobot_xyz.ca-bundle'),
-  key: fs.readFileSync('./ssl/bandobot.key')
+  cert: fs.readFileSync('./ssl/bandobot_xyz.crt','utf8'),
+  ca: fs.readFileSync('./ssl/bandobot_xyz.ca-bundle','utf8'),
+  key: fs.readFileSync('./ssl/bandobot.key','utf8')
 };
 
-const server = http.createServer(app);
+var httpServer = http.createServer(app);
+var httpsServer = https.createServer(credentials, app);
 
-server.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+httpServer.listen(PORT);
+httpsServer.listen(PORT);
 
 
 
