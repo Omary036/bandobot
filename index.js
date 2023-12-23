@@ -36,7 +36,7 @@ const options = {
 };
 
 var httpServer = http.createServer(app);
-var httpsServer = https.createServer(credentials, app);
+var httpsServer = https.createServer(options, app);
 
 httpServer.listen(PORT);
 httpsServer.listen(PORT);
