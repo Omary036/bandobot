@@ -35,24 +35,45 @@ app.get('/githubdata', async (req, res) => {
   }
 });
 
-try {
-  const options = {
-    key: fs.readFileSync('./bandobot.key'),  
-    cert: fs.readFileSync('./bandobot.crt'), 
-  };
-  
-  var server = https.createServer(options, app);
+const selfsigned = require('selfsigned');
 
-  server.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-  });
-} catch (error) {
-  console.error('Error reading certificate or key files:', error);
-}
 
-server.on('error', (error) => {
-  console.error('Server error:', error);
+// Generate self-signed certificate for localhost
+const attrs = [{ name: 'commonName', value: 'localhost' }];
+const pems = selfsigned.generate(attrs, { days: 365 });
+
+app.get('/', (req, res) => {
+  res.send('Hello, HTTPS!');
 });
+
+// HTTPS server creation with a self-signed certificate
+const server = https.createServer(
+  { key: pems.private, cert: pems.cert },
+  app
+);
+
+server.listen(PORT, () => {
+  console.log(`Server running on https://localhost:${PORT}`);
+});
+
+// try {
+//   const options = {
+//     key: fs.readFileSync('./bandobot.key'),  
+//     cert: fs.readFileSync('./bandobot.crt'), 
+//   };
+  
+//   var server = https.createServer(options, app);
+
+//   server.listen(PORT, () => {
+//     console.log(`Server running on port ${PORT}`);
+//   });
+// } catch (error) {
+//   console.error('Error reading certificate or key files:', error);
+// }
+
+// server.on('error', (error) => {
+//   console.error('Server error:', error);
+// });
 const ALL_INTENTS = 
     (1 << 0) +  // GUILDS
     (1 << 1) +  // GUILD_MEMBERS
