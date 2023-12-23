@@ -8,60 +8,47 @@ const http = require('http');
 
 // Serve static files from your existing website directory (bandobot.xyz)
 const app = express();
-const PORT = 3000 || process.env.PORT || 443; // Change to the desired HTTPS port
+const PORT = process.env.PORT || 443; // Change to the desired HTTPS port
 const fs = require('fs');
 
-// // Serve static files from your existing website directory (bandobot.xyz)
-// app.use(express.static(path.join(__dirname, 'bandobot.xyz')));
+// Serve static files from your existing website directory (bandobot.xyz)
+//app.use(express.static(path.join(__dirname, 'bandobot.xyz')));
 
-// // Serve index.html file directly (change the path according to your directory structure)
-// app.get('/', (req, res) => {
-//   res.sendFile(path.join(__dirname, 'index.html'));
-// });
-
-// app.use('/img', express.static(path.join(__dirname, 'img')));
-// app.use('/js', express.static(path.join(__dirname, 'js')));
-// app.use('/css', express.static(path.join(__dirname, 'css')));
-
-// // Example endpoint to fetch data from GitHub
-
-
-// const cert = fs.readFileSync('./ssl/bandobot_xyz.crt');
-// const ca = fs.readFileSync('./ssl/bandobot_xyz.ca-bundle');
-// const key = fs.readFileSync('./ssl/bandobot.key');
-
-// let options = {
-//    cert: cert, // fs.readFileSync('./ssl/example.crt');
-//    ca: ca, // fs.readFileSync('./ssl/example.ca-bundle');
-//    key: key // fs.readFileSync('./ssl/example.key');
-// };
-
-
-//   var server = https.createServer(options, app);
-
-//   server.listen(PORT, () => {
-//     console.log(`Server running on port ${PORT}`);
-//   });
-
-
-// server.on('error', (error) => {
-//   console.error('Server error:', error);
-// });
-
-
-
-// Serve static files (HTML, CSS, JS, images, etc.) from a folder named 'public'
-app.use(express.static('public'));
-
-// Define a route for the home page
+// Serve index.html file directly (change the path according to your directory structure)
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + 'index.html');
+  res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-// Start the server
-app.listen(PORT, () => {
+app.use('/img', express.static(path.join(__dirname, 'img')));
+app.use('/js', express.static(path.join(__dirname, 'js')));
+app.use('/css', express.static(path.join(__dirname, 'css')));
+
+// Example endpoint to fetch data from GitHub
+
+
+const cert = fs.readFileSync('./ssl/bandobot_xyz.crt');
+const ca = fs.readFileSync('./ssl/bandobot_xyz.ca-bundle');
+const key = fs.readFileSync('./ssl/bandobot.key');
+
+let options = {
+   cert: cert, // fs.readFileSync('./ssl/example.crt');
+   ca: ca, // fs.readFileSync('./ssl/example.ca-bundle');
+   key: key // fs.readFileSync('./ssl/example.key');
+};
+
+
+  var server = https.createServer(options, app);
+
+  server.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
+  });
+
+
+server.on('error', (error) => {
+  console.error('Server error:', error);
 });
+
+
 
 
 const ALL_INTENTS = 
