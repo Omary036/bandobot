@@ -42,9 +42,7 @@ let options = {
   server.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
   });
-} catch (error) {
-  console.error('Error reading certificate or key files:', error);
-}
+
 
 server.on('error', (error) => {
   console.error('Server error:', error);
