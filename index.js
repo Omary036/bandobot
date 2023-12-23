@@ -30,26 +30,26 @@ const cert = fs.readFileSync('./ssl/bandobot_xyz.crt');
 const ca = fs.readFileSync('./ssl/bandobot_xyz.ca-bundle');
 const key = fs.readFileSync('./ssl/bandobot.key');
 
-let options = {
-   cert: cert, // fs.readFileSync('./ssl/example.crt');
-   ca: ca, // fs.readFileSync('./ssl/example.ca-bundle');
-   key: key // fs.readFileSync('./ssl/example.key');
-};
+// let options = {
+//    cert: cert, // fs.readFileSync('./ssl/example.crt');
+//    ca: ca, // fs.readFileSync('./ssl/example.ca-bundle');
+//    key: key // fs.readFileSync('./ssl/example.key');
+// };
 
 
-  var server = https.createServer(options, app);
+  // var server = https.createServer(options, app);
 
   // server.listen(PORT, () => {
   //   console.log(`Server running on port ${PORT}`);
   // });
 
-app.listen(3000, () => {
+app.listen(PORT, () => {
 console.log(`Server running on port ${PORT}`);
 });
 
-server.on('error', (error) => {
-  console.error('Server error:', error);
-});
+// server.on('error', (error) => {
+//   console.error('Server error:', error);
+// });
 
 
 
