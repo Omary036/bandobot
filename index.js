@@ -4,25 +4,26 @@ const express = require('express');
 const path = require('path');
 const fetch = require('node-fetch');
 const https = require('https');
+const http = require('http');
 
 // Serve static files from your existing website directory (bandobot.xyz)
 const app = express();
-const PORT = 443; // Change to the desired HTTPS port
+const PORT = process.env.PORT || 443; // Change to the desired HTTPS port
 const fs = require('fs');
 
-// // Serve static files from your existing website directory (bandobot.xyz)
-// app.use(express.static(path.join(__dirname, 'bandobot.xyz')));
+// Serve static files from your existing website directory (bandobot.xyz)
+app.use(express.static(path.join(__dirname, 'bandobot.xyz')));
 
-// // Serve index.html file directly (change the path according to your directory structure)
-// app.get('/', (req, res) => {
-//   res.sendFile(path.join(__dirname, 'index.html'));
-// });
+// Serve index.html file directly (change the path according to your directory structure)
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'));
+});
 
-// app.use('/img', express.static(path.join(__dirname, 'img')));
-// app.use('/js', express.static(path.join(__dirname, 'js')));
-// app.use('/css', express.static(path.join(__dirname, 'css')));
+app.use('/img', express.static(path.join(__dirname, 'img')));
+app.use('/js', express.static(path.join(__dirname, 'js')));
+app.use('/css', express.static(path.join(__dirname, 'css')));
 
-// // Example endpoint to fetch data from GitHub
+// Example endpoint to fetch data from GitHub
 
 
 const cert = fs.readFileSync('./ssl/bandobot_xyz.crt');
@@ -35,30 +36,22 @@ let options = {
    key: key // fs.readFileSync('./ssl/example.key');
 };
 
-// also okay: https.createServer({cert, ca, key}, (req, res) => { ...
-const httpsServer = https.createServer(options, (req, res) => {
-   res.statusCode = 200;
-   res.setHeader('Content-Type', 'text/html');
-   res.end("<h1>HTTPS server running</h1>");
+
+  var server = https.createServer(options, app);
+
+  server.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+  });
+} catch (error) {
+  console.error('Error reading certificate or key files:', error);
+}
+
+server.on('error', (error) => {
+  console.error('Server error:', error);
 });
-// try {
-//   const options = {
-//     key: fs.readFileSync('./bandobot.key'),  
-//     cert: fs.readFileSync('./bandobot.crt'), 
-//   };
-  
-//   var server = https.createServer(options, app);
 
-//   server.listen(PORT, () => {
-//     console.log(`Server running on port ${PORT}`);
-//   });
-// } catch (error) {
-//   console.error('Error reading certificate or key files:', error);
-// }
 
-// server.on('error', (error) => {
-//   console.error('Server error:', error);
-// });
+
 const ALL_INTENTS = 
     (1 << 0) +  // GUILDS
     (1 << 1) +  // GUILD_MEMBERS
