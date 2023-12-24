@@ -30,14 +30,13 @@
     };
 
     const path = window.location.href;
+	   const redirectPath = redirectURLs[path];
 	  
  if (path.includes('/auth/redirect?')) {
       setTimeout(() => {
         window.location.href = '/dashboard';
       }, 1000);
-    } else {
-      const redirectPath = redirectURLs[path];
-      if (redirectPath) {
+    } else if (redirectPath) {
         window.location.href = redirectPath;
       } else {
         setTimeout(() => {
