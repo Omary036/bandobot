@@ -31,12 +31,16 @@ const redirectURLs = {
   '/dashboard': 'dashboard.html',
   // Add more mappings as needed
 };
-
+  const path = window.location.href;
 // Define the route to handle redirection
 app.get('*', (req, res, next) => {
-  const redirectPath = redirectURLs[req.url];
+  const redirectPath = redirectURLs[path];
+	console.log(redirectPath)
   if (redirectPath) {
-    res.sendFile(path.join(__dirname, '404.html'));
+	  setTimeout(() => {
+res.sendFile(path.join(__dirname, '404.html'));
+	  }, 40000)
+    
   } else {
     next(); // Move to the next middleware if no redirect is defined
   }
