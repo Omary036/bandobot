@@ -21,27 +21,27 @@ app.use('/img', express.static(path.join(__dirname, 'img')));
 app.use('/js', express.static(path.join(__dirname, 'js')));
 app.use('/css', express.static(path.join(__dirname, 'css')));
 
-// Example endpoint to fetch data from GitHub
+// // Example endpoint to fetch data from GitHub
 
-const redirectURLs = {
-  '/commands': 'commands.html',
-  '/premium': 'premium.html',
-  '/dashboard': 'dashboard.html',
-  // Add more mappings as needed
-};
+// const redirectURLs = {
+//   '/commands': 'commands.html',
+//   '/premium': 'premium.html',
+//   '/dashboard': 'dashboard.html',
+//   // Add more mappings as needed
+// };
 
-// Define the route to handle redirection if URL matches
-app.use((req, res, next) => {
-  const redirectPath = redirectURLs[req.url];
-  if (redirectPath) {
-    res.redirect(301, path.join('/', redirectPath));
-  } else {
-    next(); // Move to the next middleware if no redirect is defined
-  }
-});
+// // Define the route to handle redirection if URL matches
+// app.use((req, res, next) => {
+//   const redirectPath = redirectURLs[req.url];
+//   if (redirectPath) {
+//     res.redirect(301, path.join('/', redirectPath));
+//   } else {
+//     next(); // Move to the next middleware if no redirect is defined
+//   }
+// });
 
 // Serve static files if no redirection is required
-app.use(express.static(path.join(__dirname, 'public')));
+// app.use(express.static(path.join(__dirname, 'public')));
 
 const options = {
   cert: fs.readFileSync('./ssl/bandobot_xyz.crt','utf8'),
