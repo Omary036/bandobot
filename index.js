@@ -31,22 +31,18 @@ const redirectURLs = {
   '/dashboard': 'dashboard.html',
   // Add more mappings as needed
 };
-  const path = window.location.href;
-// Define the route to handle redirection
-app.get('*', (req, res, next) => {
-  const redirectPath = redirectURLs[path];
-	console.log(redirectPath)
+
+// Define the route to handle redirection if URL matches
+app.use((req, res, next) => {
+  const redirectPath = redirectURLs[req.url];
   if (redirectPath) {
-	  setTimeout(() => {
-res.sendFile(path.join(__dirname, '404.html'));
-	  }, 40000)
-    
+    res.redirect(301, path.join('/', redirectPath));
   } else {
     next(); // Move to the next middleware if no redirect is defined
   }
 });
 
-// Serve static files
+// Serve static files if no redirection is required
 app.use(express.static(path.join(__dirname, 'public')));
 
 const options = {
