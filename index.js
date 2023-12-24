@@ -25,9 +25,25 @@ app.use('/css', express.static(path.join(__dirname, 'css')));
 
 // Example endpoint to fetch data from GitHub
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '404.html'));
+const redirectURLs = {
+  '/commands': 'commands.html',
+  '/premium': 'premium.html',
+  '/dashboard': 'dashboard.html',
+  // Add more mappings as needed
+};
+
+// Define the route to handle redirection
+app.get('*', (req, res, next) => {
+  const redirectPath = redirectURLs[req.url];
+  if (redirectPath) {
+    res.sendFile(path.join(__dirname, '404.html'));
+  } else {
+    next(); // Move to the next middleware if no redirect is defined
+  }
 });
+
+// Serve static files
+app.use(express.static(path.join(__dirname, 'public')));
 
 const options = {
   cert: fs.readFileSync('./ssl/bandobot_xyz.crt','utf8'),
