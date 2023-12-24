@@ -11,8 +11,6 @@ const app = express();
 const PORT = process.env.PORT || 443; // Change to the desired HTTPS port
 const fs = require('fs');
 
-// Serve static files from your existing website directory (bandobot.xyz)
-app.use(express.static(path.join(__dirname, 'bandobot.xyz')));
 
 // Serve index.html file directly (change the path according to your directory structure)
 app.get('/', (req, res) => {
