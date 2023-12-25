@@ -19,7 +19,7 @@ app.get('/', (req, res) => {
 
 app.get('/hey', (req, res) => {
   res.sendFile(path.join(__dirname, 'dashboard.html'));
-	console.log('test123')
+console.log('test123')
 });
 
 app.use('/img', express.static(path.join(__dirname, 'img')));
@@ -58,7 +58,7 @@ var httpServer = http.createServer(app);
 var httpsServer = https.createServer(options, app);
 
 httpServer.listen(8000);
-httpsServer.listen(8080);
+//httpsServer.listen(8443);
 
 
 
