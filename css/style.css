@@ -273,6 +273,21 @@ body.on {
 	font-size: 30px;
 	text-align: center;
 }
+pricing-hey h1 {
+	font-size: 30px;
+	text-align: center;
+}
+
+.pricing-hey h1::after {
+	content: "";
+	display: block;
+	border-bottom: 3px solid var(--third);
+	width: 10%;
+	margin: 0 auto;
+	border-radius: 50px;
+	margin-top: 7px;
+	min-width: 70px;
+}
 
 .pricing-box h1::after {
 	content: "";
