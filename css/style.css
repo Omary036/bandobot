@@ -322,6 +322,25 @@ pricing-hey h1 {
 	font-weight: bold;
 }
 
+.premium-line-container {
+    display: flex;
+    justify-content: center;
+}
+
+.premium-line {
+    width: 70%;
+    height: 3px;
+    background-color: red; /* Change this to your preferred color */
+    position: relative;
+    top: 30%; /* Adjust this percentage to place the line vertically */
+}
+
+/* Adjustments for the "Pricing" section title */
+.pricing-t {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
 /* services */
 .services-box {
 	margin: 100px;
