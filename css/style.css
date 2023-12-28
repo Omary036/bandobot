@@ -265,68 +265,61 @@ body.on {
 }
 /* features end */
 
-/* .pricing-box {
-	margin: 100px;
-} */
-/* 
 .pricing-box {
-    position: relative;
+	margin: 100px;
 }
 
-.premium-section {
-    position: relative;
-    height: 100%; /* Adjust as needed */
+.pricing-box h1 {
+	font-size: 30px;
+	text-align: center;
+}
+pricing-hey h1 {
+	font-size: 30px;
+	text-align: center;
 }
 
-.pricing-section {
-    display: flex;
-    justify-content: space-around; /* Adjust as needed */
-    align-items: center;
-    margin: 50px 0;
+.pricing-hey h1::after {
+	content: "";
+	display: block;
+	border-bottom: 3px solid var(--third);
+	width: 10%;
+	margin: 0 auto;
+	border-radius: 50px;
+	margin-top: 7px;
+	min-width: 70px;
 }
 
-.pricing-plan {
-    width: 250px; /* Adjust the width as needed */
-    background-color: #f4f4f4; /* Change as per your design */
-    padding: 20px;
-    text-align: center;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add shadow */
+.pricing-box h1::after {
+	content: "";
+	display: block;
+	border-bottom: 3px solid var(--third);
+	width: 10%;
+	margin: 0 auto;
+	border-radius: 50px;
+	margin-top: 7px;
+	min-width: 70px;
 }
 
-.pricing-plan h2 {
-    font-size: 24px;
-    margin-bottom: 15px;
-    color: #333;
+.pricings {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
 }
 
-.pricing-plan p {
-    color: #666;
-    margin-bottom: 20px;
+.pricing {
+	width: 216px;
+	height: 550px;
+	background-color: var(--o1);
+	 border: 1px solid #bdfff8;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 5px;
+	margin: 12px;
 }
 
-ul {
-    list-style: none;
-    padding: 0;
-    margin: 0 0 20px;
-}
-
-ul li {
-    margin-bottom: 10px;
-}
-
-.btn {
-    display: inline-block;
-    padding: 8px 20px;
-    text-decoration: none;
-    background-color: #3498db; /* Change to your preferred color */
-    color: #fff;
-    border-radius: 4px;
-    transition: background-color 0.3s ease;
-}
-
-.btn:hover {
-    background-color: #2980b9; /* Change to hover color */
+.pricing span {
+	font-weight: bold;
 }
 
 /* services */
