@@ -272,13 +272,22 @@ body.on {
   list-style: none;
   padding: 0;
   margin: 70px 0 30px;
-  border: 1px solid #D0D0D0; 
+  border: 1px solid #D0D0D0;
   padding: 15px;
   text-align: center;
+  display: flex; /* Display pricing items as a flex container */
+  justify-content: space-around; /* Space around each pricing item */
 }
+
 #pricing ul.pricing li {
-  display: block;
-  padding: 10px;
+  display: inline-block; /* Display pricing items inline */
+  width: 200px; /* Adjust the width of each pricing item */
+  margin: 0;
+  vertical-align: top; /* Align items at the top */
+  border: 1px solid #ccc; /* Optional: Add a border for visual separation */
+  border-radius: 5px; /* Optional: Add border radius for styling */
+  padding: 15px; /* Optional: Adjust padding for better spacing */
+  box-sizing: border-box; /* Include padding and border in the width */
 }
 #pricing ul.pricing li.plan-header {
   background: #FFFFFF; 
