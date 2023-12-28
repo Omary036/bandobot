@@ -282,7 +282,7 @@ body.on {
 	margin: 0 auto;
 	border-radius: 50px;
 	margin-top: 7px;
-	min-width: 70px;	
+	min-width: 70px;
 }
 
 .pricings {
@@ -292,14 +292,15 @@ body.on {
 }
 
 .pricing {
-	width: 200px;
-	height: 50px;
-	background-color: var(--third);
+	width: 216px;
+	height: 550px;
+	background-color: var(--o1);
+	 border: 1px solid #bdfff8;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	border-radius: 5px;
-	margin: 20px;
+	margin: 12px;
 }
 
 .pricing span {
