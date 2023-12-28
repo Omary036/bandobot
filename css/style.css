@@ -268,7 +268,7 @@ body.on {
 /* .pricing-box {
 	margin: 100px;
 } */
-
+/* 
 .pricing-box {
     position: relative;
 }
@@ -278,90 +278,55 @@ body.on {
     height: 100%; /* Adjust as needed */
 }
 
-
-.pricing-box h1 {
-	font-size: 30px;
-	text-align: center;
-}
-pricing-hey h1 {
-	font-size: 30px;
-	text-align: center;
-}
-
-.pricing-hey h1::after {
-	content: "";
-	display: block;
-	border-bottom: 3px solid var(--third);
-	width: 10%;
-	margin: 0 auto;
-	border-radius: 50px;
-	margin-top: 7px;
-	min-width: 70px;
-}
-
-.pricing-box h1::after {
-	content: "";
-	display: block;
-	border-bottom: 3px solid var(--third);
-	width: 10%;
-	margin: 0 auto;
-	border-radius: 50px;
-	margin-top: 7px;
-	min-width: 70px;
-}
-
-.pricings {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
-}
-
-.pricing {
-	width: 216px;
-	height: 550px;
-	background-color: var(--o1);
-	 border: 1px solid #bdfff8;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	border-radius: 5px;
-	margin: 12px;
-}
-
-.pricing span {
-	font-weight: bold;
-}
-.red-line {
-    position: absolute;
-    width: 100%;
-    height: 3px; /* Height of the red line */
-    background-color: red; /* Change to your preferred color */
-    top: 30%; /* Adjust the vertical position within the blue box */
-    left: 0;
-    right: 0;
-}
-
-.premium-content {
-    /* Your Premium section content styles */
-}
-
-.premium-line-container {
+.pricing-section {
     display: flex;
-    justify-content: center;
+    justify-content: space-around; /* Adjust as needed */
+    align-items: center;
+    margin: 50px 0;
 }
 
-.premium-line {
-    width: 70%;
-    height: 3px;
-    background-color: red; /* Change this to your preferred color */
-    position: relative;
-    top: 30%; /* Adjust this percentage to place the line vertically */
-}
-
-/* Adjustments for the "Pricing" section title */
-.pricing-t {
-    margin-bottom: 20px;
+.pricing-plan {
+    width: 250px; /* Adjust the width as needed */
+    background-color: #f4f4f4; /* Change as per your design */
+    padding: 20px;
     text-align: center;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add shadow */
+}
+
+.pricing-plan h2 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.pricing-plan p {
+    color: #666;
+    margin-bottom: 20px;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 20px;
+}
+
+ul li {
+    margin-bottom: 10px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 8px 20px;
+    text-decoration: none;
+    background-color: #3498db; /* Change to your preferred color */
+    color: #fff;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #2980b9; /* Change to hover color */
 }
 
 /* services */
