@@ -265,6 +265,71 @@ body.on {
 }
 /* features end */
 
+#pricing {
+  padding: 140px 0 70px;
+}
+#pricing ul.pricing {
+  list-style: none;
+  padding: 0;
+  margin: 70px 0 30px;
+  border: 1px solid #D0D0D0; 
+  padding: 15px;
+  text-align: center;
+}
+#pricing ul.pricing li {
+  display: block;
+  padding: 10px;
+}
+#pricing ul.pricing li.plan-header {
+  background: #FFFFFF; 
+  margin: -15px -15px 10px;
+  padding: 15px 15px 30px;
+  border-bottom: 2px solid #429DD0;
+}
+#pricing ul.pricing li.plan-header .price-duration {
+  position: relative;
+  margin-top: 15px;
+  top: -10px;
+  display: inline-block;
+  width: 100%;
+  height: 116px; 
+  color: #000;  
+}
+#pricing ul.pricing li.plan-header .price-duration > span {
+  display: block;
+  line-height: 1;
+}
+#pricing ul.pricing li.plan-header .price-duration > span.price {
+  font-size: 24px;
+  font-weight: 700;
+  margin-top: 35px;
+}
+#pricing ul.pricing li.plan-header .price-duration > span.duration {
+  margin-top: 5px;
+}
+#pricing ul.pricing li.plan-header .plan-name {
+  margin-top: 10px;
+  font-size: 24px;
+  color: #272727;
+  font-weight: bold;
+  line-height: 1;
+  text-transform: uppercase;
+}
+#pricing ul.pricing.featured {
+  background: #FFFFFF; 
+  border: 1;
+}
+#pricing ul.pricing.featured  li.plan-header .price-duration{
+color: #FFFFFF;
+}
+#pricing ul.pricing.featured li.plan-header {
+  background: #62BDF0;
+  border-bottom: 2px solid #429DD0;
+}
+#pricing ul.pricing.featured li.plan-header .plan-name {
+  color: #FFFFFF;
+}
+
 /* services */
 .services-box {
 	margin: 100px;
