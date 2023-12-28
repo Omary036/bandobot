@@ -265,9 +265,19 @@ body.on {
 }
 /* features end */
 
-.pricing-box {
+/* .pricing-box {
 	margin: 100px;
+} */
+
+.pricing-box {
+    position: relative;
 }
+
+.premium-section {
+    position: relative;
+    height: 100%; /* Adjust as needed */
+}
+
 
 .pricing-box h1 {
 	font-size: 30px;
@@ -320,6 +330,19 @@ pricing-hey h1 {
 
 .pricing span {
 	font-weight: bold;
+}
+.red-line {
+    position: absolute;
+    width: 100%;
+    height: 3px; /* Height of the red line */
+    background-color: red; /* Change to your preferred color */
+    top: 30%; /* Adjust the vertical position within the blue box */
+    left: 0;
+    right: 0;
+}
+
+.premium-content {
+    /* Your Premium section content styles */
 }
 
 .premium-line-container {
