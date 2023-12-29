@@ -188,7 +188,16 @@ app.get('/', (req, res) => {
 		<div class="container">
 			<div class="pricings">
 				<div class="pricing">
-					<span><i class="fas fa-server">$5</i> <h1 class="pricing-hey" id="$5"> </h1> </span>
+                                 <div class="title-point-text">$5/month<br><br>BASIC</div>
+				 <li class="point-text">8x per jaar nieuwe kleren</li>
+     <li class="point-text">8x per jaar nieuwe kleren</li>
+<li class="point-text">8x per jaar nieuwe kleren</li>
+<li class="point-text">8x per jaar nieuwe kleren</li>
+<li class="point-text">8x per jaar nieuwe kleren</li>
+
+    
+
+
                                         <button class ="btn pricing-buttons1" onclick="location.href='/we-are-fixing-currently-give-it-a-few-days-to-done-this/sorry'">Upgrade</button>
 				</div>
 				<div class="pricing">
