@@ -326,6 +326,7 @@ pricing-hey h1 {
 	padding-left:40px;
 	padding-right:40px;
 	border-radius: 8px;
+	border: 0.3px solid rgb(255 217 217 / 90%);
 }
 .pricing .pricing-buttons2{
 		margin: 12px;
@@ -335,6 +336,7 @@ pricing-hey h1 {
 	padding-left:40px;
 	padding-right:40px;
 	    border-radius: 8px;
+	border: 0.3px solid rgb(255 217 217 / 90%);
 }
 .pricing .pricing-buttons3{
 		margin: 12px;
@@ -344,6 +346,7 @@ pricing-hey h1 {
 	padding-left:40px;
 	padding-right:40px;
 	    border-radius: 8px;
+	border: 0.3px solid rgb(255 217 217 / 90%);
 }
 .pricing .pricing-buttons4{
 		margin: 12px;
@@ -353,6 +356,7 @@ pricing-hey h1 {
 	padding-left:40px;
 	padding-right:40px;
 	    border-radius: 8px;
+	border: 0.3px solid rgb(255 217 217 / 90%);
 }
 
 .pricing span {
