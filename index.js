@@ -189,18 +189,19 @@ app.get('/', (req, res) => {
 			<div class="pricings">
 				<div class="pricing">
 					<span><i class="fas fa-server">$5</i> <h1 class="pricing-hey" id="$5"> </h1> </span>
+                                        <button class ="btn pricing-buttons" onclick="location.href='/we-are-fixing-currently-give-it-a-few-days-to-done-this/sorry'">Upgrade</button>
 				</div>
 				<div class="pricing">
 					<span><i class="fas fa-users"></i> Premium for 10</span>
-					<button class ="btn" onclick="location.href='/we-are-fixing-currently-give-it-a-few-days-to-done-this/sorry'">Upgrade</button>
+					<button class ="btn pricing-buttons" onclick="location.href='/we-are-fixing-currently-give-it-a-few-days-to-done-this/sorry'">Upgrade</button>
 				</div>
 				<div class="pricing">
 					<span><i class="fas fa-hashtag"></i> etc</span>
-					<button class ="btn blue" onclick="location.href='/we-are-fixing-currently-give-it-a-few-days-to-done-this/sorry'">Upgrade</button>
+					<button class ="btn pricing-buttons" onclick="location.href='/we-are-fixing-currently-give-it-a-few-days-to-done-this/sorry'">Upgrade</button>
 				</div>
 				<div class="pricing">
 					<span><i class="fas fa-pro"></i> etc</span>
-					<button class ="btn blue" onclick="location.href='/we-are-fixing-currently-give-it-a-few-days-to-done-this/sorry'">Upgrade</button>
+					<button class ="btn pricing-buttons" onclick="location.href='/we-are-fixing-currently-give-it-a-few-days-to-done-this/sorry'">Upgrade</button>
 				</div>
 				
 			</div>
