@@ -215,7 +215,7 @@ app.get('/', (req, res) => {
 		<div class="container">
 			<div class="services">
 				<div class="service">
-					<span><i class="fas fa-server"></i> ${servers} servers</span>
+					<span><i class="fas fa-server"></i> ${guilds} servers</span>
 				</div>
 				<div class="service">
 					<span><i class="fas fa-users"></i> ${users} users</span>
