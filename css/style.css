@@ -320,15 +320,35 @@ pricing-hey h1 {
 
 .pricing .pricing-buttons1{
 	margin: 12px;
+	margin-block-start: 470px;
+	margin-right: 79px;
+	padding: 14px;
+	padding-left:40px;
+	padding-right:40px;
 }
 .pricing .pricing-buttons2{
-	margin: 12px;
+		margin: 12px;
+	margin-block-start: 470px;
+	margin-right: 72px;
+	padding: 14px;
+	padding-left:40px;
+	padding-right:40px;
 }
 .pricing .pricing-buttons3{
-	margin: 12px;
+		margin: 12px;
+	margin-block-start: 470px;
+	margin-right: 35px;
+	padding: 14px;
+	padding-left:40px;
+	padding-right:40px;
 }
 .pricing .pricing-buttons4{
-	margin: 12px;
+		margin: 12px;
+	margin-block-start: 470px;
+	margin-right: 34px;
+	padding: 14px;
+	padding-left:40px;
+	padding-right:40px;
 }
 
 .pricing span {
