@@ -318,6 +318,10 @@ pricing-hey h1 {
 	margin: 12px;
 }
 
+.pricing .btn {
+	margin: 12px;
+}
+
 .pricing span {
 	font-weight: bold;
 }
