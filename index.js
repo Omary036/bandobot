@@ -182,41 +182,6 @@ app.get('/', (req, res) => {
 
 
 
-
-	<div class="pricing-box">
-		<h1 class="pricing-t" id="pricing">Pricing</h1>
-		<div class="container">
- <ul class="info-about-dis">
-			<div class="pricings">
-			<div class="pricing">
-   <div class="boxing"></div>
-                    <ul class="info-about-dis">
-                    <li class="point-text"><strong>10GB</strong> storage</li>
-      <li class="point-text"><strong>10</strong> custom voice</li>
-      		    <li class="point-text"><strong>5</strong> AI-message/day</li>
-      <li class="point-text"><strong>10</strong> reaction role</li>
-      <li class="point-text"><strong>24/7</strong> support</li>
-                </ul>
-                <button class="btn pricing-buttons1" onclick="location.href='/we-are-fixing-currently-give-it-a-few-days-to-done-this/sorry'">Upgrade</button>
-            </div>
-				
-				<div class="pricing">
-					<button class ="btn pricing-buttons2" onclick="location.href='/we-are-fixing-currently-give-it-a-few-days-to-done-this/sorry'">Upgrade</button>
-				</div>
-				<div class="pricing">
-					<button class ="btn pricing-buttons3" onclick="location.href='/we-are-fixing-currently-give-it-a-few-days-to-done-this/sorry'">Upgrade</button>
-				</div>
-				<div class="pricing">
-					<button class ="btn pricing-buttons4" onclick="location.href='/we-are-fixing-currently-give-it-a-few-days-to-done-this/sorry'">Upgrade</button>
-				</div>
-				
-			</div>
-
-		</div>
-	
-	</div> 
-
-
     <section>
         <a href="/" class="pricing-card">
             <div>
