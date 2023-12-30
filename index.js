@@ -100,11 +100,11 @@ app.get('/', (req, res) => {
 			<div class="container">
 				<div class="jumbotron-items">
 					<div class="jumbotron-item">
-						<span class="jumbotron-t">Why bando bot?</span>
+						<span class="jumbotron-t">Why bando bot?<br></span>
 						<div class="content">
-  <p><strong>Welcome to Bando Bot:</strong> Elevate Your Discord Experience! Ready to revolutionize your server? Bando Bot brings a fresh breeze of unique commands and awesome features!</p>
-  <p><strong>Guess what?</strong> Our latest version rocks Discord Cloud (secure storage) for ultimate stability. No more glitches, just smooth sailing! Store files and messages worry-free, always within reach!</p>
-  <p><strong>But wait, there's more!</strong> Dive into exciting games, keep things in line with our moderation tools, and craft personalized voice chats - your server, your way!</p>
+  <p><strong>Welcome to Bando Bot:</strong> Elevate Your Discord Experience! Ready to revolutionize your server? Bando Bot brings a fresh breeze of unique commands and awesome features!<br></p>
+  <p><strong>Guess what?</strong> Our latest version rocks Discord Cloud (secure storage) for ultimate stability. No more glitches, just smooth sailing! Store files and messages worry-free, always within reach!<br></p>
+  <p><strong>But wait, there's more!</strong> Dive into exciting games, keep things in line with our moderation tools, and craft personalized voice chats - your server, your way!<br></p>
   <p><strong>Unlock the magic with 'bndhelp' and join the adventure. Elevate your Discord game with Bando Bot!</strong></p>
 </div>
 						<div class="jumbotron-buttons">
