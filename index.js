@@ -184,7 +184,6 @@ app.get('/', (req, res) => {
 
     <section>
 
-	<div class="services-box">
 		<h1 class="services-t" id="services">Pricing.</h1>
 		<div class="container">
         <a href="/" class="pricing-card">
@@ -248,7 +247,6 @@ app.get('/', (req, res) => {
             </div>
         </a>
 	</div>
- </div>
     </section>
 
     
