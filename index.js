@@ -191,8 +191,8 @@ app.get('/', (req, res) => {
 			<div class="pricing">
                     <ul class="info-about-dis">
                     <li class="point-text"><strong>10GB</strong> storage</li>
-		    <li class="point-text"><strong>5</strong> AI-message/day</li>
       <li class="point-text"><strong>10</strong> custom voice</li>
+      		    <li class="point-text"><strong>5</strong> AI-message/day</li>
       <li class="point-text"><strong>10</strong> reaction role</li>
       <li class="point-text"><strong>24/7</strong> support</li>
                 </ul>
