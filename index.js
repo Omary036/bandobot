@@ -183,7 +183,11 @@ app.get('/', (req, res) => {
 
 
     <section>
-<div> <h1 class="pricing-t" id="pricing">Pricing.</h1> </div>
+    <div class="pricing-title">
+        <h1 class="pricing-t" id="pricing">Pricing.</h1>
+    </div>
+
+     <div class="pricing-cards">
 		
         <a href="/" class="pricing-card">
             <div>
@@ -245,6 +249,8 @@ app.get('/', (req, res) => {
                 <Button class="btn primary">Choose Plan</Button>
             </div>
         </a>
+
+  </div>
     </section>
 
     
