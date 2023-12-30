@@ -311,7 +311,7 @@ app.get('/', (req, res) => {
 	</div>
 	<!-- footer end -->
 
-	 <script src="./js/bootstrap.bundle.min.js"></script>
+	
 </body>
 </html>
 `
