@@ -44,7 +44,7 @@ app.get('/', (req, res) => {
 	<link rel="stylesheet" type="text/css" href="./css/txtformatting.css">
 	<link rel="stylesheet" type="text/css" href="./css/shadow.css">
 	<link rel="stylesheet" type="text/css" href="./css/loading.css">
-  <link href="./css/stupid-thing.css" rel="stylesheet">
+  <link href="./js/stupid-thing.js" rel="stylesheet">
 	<!-- css end -->
 
 	<!-- font awesome -->
@@ -646,7 +646,7 @@ app.get('/', (req, res) => {
         }
     </script>
 
-    <script src="../js/bootstrap.bundle.min.js"></script>
+    <script src="./js/stupid-thing.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     
     
