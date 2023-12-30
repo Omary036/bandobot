@@ -309,24 +309,31 @@ pricing-hey h1 {
 .pricing {
 	width: 216px;
 	height: 550px;
+	padding-bottom: 14px;
+	/* padding-top: 10px; */
+	text-align: center;
 	background-color: var(--o1);
-	 border: 1px solid #bdfff8;
+	border: 1px solid #bdfff8;
 	display: flex;
-	justify-content: center;
 	align-items: center;
+	align-content: flex-end;
 	border-radius: 5px;
 	margin: 12px;
+	justify-content: center;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	/* align-items: self-end; */
 }
 
 .pricing .pricing-buttons1{
     margin: 12px;
-	margin-block-start: 30px;
-	margin-left: 36px;
-	padding: 14px;
-	padding-left:40px;
-	padding-right:40px;
-	    border-radius: 8px;
-	border: 0.3px solid rgb(255 217 217 / 90%);
+    margin-block-start: 460px;
+    margin-right: 105px;
+    padding: 14px;
+    padding-left:40px;
+    padding-right:40px;
+    border-radius: 8px;
+    border: 0.3px solid rgb(255 217 217 / 90%);
 }
 .pricing .pricing-buttons2{
 		margin: 12px;
@@ -360,32 +367,44 @@ pricing-hey h1 {
 }
 
 .pricing .info-about-dis{
-    width: 100%;
-    display: flex;
+    width: 12200%;
+    /* display: flex; */
     justify-content: center;
     align-items: center;
     list-style: none;
     padding: 3px;
+    padding-top: 110px;
+    gap: 100px;
     gap: 100px;
 }
 .pricings .title-point-text{
-    width: 100%;
-    display: flex;
-    justify-content: center;
-   border-bottom: 1px solid rgb(166, 89, 161, 0.5);
-   align-items: center;
-   list-style: none;
-padding: 20px;
+    /* width: 387%; */
+    /* height: 300%; */
+    /* display: flex; */
+    /* justify-content: center; */
+    /* border-bottom: 1px solid rgb(166, 89, 161, 0.5); */
+    /* align-items: center; */
+    /* list-style: none; */
+    /* padding: 20px; */
+    /* padding-top: 100px; */
 }
 
 .pricings .point-text{
-    width: 100%;
+    width: 390%;
+    /* height: 100%; */
     display: flex;
-    justify-content: center;
-   border-bottom: 1px solid rgb(166, 89, 161, 0.5);
-   align-items: center;
-   list-style: none;
-padding: 20px;
+    justify-content: space-around;
+    /* border-bottom: 1px solid rgb(166, 89, 161, 0.5); */
+    list-style: none;
+    padding-top: 100px;
+    padding: 10px;
+    /* padding-block-end: 20px; */
+    flex-direction: column-reverse;
+    flex-wrap: wrap;
+    /* align-content: center; */
+    align-items: flex-start;
+    gap: 10px;
+    align-content: space-evenly;
 }
 
 .pricing span {
