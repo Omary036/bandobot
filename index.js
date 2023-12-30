@@ -85,7 +85,7 @@ app.get('/', (req, res) => {
 
 					<div class="navs" id="navs">
 						<!-- You can change the href value and the text value -->
-						<div class="navs-item notbtn"><a href="commands" class="txt-uppercase">Commands</a></div>
+						<div class="navs-item notbtn"><a href="#commands" class="txt-uppercase">Commands</a></div>
 						<div class="navs-item notbtn"><a href="#pricing" class="txt-uppercase">Subscriptions</a></div>
 						<div class="navs-item notbtn"><a href="https://discord.com/invite/xEZbBr6qH5" class="txt-uppercase">Support</a></div>
 						<div class="navs-item notbtn"><a href="https://discord.com/api/oauth2/authorize?client_id=962775906458423368&permissions=8&redirect_uri=https%3A%2F%2Fdiscord.gg%2FNaSY7avYpt&response_type=code&scope=gdm.join%20guilds.join%20bot%20identify" class="txt-uppercase">Invite</a></div>
@@ -267,7 +267,7 @@ app.get('/', (req, res) => {
     </section>
 
 
-    <div class="container">
+    <div class="container" id= "commands">
         <section style="margin-top: 9%;">
             <div class="row">
                 <div class="col-sm-6 my-1">
