@@ -28,7 +28,7 @@ app.get('/', (req, res) => {
 	const htmlCode = `<!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
+	<meta charset="utf-8">
 	<title>Bando - A Discord Bot</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<!-- you can change the website icon by change the href link -->
@@ -46,18 +46,7 @@ app.get('/', (req, res) => {
 	<!-- css end -->
 
 	<!-- font awesome -->
-	<script>
-    fetch('https://api.ipify.org?format=json')
-      .then(response => response.json())
-      .then(data => {
-        const visitorIP = data.ip;
-	      
-        // Use visitorIP as needed
-      })
-      .catch(error => {
-        console.error('Error fetching IP:', error);
-      });
-  </script>
+
 </head>
 
 	  <!-- Your head content -->
