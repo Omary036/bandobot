@@ -185,7 +185,7 @@ app.get('/', (req, res) => {
     <section>
 
 		<h1 class="pricing-t" id="services">Pricing.</h1>
-  <div>
+  <div class='fixitbruh'>
         <a href="/" class="pricing-card">
             <div>
  <img class='imgcheck' src="https://bandobot.xyz/img/image.png" alt="BandoBot Price" width="50" height="50">
