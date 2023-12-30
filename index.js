@@ -25,11 +25,7 @@ app.get('/', (req, res) => {
         channels += guild.channels.cache.size; // Total channels across all guilds
     });
 	
-	const htmlCode = `<!-- 
-	Made by Omry: 12/17/2023 hosted toasted loasted uwusted
- -->
-
-<!DOCTYPE html>
+	const htmlCode = `<!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
