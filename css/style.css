@@ -446,7 +446,7 @@ section {
 }
 
 .pricing-card>div ul {
-    margin: 12px 0 32px;
+    margin: 13px 0 1px 1;
     list-style: none;
     display: flex;
     flex-direction: column;
