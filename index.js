@@ -134,10 +134,11 @@ app.get('/', (req, res) => {
 <div class="feature-info">
     <h2 class="feature-info-t">Feature 1</h2>
     <p class="feature-info-d">
-        <strong>Seamless Storage</strong><br>  </p>
-        <p class="feature-info-d"> <strong>Enhanced Stability:</strong> Bando Bot seamlessly integrates with Discord Cloud, ensuring a stable environment for file and message storage within your server.<br></p>
-       <p class="feature-info-d">  <strong>Command Usage:</strong> Employ <code>bndsave &lt;image|text&gt;</code> to save files and messages effortlessly. Access your stored data via <code>bndcloud</code> with a custom pincode for retrieval.<br></p>
-        <p class="feature-info-d"> <strong>Simplified Storage:</strong> Effortlessly manage and access files, enhancing server organization for a smoother experience!</p>
+        <br>
+	<strong>Seamless Storage</strong><br><br>
+       <strong>Enhanced Stability:</strong> Bando Bot seamlessly integrates with Discord Cloud, ensuring a stable environment for file and message storage within your server.<br><br>
+      <strong>Command Usage:</strong> Employ <code>bndsave &lt;image|text&gt;</code> to save files and messages effortlessly. Access your stored data via <code>bndcloud</code> with a custom pincode for retrieval.<br><br>
+        <strong>Simplified Storage:</strong> Effortlessly manage and access files, enhancing server organization for a smoother experience! </p>
   
 </div>
 
