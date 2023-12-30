@@ -28,7 +28,7 @@ app.get('/', (req, res) => {
 	const htmlCode = `<!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
+	<meta charset="UTF-8">
 	<title>Bando - A Discord Bot</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<!-- you can change the website icon by change the href link -->
@@ -40,8 +40,8 @@ app.get('/', (req, res) => {
 	<link rel="stylesheet" type="text/css" href="./css/txtformatting.css">
 	<link rel="stylesheet" type="text/css" href="./css/shadow.css">
 	<link rel="stylesheet" type="text/css" href="./css/loading.css">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 	<!-- css end -->
 
