@@ -505,14 +505,10 @@ pricing-hey h1 {
 * {
     box-sizing: border-box;
     margin: 0;
-    padding: 0;
-    font-family: sans-serif;
+    padding: 0;   
 }
 
-body {
-    height: 100vh;
-  
-}
+
 
 a {
     text-decoration: none;
@@ -585,7 +581,7 @@ svg {
     margin: 2rem 0;
 }
 
-.btn {
+.pricing-card .btn  {
     padding: 12px 0;
     cursor: pointer;
     width: 80%;
