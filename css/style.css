@@ -283,7 +283,7 @@ body.on {
 
 /* services */
 .services-box {
-	/* margin: 100px; */
+	/* margin-bottom: 200px; */
 }
 
 .services-box h1 {
@@ -373,10 +373,10 @@ body.on {
 }
 
 * {
-    /* box-sizing: border-box; */
+    box-sizing: border-box;
     /* margin: 0; */
     /* padding: 0; */
-    /* margin: 0; */
+    margin: 0;
     /* margin-top: 20px; */
 }
 
@@ -491,7 +491,7 @@ section {
 
 section {
     text-align: center;
-    padding: 20px;
+    padding: 40px;
     margin-bottom: 50px 100px;
     /* margin-top: 150px; */
 }
@@ -505,6 +505,7 @@ section {
     align-items: flex-end;
     justify-content: center;
     margin-block: 0;
+    margin-top: 50px;
 }
 
 @media (max-width: 992px) {
