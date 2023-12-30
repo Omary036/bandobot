@@ -7,6 +7,7 @@
 
 .pricing-t::after {
 	content: "";
+	font-size: 66px;
 	display: block;
 	border-bottom: 3px solid var(--third);
 	width: 10%;
@@ -17,15 +18,7 @@
 }
 
 
-* {
-/* 	margin: 0; */
-	padding: 0;
-	color: var(--secondary);
-	font-size: 16px;
-	font-family: 'Roboto', sans-serif;
-	box-sizing: border-box;
-	text-decoration: none;
-}
+* {/* margin: 0; */padding: 0;color: var(--secondary);font-size: 16px;font-family: 'Roboto', sans-serif;box-sizing: border-box;text-decoration: none;}
 
 html, body {
 	scroll-behavior: smooth;
@@ -63,7 +56,7 @@ body.on {
 .container {
 	max-width: 1000px;
 	margin: 0 auto;
-	padding: 0 20px;
+	/* padding: 0 20px; */
 }
 
 .main {
@@ -183,7 +176,9 @@ body.on {
 	font-size: 30px;
 	font-weight: bold;
 	text-align: right;
-	width: 100%;
+	margin: 0;
+	margin-bottom: 10px;
+	/* width: 100%; */
 }
 
 .jumbotron-item .jumbotron-d {
@@ -206,6 +201,7 @@ body.on {
   line-height: 1.6; /* Set the line height for readability */
   color: #333; /* Set the text color */
   margin-bottom: 20px; /* Add space between paragraphs */
+  margin-top: 20px;
 }
 
 .content p {
@@ -244,6 +240,8 @@ body.on {
 	width: 100%;
 	justify-content: space-between;
 	margin: 30px 0;
+	/* margin-bottom: 20px; */
+	/* margin: 0; */
 }
 
 .features .feature:nth-child(2) {
@@ -261,6 +259,9 @@ body.on {
 	border-radius: 5px;
 	padding: 10px;
 	margin: 10px auto;
+	/* margin: 0; */
+	margin-top: 20px;
+	gap: 10px;
 }
 
 .feature .feature-info .feature-info-d {
@@ -271,6 +272,7 @@ body.on {
 .feature .feature-info .feature-info-t {
 	font-size: 30px;
 	font-weight: bold;
+	margin-bottom: 20px;
 }
 .content p {
   margin-bottom: 20px; /* Add space between paragraphs */
@@ -280,7 +282,7 @@ body.on {
 
 /* services */
 .services-box {
-	margin: 100px;
+	/* margin: 100px; */
 }
 
 .services-box h1 {
@@ -371,22 +373,26 @@ body.on {
 
 * {
     box-sizing: border-box;
+    /* margin: 0; */
+    padding: 0;
     margin: 0;
-    padding: 0;   
+    /* margin-top: 20px; */
 }
 
 
 
 a {
     text-decoration: none;
+	
 }
 
 section {
-    display: flex;
+    /* display: flex; */
     justify-content: center;
     min-height: 100vh;
     align-items: center;
     margin: 1rem 0;
+	
 }
 
 .pricing-card {
@@ -398,11 +404,13 @@ section {
     border-radius: 4px;
     transition: all 0.3s ease-out;
 	margin-right: 30px;
+	
 }
 
 .pricing-card:nth-child(2) {
     background: #25262d;
     margin: 0 rem;
+	
     height: 540px;
 }
 
@@ -438,10 +446,12 @@ section {
     display: flex;
     flex-direction: column;
     align-items: center;
+	
 }
 
 .pricing-card>div ul li {
     margin-bottom: 10px;
+	
 }
 
 .imgcheck {
@@ -478,6 +488,8 @@ section {
 section {
     text-align: center;
     padding: 20px;
+    margin-bottom: 50px 100px;
+    margin-top: 150px;
 }
 .pricing-title {
     margin-bottom: 20px;
@@ -485,10 +497,10 @@ section {
 
 .pricing-cards {
     display: flex;
-    justify-content: space-around;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 20px; /* Adjust the gap between cards */
+    /* gap: 20px; */ /* Adjust the gap between cards */
+    align-items: flex-end;
+    justify-content: center;
+    margin-block: 0;
 }
 
 @media (max-width: 992px) {
