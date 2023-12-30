@@ -268,27 +268,12 @@ app.get('/', (req, res) => {
 
 
     <div class="container" id= "commands">
-        <section>
-            <div class="row">
-                <div class="col-sm-6 my-1">
-                    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4050940490843957" crossorigin="anonymous"></script>
-                    <!-- banner -->
-                    <ins class="adsbygoogle"
-                         style="display:inline-block;width:100%;height:90px"
-                         data-ad-client="ca-pub-4050940490843957"
-                         data-ad-slot="6770580457"></ins>
-                    <script>
-                         (adsbygoogle = window.adsbygoogle || []).push({});
-                    </script>
-                </div>
-            </div>
-            <hr>
-        </section>
-        <div class="mt-4"></div>
-        <div class="row">
-	                <div class="col-sm-6 my-1">
+    	                <div class="col-sm-6 my-1">
                     <h2 class="fw-bold">Commands</h2>
                 </div>
+        <div class="mt-4"></div>
+        <div class="row">
+
             <div class="col-md-4 my-2">
                 <div class="card p-3">
                     <h5>Select Commands Category</h5>
