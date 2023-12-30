@@ -326,9 +326,9 @@ pricing-hey h1 {
 }
 
 .pricing .pricing-buttons1{
-    margin: 12px;
-    margin-block-start: 460px;
-    margin-right: 105px;
+    margin: 0px;
+    margin-block-start: 450px;
+    margin-right: 120px;
     padding: 14px;
     padding-left:40px;
     padding-right:40px;
@@ -390,9 +390,9 @@ pricing-hey h1 {
 }
 
 .pricings .point-text{
-    width: 390%;
-    /* height: 100%; */
-    display: flex;
+    width: 325%;
+    height: 100%;
+    /* display: flex; */
     justify-content: space-around;
     /* border-bottom: 1px solid rgb(166, 89, 161, 0.5); */
     list-style: none;
