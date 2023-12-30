@@ -5,6 +5,18 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
 
+.pricing-t::after {
+	content: "";
+	display: block;
+	border-bottom: 3px solid var(--third);
+	width: 10%;
+	margin: 0 auto;
+	border-radius: 50px;
+	margin-top: 7px;
+	min-width: 70px;
+}
+
+
 * {
 /* 	margin: 0; */
 	padding: 0;
