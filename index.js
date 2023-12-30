@@ -196,9 +196,11 @@ app.get('/', (req, res) => {
                 <h4>$4.99</h4>
                 <p>per Month</p>
                 <ul>
-                    <li>100 Transaction</li>
-                    <li>2% Cash Back</li>
-                    <li>$10,000 limit</li>
+                    <li><strong>10GB</strong> storage</li>
+                    <li><strong>10</strong> reaction role</li>
+                    <li><strong>5</strong> AI-message per day</li>
+		    <li><strong>10</strong> custom voice</li>
+		    <li><strong>24/7</strong> support</li>
                 </ul>
                 <Button class="btn primary">Choose Plan</Button>
             </div>
@@ -211,9 +213,11 @@ app.get('/', (req, res) => {
                 <h4>$9.99</h4>
                 <p>per Month</p>
                 <ul>
-                    <li>1000 Transaction</li>
-                    <li>3.5% Cash Back</li>
-                    <li>$100,000 limit</li>
+                    <li><strong>25GB</strong> storage</li>
+                    <li><strong>15</strong> reaction role</li>
+                    <li><strong>8</strong> AI-message per day</li>
+		    <li><strong>15</strong> custom voice</li>
+		    <li><strong>24/7</strong> support</li>
                 </ul>
                 <Button class="btn blue">Choose Plan</Button>
             </div>
@@ -228,9 +232,11 @@ app.get('/', (req, res) => {
                 <h4>$24.99</h4>
                 <p>per Month</p>
                 <ul>
-                    <li>Unlimited Transaction</li>
-                    <li>5% Cash Back</li>
-                    <li>Unlimited Spending</li>
+                    <li><strong>250GB</strong> storage</li>
+                    <li><strong>30</strong> reaction role</li>
+                    <li><strong>25</strong> AI-message per day</li>
+		    <li><strong>50</strong> custom voice</li>
+		    <li><strong>24/7</strong> support</li>
                 </ul>
                 <Button class="btn primary">Choose Plan</Button>
             </div>
@@ -242,9 +248,11 @@ app.get('/', (req, res) => {
                 <h4>$99.99</h4>
                 <p>per Month</p>
                 <ul>
-                    <li>Unlimited Transaction</li>
-                    <li>5% Cash Back</li>
-                    <li>Unlimited Spending</li>
+                    <li><strong>1TB</strong> storage</li>
+                    <li><strong>Unlimited</strong> reaction role</li>
+                    <li><strong>100</strong> AI-message per day</li>
+		    <li><strong>Unlimited</strong> custom voice</li>
+		    <li><strong>24/7</strong> support</li>
                 </ul>
                 <Button class="btn primary">Choose Plan</Button>
             </div>
