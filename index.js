@@ -266,37 +266,13 @@ app.get('/', (req, res) => {
   </div>
     </section>
 
-        <div class="navbar navbar-expand-md bg-dark navbar-dark">
-        <div class="container">
-            <a href="../index.html" class="navbar-brand text-info">Aris Bot</a>
-
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainmenu"><span
-                    class="navbar-toggler-icon"></span></button>
-
-            <div class="collapse navbar-collapse" id="mainmenu">
-                <ul class="navbar-nav mx-auto">
-                    <li class="nav-item"><a href="../index.html" class="nav-link">Home</a></li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="linksdrop" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">Links</a>
-                        <ul class="dropdown-menu bg-dark" aria-labelledby="linksdrop">
-                            <li><a class="dropdown-item text-muted" href="">Invite</a></li>
-                            <li><a class="dropdown-item text-muted" href="">Github</a></li>
-                            <li><a class="dropdown-item text-muted" href="">Support Server</a></li>
-                        </ul>
-                    </li>
-                </ul>
-                <li class="navbar-nav nav-item"><a href="" class="btn btn-outline-info">Login</a></li>
-            </div>
-        </div>
-    </div>
 
     <div class="container">
         <section style="margin-top: 9%;">
             <div class="row">
                 <div class="col-sm-6 my-1">
-                    <h2 class="fw-bold">Aris Commands</h2>
-                    <p class="command-descreption">Find all Aris bot commands and information you need fast and easy</p>
+                    <h2 class="fw-bold">Commands</h2>
+                    <p class="command-descreption">Commands</p>
                 </div>
                 <div class="col-sm-6 my-1">
                     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4050940490843957" crossorigin="anonymous"></script>
@@ -548,49 +524,6 @@ app.get('/', (req, res) => {
         </div>
     </div>
 
-        <!-- footer -->
-
-        <div class="footer-clean bg-dark">
-            <footer>
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-sm-4 col-md-3 item">
-                            <h3>Quick access</h3>
-                            <ul>
-                                <li><a href="#Features">Features</a></li>
-                                <li><a href="#Statics">Statics</a></li>
-                                <li><a href="#FAQ">Ask me</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-sm-4 col-md-3 item">
-                            <h3>About</h3>
-                            <ul>
-                                <li><a href="./pages/commands.html">Commands</a></li>
-                                <li><a href="#">Team</a></li>
-                                <li><a href="#">License</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-sm-4 col-md-3 item">
-                            <h3>Links</h3>
-                            <ul>
-                                <li><a href="#">Support server</a></li>
-                                <li><a href="#">Invite bot</a></li>
-                                <li><a href="#">Github</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-lg-3 item social"><a href="#"><ion-icon name="logo-discord"></ion-icon></a><a href="#"><ion-icon name="logo-facebook"></ion-icon></a><a href="#"><ion-icon name="logo-twitter"></ion-icon></a><a href="#"><ion-icon name="logo-instagram"></ion-icon></a>
-                            <p class="copyright">Aris Bot © 2022</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="page-footer font-small text-light mt-5">
-                <div class="footer-copyright text-center">Made with 💖 by
-                    <a href="https://github.com/Hadi-koubeissi/">Hadi Koubeissi</a>
-                    © 2022 Copyright
-                  </div>
-                </div>
-            </footer>
-        </div>
     
     <input id="commands" value="[{&#34;title&#34;:&#34;&lt;i class=&#39;fas fa-gift ttt&#39;&gt;&lt;/i&gt;&amp;nbsp; Moderation Commands&#34;,&#34;commands&#34;:[&#34;ban&#34;,&#34;kick&#34;,&#34;mute&#34;]},{&#34;title&#34;:&#34;&lt;i class=&#39;fas fa-globe-europe ttt&#39;&gt;&lt;/i&gt;&amp;nbsp; General Commands&#34;,&#34;commands&#34;:[&#34;help&#34;,&#34;ping&#34;,&#34;invite&#34;]},{&#34;title&#34;:&#34;&lt;i class=&#39;fas fa-hammer-war ttt&#39;&gt;&lt;/i&gt;&amp;nbsp;&amp;nbsp; Leveling Commands&#34;,&#34;commands&#34;:[&#34;leaderboard&#34;]},{&#34;title&#34;:&#34;&lt;i class=&#39;fas fas fa-crown ttt&#39;&gt;&lt;/i&gt;&amp;nbsp; Premium Commands&#34;,&#34;commands&#34;:[&#34;reactionrole&#34;,&#34;slowmode&#34;]}]" hidden />
     <script src="https://unpkg.com/scrollreveal"></script>
