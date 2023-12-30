@@ -25,8 +25,15 @@ app.get('/', (req, res) => {
         channels += guild.channels.cache.size; // Total channels across all guilds
     });
 	
-	const htmlCode = `
- <!DOCTYPE html>
+	const htmlCode = `<!-- 
+	Make by Vins 2106
+	only landing page.
+	contact me to buy full page (IG: Vins2106)
+	start from 2$ - custom$
+	Github: https://github.com/Vins2106/Free-Discord-Bot-Website
+ -->
+
+<!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
