@@ -25,7 +25,8 @@ app.get('/', (req, res) => {
         channels += guild.channels.cache.size; // Total channels across all guilds
     });
 	
-	const htmlCode = `<!DOCTYPE html>
+	const htmlCode = `
+ <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
