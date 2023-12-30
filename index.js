@@ -190,11 +190,11 @@ app.get('/', (req, res) => {
 			<div class="pricings">
 			<div class="pricing">
                     <ul class="info-about-dis">
-                    <li class="point-text">8x per jaar nieuwe kleren</li>
-                    <li class="point-text">8x per jaar nieuwe kleren</li>
-                    <li class="point-text">8x per jaar nieuwe kleren</li>
-                    <li class="point-text">8x per jaar nieuwe kleren</li>
-                    <li class="point-text">8x per jaar nieuwe kleren</li>
+                    <li class="point-text"><strong>10GB</strong> storage</li>
+		    <li class="point-text"><strong>5</strong> AI-message/day</li>
+      <li class="point-text"><strong>10</strong> custom voice</li>
+      <li class="point-text"><strong>10</strong> reaction role</li>
+      <li class="point-text"><strong>24/7</strong> support</li>
                 </ul>
                 <button class="btn pricing-buttons1" onclick="location.href='/we-are-fixing-currently-give-it-a-few-days-to-done-this/sorry'">Upgrade</button>
             </div>
