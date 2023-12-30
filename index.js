@@ -190,7 +190,6 @@ app.get('/', (req, res) => {
 			<div class="pricings">
 			<div class="pricing">
                     <ul class="info-about-dis">
-                    <li class="title-point-text">8x per jaar nieuwe kleren</li>
                     <li class="point-text">8x per jaar nieuwe kleren</li>
                     <li class="point-text">8x per jaar nieuwe kleren</li>
                     <li class="point-text">8x per jaar nieuwe kleren</li>
