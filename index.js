@@ -201,15 +201,12 @@ app.get('/', (req, res) => {
                                         <button class ="btn pricing-buttons1" onclick="location.href='/we-are-fixing-currently-give-it-a-few-days-to-done-this/sorry'">Upgrade</button>
 				</div>
 				<div class="pricing">
-					<span><i class="fas fa-users"></i> Premium for 10</span>
 					<button class ="btn pricing-buttons2" onclick="location.href='/we-are-fixing-currently-give-it-a-few-days-to-done-this/sorry'">Upgrade</button>
 				</div>
 				<div class="pricing">
-					<span><i class="fas fa-hashtag"></i> etc</span>
 					<button class ="btn pricing-buttons3" onclick="location.href='/we-are-fixing-currently-give-it-a-few-days-to-done-this/sorry'">Upgrade</button>
 				</div>
 				<div class="pricing">
-					<span><i class="fas fa-pro"></i> etc</span>
 					<button class ="btn pricing-buttons4" onclick="location.href='/we-are-fixing-currently-give-it-a-few-days-to-done-this/sorry'">Upgrade</button>
 				</div>
 				
