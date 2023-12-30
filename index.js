@@ -189,6 +189,7 @@ app.get('/', (req, res) => {
  <ul class="info-about-dis">
 			<div class="pricings">
 			<div class="pricing">
+   <div class="boxing"></div>
                     <ul class="info-about-dis">
                     <li class="point-text"><strong>10GB</strong> storage</li>
       <li class="point-text"><strong>10</strong> custom voice</li>
