@@ -498,6 +498,34 @@ pricing-hey h1 {
 
 /* mobile */
 
+:root {
+    --light: rgb(242, 241, 241);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+body {
+    height: 100vh;
+    background-color: #dbefff;
+}
+
+a {
+    text-decoration: none;
+}
+
+section {
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+    align-items: center;
+    margin: 1rem 0;
+}
+
 .pricing-card {
     background: linear-gradient(45deg, #37afea 0%, #5583f1 100%);
     box-shadow: 0 3px 10px rgb(16, 29, 53);
@@ -581,6 +609,8 @@ svg {
     background-color: #25262d;
     color: var(--light);
 }
+
+
 @media (max-width: 992px) {
 
 	/* navbar mobile version */
