@@ -188,20 +188,18 @@ app.get('/', (req, res) => {
 		<div class="container">
  <ul class="info-about-dis">
 			<div class="pricings">
-				<div class="pricing">
-                                <li class="title-point-text">8x per jaar nieuwe kleren</li>
-				 <li class="point-text">8x per jaar nieuwe kleren</li>
-     <li class="point-text">8x per jaar nieuwe kleren</li>
-<li class="point-text">8x per jaar nieuwe kleren</li>
-<li class="point-text">8x per jaar nieuwe kleren</li>
-<li class="point-text">8x per jaar nieuwe kleren</li>
-</ul>
-
-    
-
-
-                                        <button class ="btn pricing-buttons1" onclick="location.href='/we-are-fixing-currently-give-it-a-few-days-to-done-this/sorry'">Upgrade</button>
-				</div>
+			<div class="pricing">
+                    <ul class="info-about-dis">
+                    <li class="title-point-text">8x per jaar nieuwe kleren</li>
+                    <li class="point-text">8x per jaar nieuwe kleren</li>
+                    <li class="point-text">8x per jaar nieuwe kleren</li>
+                    <li class="point-text">8x per jaar nieuwe kleren</li>
+                    <li class="point-text">8x per jaar nieuwe kleren</li>
+                    <li class="point-text">8x per jaar nieuwe kleren</li>
+                </ul>
+                <button class="btn pricing-buttons1" onclick="location.href='/we-are-fixing-currently-give-it-a-few-days-to-done-this/sorry'">Upgrade</button>
+            </div>
+				
 				<div class="pricing">
 					<button class ="btn pricing-buttons2" onclick="location.href='/we-are-fixing-currently-give-it-a-few-days-to-done-this/sorry'">Upgrade</button>
 				</div>
