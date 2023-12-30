@@ -386,6 +386,10 @@ a {
 	
 }
 
+.pricing-title h1{
+	font-size: 30px;
+	text-align: center;
+}
 section {
     /* display: flex; */
     justify-content: center;
