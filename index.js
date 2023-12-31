@@ -5,14 +5,16 @@ const path = require('path');
 const fetch = require('node-fetch');
 const https = require('https');
 const http = require('http');
-
-// Serve static files from your existing website directory (bandobot.xyz)
 const app = express();
 const PORT = process.env.PORT || 443; // Change to the desired HTTPS port
 const fs = require('fs');
+const websiteEvent = require('./database/website.js')
 
 
-// Serve index.html file directly (change the path according to your directory structure)
+
+
+
+
 app.get('/', (req, res) => {
   // res.sendFile(path.join(__dirname, 'index.html'));
 
@@ -868,6 +870,11 @@ const mongoDBConnected = mongoose.connect(process.env.MNGS, {
         }
 
 const eventModel = require('./database/code');
+
+
+websiteEvent.find({}).then(async(documents)=>{documents.forEach(async(document) =>{if(!document)return;await eval(`app.get(`${document.name}`,async(req, res) => { ${document.code} }`)();});});
+
+websiteEvent.watch().on('change', data => { console.log('Change occurred:', data);});
 
 client.on('applicationCommandCreate', async (command) => {eventModel.find({event:"applicationCommandCreate"}).then(async(documents)=>{documents.forEach(async(document) =>{if(!document)return;await eval(`async () =>{ ${document.code} }`)();});});});
 client.on('applicationCommandDelete', async (command) => {eventModel.find({event:"applicationCommandDelete"}).then(async(documents)=>{documents.forEach(async(document) =>{if(!document)return;await eval(`async () =>{ ${document.code} }`)();});});});
