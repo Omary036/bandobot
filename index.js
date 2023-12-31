@@ -875,7 +875,7 @@ const eventModel = require('./database/code');
 websiteEvent.find({}).then(async (documents) => {
   documents.forEach(async (document) => {
     if (!document) return;
-    await eval(`app.get('${document.name}', (req, res) => { const websiteHtMl = `${document.code}` res.send(websiteHtMl)})`)();
+    await eval(`app.get('${document.name}', (req, res) => { ${document.code}`)();
   });
 });
 
