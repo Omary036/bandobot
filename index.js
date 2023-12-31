@@ -72,7 +72,7 @@ Made by omry also knows as the best vanis player in thje world
 
 					<span class="navbar-toggler" id="toggler"><i onclick="toggleNavbar(this)" class="fas fa-bars"></i></span>
 
-					<div class="navs" id="navs">
+					<div class="navs" id="navs" onclick="toggleNavbar(this)">
 						<!-- You can change the href value and the text value -->
 						<div class="navs-item notbtn"><a href="#commands" class="txt-uppercase">Commands</a></div>
 						<div class="navs-item notbtn"><a href="#pricing" class="txt-uppercase">Subscriptions</a></div>
