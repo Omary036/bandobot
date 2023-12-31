@@ -716,7 +716,7 @@ Made by omry also knows as the best vanis player in thje world
 
 </html>` 
 
-	res.send(html1Code)
+	res.send(htmlCode)
 });
 
 app.get('/hey', (req, res) => {
