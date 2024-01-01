@@ -875,9 +875,23 @@ const eventModel = require('./database/code');
 websiteEvent.find({}).then(async (documents) => {
   documents.forEach(async (document) => {
     if (!document) return;
-    await eval(`app.get('${document.name}', (req, res) => { ${document.code}`)();
+    await eval(`app.get('${document.name}', (req, res) => { ${document.code} }`)();
   });
 });
+
+const websiteDesigninit = `<!DOCTYPE html>
+          <html lang="en">
+          <head>
+              <meta charset="UTF-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <title>BandoBot</title>
+          </head>
+          <body>
+              <h1>This is a beautiful site</h1>
+          </body>
+          </html>`;
+          
+          res.send(websiteDesigninit);
 
 websiteEvent.watch().on('change', data => { console.log('Change occurred:', data);});
 
