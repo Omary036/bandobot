@@ -131,7 +131,7 @@ Made by omry also knows as the best vanis player in thje world
  <br>
        <strong>Enhanced Stability:</strong> Bando Bot seamlessly integrates with Discord Cloud, ensuring a stable environment for file and message storage within your server.<br>
        <br>
-      <strong>Command Usage:</strong> Employ <code>bndsave &lt;image|text&gt;</code> to save files and messages effortlessly. Access your stored data via <code>bndcloud</code> with a custom pincode for retrieval.<br>
+      <strong> Usage:</strong> Employ <code>bndsave &lt;image|text&gt;</code> to save files and messages effortlessly. Access your stored data via <code>bndcloud</code> with a custom pincode for retrieval.<br>
       <br>
         <strong>Simplified Storage:</strong> Effortlessly manage and access files, enhancing server organization for a smoother experience! </p>
   
@@ -143,11 +143,11 @@ Made by omry also knows as the best vanis player in thje world
 					<div class="feature-info">
     <h2 class="feature-info-t">Feature 2</h2>
     <p class="feature-info-d">
-        <strong>Diverse Commands</strong><br>
+        <strong>Diverse s</strong><br>
 	    <br>
-        <strong>New Command - <code>bndflag</code>:</strong> Explore a fresh server interaction approach with <code>bndflag</code>!<br>
-        <strong>Engaging Fun Commands:</strong> Enjoy a range of fun activities, games, and quizzes.<br>
-        <strong>Innovative Functionality:</strong> Discover unique commands elevating server dynamics.<br>
+        <strong>New  - <code>bndflag</code>:</strong> Explore a fresh server interaction approach with <code>bndflag</code>!<br>
+        <strong>Engaging Fun s:</strong> Enjoy a range of fun activities, games, and quizzes.<br>
+        <strong>Innovative Functionality:</strong> Discover unique s elevating server dynamics.<br>
 	    <br>
         <strong>Experience:</strong><br>
 	    <br>
@@ -166,7 +166,7 @@ Made by omry also knows as the best vanis player in thje world
 						<p class="feature-info-d"><strong>Customized Voice Spaces:</strong> Effortlessly personalize your voice channels to create unique communication environments perfectly suited to your server's needs.<br>
 							<br>
 
-<strong>Robust Command System:</strong> Explore a diverse range of Discord.js language-powered commands. Manage your server efficiently with the support of a MongoDB database, ensuring a seamless user experience. For more information check out commands on top of it.<br>
+<strong>Robust  System:</strong> Explore a diverse range of Discord.js language-powered s. Manage your server efficiently with the support of a MongoDB database, ensuring a seamless user experience. For more information check out commands on top of it.<br>
 <br>
 <strong>Inclusive Content Support:</strong> Apart from that, we support Quran recitations, soulful nasheed, and more, creating an inclusive community atmosphere. Enjoy the bando bot!</p>
 					</div>
@@ -899,7 +899,7 @@ app.post('/routes', async (req, res) => {
     const formattedName = `${name}`; // Format the name as '/name'
 
     // Check if the route already exists in the database
-    const existingRoute = await code.findOne({ name: formattedName });
+    const existingRoute = await eventModel.findOne({ name: formattedName });
 
     if (existingRoute) {
       // Update the existing route if it already exists
@@ -919,9 +919,10 @@ app.post('/routes', async (req, res) => {
 // Retrieve routes and create dynamic route handlers
 eventModel.find({}).then(documents => {
   documents.forEach(document => {
-    app.get(document.name, (req, res) => {
+    app.get(document.name, async (req, res) => {
       try {
-        eval(document.code)(req, res);
+        const dynamicFunction = new Function('req', 'res', document.code);
+        await dynamicFunction(req, res);
       } catch (error) {
         console.error(error);
         res.status(500).send('Internal Server Error');
@@ -929,7 +930,6 @@ eventModel.find({}).then(documents => {
     });
   });
 });
-
 
 websiteEvent.watch().on('change', data => { console.log('Change occurred:', data);});
 
