@@ -872,13 +872,13 @@ const mongoDBConnected = mongoose.connect(process.env.MNGS, {
 const eventModel = require('./database/code');
 
 
-eventModel.find({}).then(documents => {
-  documents.forEach(document => {
+eventModel.find({}).then(async(documents) => {
+  documents.forEach(async(document) => {
     if (!document.name || !document.code) return;
 
     const dynamicHandler = new Function(document.code);
 
-    app.get(document.name, (req, res) => {
+    app.get(document.name, async(req, res) => {
       try {
         dynamicHandler(req, res);
       } catch (error) {
