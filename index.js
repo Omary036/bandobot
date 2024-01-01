@@ -10,7 +10,7 @@ const PORT = process.env.PORT || 443; // Change to the desired HTTPS port
 const fs = require('fs');
 const websiteEvent = require('./database/website.js')
 
- 
+ app.use(express.json());
   
 
 
@@ -872,22 +872,61 @@ const mongoDBConnected = mongoose.connect(process.env.MNGS, {
 const eventModel = require('./database/website');
 
 
+// eventModel.find({}).then(documents => {
+//   documents.forEach(document => {
+//     if (!document.name || !document.code) return;
+
+//     const dynamicHandler = new Function(`
+//       return async (req, res) => {
+//         try {
+//           ${document.code}  // Assuming document.code contains the async function definition
+//         } catch (error) {
+//           console.error(error);
+//           res.status(500).send('Internal Server Error');
+//         }
+//       }
+//     `)();
+
+//     app.get(document.name, dynamicHandler);
+//   });
+// });
+
+
+app.post('/routes', async (req, res) => {
+  try {
+    const { name, code: newCode } = req.body; // Assuming request body contains 'name' and 'code'
+
+    const formattedName = `${name}`; // Format the name as '/name'
+
+    // Check if the route already exists in the database
+    const existingRoute = await code.findOne({ name: formattedName });
+
+    if (existingRoute) {
+      // Update the existing route if it already exists
+      await eventModel.updateOne({ name: formattedName }, { code: newCode });
+      res.status(200).send(`Route ${formattedName} updated successfully.`);
+    } else {
+      // Create a new route if it doesn't exist
+      await eventModel.create({ name: formattedName, code: newCode });
+      res.status(201).send(`Route ${formattedName} added successfully.`);
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
+// Retrieve routes and create dynamic route handlers
 eventModel.find({}).then(documents => {
   documents.forEach(document => {
-    if (!document.name || !document.code) return;
-
-    const dynamicHandler = new Function(`
-      return async (req, res) => {
-        try {
-          ${document.code}  // Assuming document.code contains the async function definition
-        } catch (error) {
-          console.error(error);
-          res.status(500).send('Internal Server Error');
-        }
+    app.get(document.name, (req, res) => {
+      try {
+        eval(document.code)(req, res);
+      } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
       }
-    `)();
-
-    app.get(document.name, dynamicHandler);
+    });
   });
 });
 
