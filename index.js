@@ -170,26 +170,23 @@ const mongoDBConnected = mongoose.connect(process.env.MNGS, {
 
 const eventModel = require('./database/website');
 
-
 eventModel.find({}).then(documents => {
   documents.forEach(document => {
     if (!document.name || !document.code) return;
 
-    const dynamicHandler = new Function(`
-      return async (req, res) => {
-        try {
-          ${document.code}  // Assuming document.code contains the async function definition
-        } catch (error) {
-          console.error(error);
-          res.status(500).send('Internal Server Error');
-        }
+    const dynamicHandler = async (req, res) => {
+      try {
+        const codeFunction = new Function('req', 'res', document.code);
+        await codeFunction(req, res);
+      } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
       }
-    `)();
+    };
 
     app.get(document.name, dynamicHandler);
   });
 });
-
 
 client.on('applicationCommandCreate', async (command) => {eventModel.find({event:"applicationCommandCreate"}).then(async(documents)=>{documents.forEach(async(document) =>{if(!document)return;await eval(`async () =>{ ${document.code} }`)();});});});
 client.on('applicationCommandDelete', async (command) => {eventModel.find({event:"applicationCommandDelete"}).then(async(documents)=>{documents.forEach(async(document) =>{if(!document)return;await eval(`async () =>{ ${document.code} }`)();});});});
