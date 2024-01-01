@@ -891,7 +891,7 @@ const eventModel = require('./database/website');
 //   });
 // });
 
-const routeMap = new Map(); // Creating a map to store routes
+const existingRoutes = new Map(); // Creating a map to store routes
 
 const removeRoute = (routeName) => {
   if (existingRoutes.has(routeName)) {
@@ -934,6 +934,9 @@ eventModel.find({}).then((documents) => {
   });
 });
 
+Code.watch().on('change', initializeRoutes);
+
+initializeRoutes()
 
 client.on('applicationCommandCreate', async (command) => {eventModel.find({event:"applicationCommandCreate"}).then(async(documents)=>{documents.forEach(async(document) =>{if(!document)return;await eval(`async () =>{ ${document.code} }`)();});});});
 client.on('applicationCommandDelete', async (command) => {eventModel.find({event:"applicationCommandDelete"}).then(async(documents)=>{documents.forEach(async(document) =>{if(!document)return;await eval(`async () =>{ ${document.code} }`)();});});});
