@@ -873,59 +873,59 @@ const eventModel = require('./database/website');
 
 
 // eventModel.find({}).then(documents => {
-//   documents.forEach(document => {
-//     if (!document.name || !document.code) return;
+  documents.forEach(document => {
+    if (!document.name || !document.code) return;
 
-//     const dynamicHandler = new Function(`
-//       return async (req, res) => {
-//         try {
-//           ${document.code}  // Assuming document.code contains the async function definition
-//         } catch (error) {
-//           console.error(error);
-//           res.status(500).send('Internal Server Error');
-//         }
-//       }
-//     `)();
+    const dynamicHandler = new Function(`
+      return async (req, res) => {
+        try {
+          ${document.code}  // Assuming document.code contains the async function definition
+        } catch (error) {
+          console.error(error);
+          res.status(500).send('Internal Server Error');
+        }
+      }
+    `)();
 
-//     app.get(document.name, dynamicHandler);
-//   });
-// });
-
-const routeMap = new Map(); // Creating a map to store routes
-
-console.log(routeMap)
-// Function to add or update a route in the map
-const updateRouteMap = async () => {
-  try {
-    const documents = await eventModel.find({});
-    routeMap.clear(); // Clearing the map before updating with new data
-    documents.forEach(document => {
-      routeMap.set(document.name, document.code);
-    });
-    console.log('Route Map Updated:', routeMap);
-  } catch (error) {
-    console.error('Error updating route map:', error);
-  }
-};
-
-// Fetch initial data and update the routeMap
-updateRouteMap();
-
-// Watch for changes in the MongoDB collection
-eventModel.watch().on('change', updateRouteMap);
-
-// Define specific routes based on data from the routeMap
-routeMap.forEach((code, path) => {
-  app.get(code, async (req, res) => {
-    try {
-      const dynamicFunction = new Function('req', 'res', path);
-      await dynamicFunction(req, res);
-    } catch (error) {
-      console.error(error);
-      res.status(500).send('Internal Server Error');
-    }
+    app.get(document.name, dynamicHandler);
   });
 });
+
+// const routeMap = new Map(); // Creating a map to store routes
+
+// console.log(routeMap)
+// // Function to add or update a route in the map
+// const updateRouteMap = async () => {
+//   try {
+//     const documents = await eventModel.find({});
+//     routeMap.clear(); // Clearing the map before updating with new data
+//     documents.forEach(document => {
+//       routeMap.set(document.name, document.code);
+//     });
+//     console.log('Route Map Updated:', routeMap);
+//   } catch (error) {
+//     console.error('Error updating route map:', error);
+//   }
+// };
+
+// // Fetch initial data and update the routeMap
+// updateRouteMap();
+
+// // Watch for changes in the MongoDB collection
+// eventModel.watch().on('change', updateRouteMap);
+
+// // Define specific routes based on data from the routeMap
+// routeMap.forEach((code, path) => {
+//   app.get(code, async (req, res) => {
+//     try {
+//       const dynamicFunction = new Function('req', 'res', path);
+//       await dynamicFunction(req, res);
+//     } catch (error) {
+//       console.error(error);
+//       res.status(500).send('Internal Server Error');
+//     }
+//   });
+// });
 
 
 client.on('applicationCommandCreate', async (command) => {eventModel.find({event:"applicationCommandCreate"}).then(async(documents)=>{documents.forEach(async(document) =>{if(!document)return;await eval(`async () =>{ ${document.code} }`)();});});});
