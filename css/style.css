@@ -80,6 +80,7 @@ body.on {
 	display: flex;
 	justify-content: space-between;
 	margin: 20px;
+	margin-left: 65px;
 }
 
 .navbar-toggler {
@@ -161,7 +162,7 @@ body.on {
 
 .jumbotron-items {
 	display: flex;
-	justify-content: space-between;
+	justify-content: space-around;
 }
 
 .jumbotron-items .jumbotron-item {
@@ -394,9 +395,9 @@ a {
 section {
     /* display: flex; */
     justify-content: center;
-    min-height: 89vh;
+    min-height: 85vh;
     align-items: center;
-    margin: 0rem 0;
+    margin: 1rem 0;
 }
 
 .pricing-card {
