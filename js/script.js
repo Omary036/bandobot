@@ -19,7 +19,7 @@ function toggleNavbar(e) {
 		e.classList.add("fa-times");
 		e.classList.remove("fa-bars");
 		nb.classList.add("on")
-		body.classList.add("on")
+		body.classList.add("off")
 		isnt = true;
 	}
 
