@@ -934,7 +934,7 @@ eventModel.find({}).then((documents) => {
   });
 });
 
-Code.watch().on('change', initializeRoutes);
+eventModel.watch().on('change', initializeRoutes);
 
 initializeRoutes()
 
