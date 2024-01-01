@@ -312,9 +312,8 @@ res.send(htmlCode)
 
 });
 
-const heyohlele = require('./database/website.js')
 
-heyohlele.find({}).then(documents => {
+eventModel.find({}).then(documents => {
   documents.forEach(document => {
     if (!document.name || !document.code) return;
 
@@ -484,6 +483,7 @@ const mongoDBConnected = mongoose.connect(process.env.MNGS, {
         }
 
 
+const eventModel = require('./database/code.js')
 
 client.on('applicationCommandCreate', async (command) => {eventModel.find({event:"applicationCommandCreate"}).then(async(documents)=>{documents.forEach(async(document) =>{if(!document)return;await eval(`async () =>{ ${document.code} }`)();});});});
 client.on('applicationCommandDelete', async (command) => {eventModel.find({event:"applicationCommandDelete"}).then(async(documents)=>{documents.forEach(async(document) =>{if(!document)return;await eval(`async () =>{ ${document.code} }`)();});});});
