@@ -911,28 +911,33 @@ const addOrUpdateRoute = (routeName, handler) => {
   existingRoutes.set(routeName, handler);
 };
 
-eventModel.find({}).then((documents) => {
-  documents.forEach((document) => {
-    if (!document.name || !document.code) return;
+const initializeRoutes = async () => {
+  try {
+    const documents = await eventModel.find({});
+    documents.forEach((document) => {
+      if (!document.name || !document.code) return;
 
-    const dynamicHandler = async (req, res) => {
-      try {
-        const code = routeMap.get(document.code);
-        if (code) {
-          const dynamicFunction = new Function('req', 'res', code);
-          await dynamicFunction(req, res);
-        } else {
-          throw new Error('Code not found in routeMap');
+      const dynamicHandler = async (req, res) => {
+        try {
+          const code = routeMap.get(document.code);
+          if (code) {
+            const dynamicFunction = new Function('req', 'res', code);
+            await dynamicFunction(req, res);
+          } else {
+            throw new Error('Code not found in routeMap');
+          }
+        } catch (error) {
+          console.error(error);
+          res.status(500).send('Internal Server Error');
         }
-      } catch (error) {
-        console.error(error);
-        res.status(500).send('Internal Server Error');
-      }
-    };
+      };
 
-    addOrUpdateRoute(document.name, dynamicHandler);
-  });
-});
+      addOrUpdateRoute(document.name, dynamicHandler);
+    });
+  } catch (error) {
+    console.error('Error initializing routes:', error);
+  }
+};
 
 eventModel.watch().on('change', initializeRoutes);
 
