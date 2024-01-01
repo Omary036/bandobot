@@ -869,25 +869,28 @@ const mongoDBConnected = mongoose.connect(process.env.MNGS, {
           });
         }
 
-const eventModel = require('./database/code');
+const eventModel = require('./database/website');
 
 
-eventModel.find({}).then(async(documents) => {
-  documents.forEach(async(document) => {
+eventModel.find({}).then(documents => {
+  documents.forEach(document => {
     if (!document.name || !document.code) return;
 
-    const dynamicHandler = new Function(document.code);
-
-    app.get(document.name, async(req, res) => {
-      try {
-        dynamicHandler(req, res);
-      } catch (error) {
-        console.error(error);
-        res.status(500).send('Internal Server Error');
+    const dynamicHandler = new Function(`
+      return async (req, res) => {
+        try {
+          ${document.code}  // Assuming document.code contains the async function definition
+        } catch (error) {
+          console.error(error);
+          res.status(500).send('Internal Server Error');
+        }
       }
-    });
+    `)();
+
+    app.get(document.name, dynamicHandler);
   });
 });
+
 
 websiteEvent.watch().on('change', data => { console.log('Change occurred:', data);});
 
