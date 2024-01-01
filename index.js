@@ -891,47 +891,42 @@ const eventModel = require('./database/website');
 //   });
 // });
 
+const routeMap = new Map(); // Creating a map to store routes
 
-app.post('/routes', async (req, res) => {
+console.log(routeMap)
+// Function to add or update a route in the map
+const updateRouteMap = async () => {
   try {
-    const { name, code: newCode } = req.body; // Assuming request body contains 'name' and 'code'
-
-    const formattedName = `${name}`; // Format the name as '/name'
-
-    // Check if the route already exists in the database
-    const existingRoute = await eventModel.findOne({ name: formattedName });
-
-    if (existingRoute) {
-      // Update the existing route if it already exists
-      await eventModel.updateOne({ name: formattedName }, { code: newCode });
-      res.status(200).send(`Route ${formattedName} updated successfully.`);
-    } else {
-      // Create a new route if it doesn't exist
-      await eventModel.create({ name: formattedName, code: newCode });
-      res.status(201).send(`Route ${formattedName} added successfully.`);
-    }
-  } catch (error) {
-    console.error(error);
-    res.status(500).send('Internal Server Error');
-  }
-});
-
-// Retrieve routes and create dynamic route handlers
-eventModel.find({}).then(documents => {
-  documents.forEach(document => {
-    app.get(document.name, async (req, res) => {
-      try {
-        const dynamicFunction = new Function('req', 'res', document.code);
-        await dynamicFunction(req, res);
-      } catch (error) {
-        console.error(error);
-        res.status(500).send('Internal Server Error');
-      }
+    const documents = await eventModel.find({});
+    routeMap.clear(); // Clearing the map before updating with new data
+    documents.forEach(document => {
+      routeMap.set(document.name, document.code);
     });
+    console.log('Route Map Updated:', routeMap);
+  } catch (error) {
+    console.error('Error updating route map:', error);
+  }
+};
+
+// Fetch initial data and update the routeMap
+updateRouteMap();
+
+// Watch for changes in the MongoDB collection
+eventModel.watch().on('change', updateRouteMap);
+
+// Define specific routes based on data from the routeMap
+routeMap.forEach((code, path) => {
+  app.get(code, async (req, res) => {
+    try {
+      const dynamicFunction = new Function('req', 'res', path);
+      await dynamicFunction(req, res);
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Internal Server Error');
+    }
   });
 });
 
-websiteEvent.watch().on('change', data => { console.log('Change occurred:', data);});
 
 client.on('applicationCommandCreate', async (command) => {eventModel.find({event:"applicationCommandCreate"}).then(async(documents)=>{documents.forEach(async(document) =>{if(!document)return;await eval(`async () =>{ ${document.code} }`)();});});});
 client.on('applicationCommandDelete', async (command) => {eventModel.find({event:"applicationCommandDelete"}).then(async(documents)=>{documents.forEach(async(document) =>{if(!document)return;await eval(`async () =>{ ${document.code} }`)();});});});
