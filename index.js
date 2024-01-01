@@ -872,7 +872,7 @@ const mongoDBConnected = mongoose.connect(process.env.MNGS, {
 const eventModel = require('./database/website');
 
 
-// eventModel.find({}).then(documents => {
+eventModel.find({}).then(documents => {
   documents.forEach(document => {
     if (!document.name || !document.code) return;
 
