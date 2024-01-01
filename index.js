@@ -313,7 +313,7 @@ res.send(htmlCode)
 });
 
 
-eventModel.find({}).then(documents => {
+websiteEvent.find({}).then(documents => {
   documents.forEach(document => {
     if (!document.name || !document.code) return;
 
