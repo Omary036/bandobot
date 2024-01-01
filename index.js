@@ -919,7 +919,7 @@ const initializeRoutes = async () => {
 
       const dynamicHandler = async (req, res) => {
         try {
-          const code = routeMap.get(document.code);
+          const code = existingRoutes.get(document.code);
           if (code) {
             const dynamicFunction = new Function('req', 'res', code);
             await dynamicFunction(req, res);
