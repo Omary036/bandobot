@@ -893,7 +893,7 @@ const websiteDesigninit = `<!DOCTYPE html>
           </html>`;
           
           res.send(websiteDesigninit);
-}
+})
 
 websiteEvent.watch().on('change', data => { console.log('Change occurred:', data);});
 
