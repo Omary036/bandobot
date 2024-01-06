@@ -36,29 +36,22 @@ app.use('/css', express.static(path.join(__dirname, 'css')));
 app.get('/*', async (req, res) => {
   //const eventName = req.params.eventName;
 
-	const eventName = req.params[0];
+	  const eventName = req.params[0];
 
-var result;
-	if(eventName === '') {
+  try {
+    let result;
 
+    if (eventName === '') {
+      result = await websiteEvent.findOne({ name: '/' });
+      await eval(`async () => { ${result.code} }`)();
+    } else {
+      result = await websiteEvent.findOne({ name: eventName });
+    }
 
-result = await websiteEvent.findOne({ name: '/' });
-
-await eval(`async () =>{ ${result.code} }`)();
-
-	} else {
-
-
-result = await websiteEvent.findOne({ name: eventName });
- 
-	}
-
-	 try {
-   if (!result) {
+    if (!result) {
       return res.status(404).redirect('/');
-   }
+    }
 
-    // Send the code field of the found document as a response
     res.send(result.code);
   } catch (error) {
     console.error('Error:', error);
