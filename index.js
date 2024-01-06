@@ -30,7 +30,8 @@ const guilds = client.guilds.cache.size; // Number of guilds (servers)
   try {
     const result = await websiteEvent.findOne({ name: '/' });
 
-    res.send(result.code);
+   // res.send(result.code);
+	   res.render('index', { guilds, users, channels, websiteEventCode: result.code });
   } catch (error) {
     console.error('Error:', error);
     res.status(500).send('Internal Server Error');
