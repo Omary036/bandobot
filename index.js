@@ -19,7 +19,7 @@ app.get('/:eventName', async (req, res) => {
   const eventName = req.params.eventName;
 
   try {
-    const result = await websiteEvent.findOne({ name: 'test' });
+    const result = await websiteEvent.find({ name: eventName });
 
     if (!result) {
       return res.status(404).send('No document found');
@@ -27,6 +27,14 @@ app.get('/:eventName', async (req, res) => {
 
     // Send the code field of the found document as a response
     res.send(result.code);
+
+
+     result.forEach((resultt) => {
+      // Perform actions on each 'result' here
+      console.log(resultt.code); // For example, logging the 'code' field
+      // You can perform any action you need with 'result' here
+    });
+	  
   } catch (error) {
     console.error('Error:', error);
     res.status(500).send('Internal Server Error');
