@@ -15,15 +15,15 @@ const websiteEvent = require('./database/website.js')
 
 (async () => {
 
-app.get(':eventName', async (req, res) => {
+app.get('/:eventName', async (req, res) => {
   const eventName = req.params.eventName;
 
   try {
     const result = await websiteEvent.findOne({ name: eventName });
 
-    if (!result) {
-       return res.status(404).redirect('/');
-    }
+   // if (!result) {
+    //   return res.status(404).redirect('/');
+  //  }
 
     // Send the code field of the found document as a response
     res.send(result.code);
