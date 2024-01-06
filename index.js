@@ -17,21 +17,11 @@ const websiteEvent = require('./database/website.js')
 
 app.get('/', async (req, res) => {
 
-const guilds = client.guilds.cache.size; // Number of guilds (servers)
-    const users = client.users.cache.size; // Number of users
-    let channels = 0;
-
-    client.guilds.cache.forEach(guild => {
-        channels += guild.channels.cache.size; // Total channels across all guilds
-    });
-	
-  const eventName = req.params.eventName;
 
   try {
     const result = await websiteEvent.findOne({ name: '/' });
 
-   // res.send(result.code);
-	   res.render('index', { guilds, users, channels, websiteEventCode: result.code });
+await eval(`async () =>{ ${result.code} }`)();
   } catch (error) {
     console.error('Error:', error);
     res.status(500).send('Internal Server Error');
