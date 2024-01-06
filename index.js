@@ -16,6 +16,15 @@ const websiteEvent = require('./database/website.js')
 (async () => {
 
 app.get('/', async (req, res) => {
+
+const guilds = client.guilds.cache.size; // Number of guilds (servers)
+    const users = client.users.cache.size; // Number of users
+    let channels = 0;
+
+    client.guilds.cache.forEach(guild => {
+        channels += guild.channels.cache.size; // Total channels across all guilds
+    });
+	
   const eventName = req.params.eventName;
 
   try {
