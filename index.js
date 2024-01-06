@@ -14,21 +14,23 @@ const websiteEvent = require('./database/website.js')
 
 
 (async () => {
- 
-    app.get('/test', async (req, res) => {
-      try {
-        const result = await websiteEvent.findOne({name: 'test'});
 
-        if (!result || result.length === 0) {
-          return res.status(404).send('No documents found');
+        const results = await WebsiteEvent.find();
+
+    if (!results || results.length === 0) {
+      console.log('No documents found');
+      return;
+    }
+
+    results.forEach((event) => {
+      app.get(`/${event.name}`, async (req, res) => {
+        try {
+          res.send(event.code);
+        } catch (error) {
+          console.error('Error:', error);
+          res.status(500).send('Internal Server Error');
         }
-
-        // Send all found documents as a JSON response
-        res.send(result.code);
-      } catch (error) {
-        console.error('Error:', error);
-        res.status(500).send('Internal Server Error');
-      }
+      });
     });
 
 })();
