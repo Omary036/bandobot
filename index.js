@@ -22,7 +22,7 @@ app.get('/:eventName', async (req, res) => {
     const result = await websiteEvent.findOne({ name: eventName });
 
     if (!result) {
-      return res.status(404).send('No document found');
+       return res.status(404).redirect('/');
     }
 
     // Send the code field of the found document as a response
