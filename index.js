@@ -20,9 +20,6 @@ const websiteEvent = require('./database/website.js')
       res.send(testHTML);
     });
 
-    app.listen(PORT, () => {
-      console.log(`Server is running on port ${PORT}`);
-    });
   } catch (error) {
     console.error('Error:', error);
   }
