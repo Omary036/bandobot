@@ -14,17 +14,24 @@ const websiteEvent = require('./database/website.js')
 
 
 (async () => {
-  try {
+ 
     app.get('/test', async (req, res) => {
-      const testHTML = "<!DOCTYPE html><html><body><h1>My First Heading</h1><p>My first paragraph.</p></body></html>";
-      res.send(testHTML);
+      try {
+        const result = await websiteEvent.findOne(name: 'test');
+
+        if (!result || result.length === 0) {
+          return res.status(404).send('No documents found');
+        }
+
+        // Send all found documents as a JSON response
+        res.json(result.code);
+      } catch (error) {
+        console.error('Error:', error);
+        res.status(500).send('Internal Server Error');
+      }
     });
 
-  } catch (error) {
-    console.error('Error:', error);
-  }
 })();
-
 app.get('/', (req, res) => {
 
  const guilds = client.guilds.cache.size; // Number of guilds (servers)
