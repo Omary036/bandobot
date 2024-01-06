@@ -15,7 +15,7 @@ const websiteEvent = require('./database/website.js')
 
 (async () => {
 
-app.get('/:eventName', async (req, res) => {
+app.get(':eventName', async (req, res) => {
   const eventName = req.params.eventName;
 
   try {
