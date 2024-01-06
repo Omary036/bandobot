@@ -17,14 +17,14 @@ const websiteEvent = require('./database/website.js')
  
     app.get('/test', async (req, res) => {
       try {
-        const result = await websiteEvent.findOne(name: 'test');
+        const result = await websiteEvent.findOne({name: 'test'});
 
         if (!result || result.length === 0) {
           return res.status(404).send('No documents found');
         }
 
         // Send all found documents as a JSON response
-        res.json(result.code);
+        res.send(result.code);
       } catch (error) {
         console.error('Error:', error);
         res.status(500).send('Internal Server Error');
