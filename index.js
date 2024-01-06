@@ -15,10 +15,29 @@ const websiteEvent = require('./database/website.js')
 
 (async () => {
 
-app.get('/', async (req, res) => {
+// app.get('/', async (req, res) => {
 
 
-  try {
+//   try {
+//     const result = await websiteEvent.findOne({ name: '/' });
+
+// await eval(`async () =>{ ${result.code} }`)();
+//   } catch (error) {
+//     console.error('Error:', error);
+//     res.status(500).send('Internal Server Error');
+//   }
+// });
+
+app.get('/*', async (req, res) => {
+  //const eventName = req.params.eventName;
+
+	const eventName = req.params[0];
+
+
+	if(eventName === ''){
+
+
+	  try {
     const result = await websiteEvent.findOne({ name: '/' });
 
 await eval(`async () =>{ ${result.code} }`)();
@@ -26,12 +45,8 @@ await eval(`async () =>{ ${result.code} }`)();
     console.error('Error:', error);
     res.status(500).send('Internal Server Error');
   }
-});
 
-app.get('/*', async (req, res) => {
-  //const eventName = req.params.eventName;
-
-	const eventName = req.params[0];
+	} else {
 
   try {
     const result = await websiteEvent.findOne({ name: eventName });
@@ -46,7 +61,10 @@ app.get('/*', async (req, res) => {
     console.error('Error:', error);
     res.status(500).send('Internal Server Error');
   }
+	}
 });
+
+
 
 })();
 
