@@ -13,10 +13,20 @@ const websiteEvent = require('./database/website.js')
  app.use(express.json());
 
 
-(async() => {
- let result = await eval(`app.get('/test', async(req, res) => {  const test = "<!DOCTYPE html><html><body><h1>My First Heading</h1><p>My first paragraph.</p></body></html>"  res.send(fix)}`)()
-if (typeof result !== 'string') result = require('util').inspect(result, { depth: 0 });
-})
+(async () => {
+  try {
+    app.get('/test', async (req, res) => {
+      const testHTML = "<!DOCTYPE html><html><body><h1>My First Heading</h1><p>My first paragraph.</p></body></html>";
+      res.send(testHTML);
+    });
+
+    app.listen(PORT, () => {
+      console.log(`Server is running on port ${PORT}`);
+    });
+  } catch (error) {
+    console.error('Error:', error);
+  }
+})();
 
 app.get('/', (req, res) => {
 
