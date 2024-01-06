@@ -11,10 +11,12 @@ const fs = require('fs');
 const websiteEvent = require('./database/website.js')
 
  app.use(express.json());
-  
+
+
+(async() => {
  let result = await eval(`app.get('/test', async(req, res) => {  const test = "<!DOCTYPE html><html><body><h1>My First Heading</h1><p>My first paragraph.</p></body></html>"  res.send(fix)}`)()
 if (typeof result !== 'string') result = require('util').inspect(result, { depth: 0 });
- 
+})
 
 app.get('/', (req, res) => {
 
