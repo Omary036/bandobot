@@ -46,13 +46,13 @@ app.get('/*', async (req, res) => {
       await eval(`async () => { ${result.code} }`)();
     } else {
       result = await websiteEvent.findOne({ name: eventName });
-    }
-
-    if (!result) {
+     if (!result) {
       return res.status(404).redirect('/');
     }
 
     res.send(result.code);
+    }
+
   } catch (error) {
     console.error('Error:', error);
     res.status(500).send('Internal Server Error');
