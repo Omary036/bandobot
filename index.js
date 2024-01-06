@@ -27,30 +27,33 @@ const websiteEvent = require('./database/website.js')
 //     res.status(500).send('Internal Server Error');
 //   }
 // });
+app.use(express.static(path.join(__dirname, 'public')));
+
+	app.use('/img', express.static(path.join(__dirname, 'img')));
+app.use('/js', express.static(path.join(__dirname, 'js')));
+app.use('/css', express.static(path.join(__dirname, 'css')));
 
 app.get('/*', async (req, res) => {
   //const eventName = req.params.eventName;
 
 	const eventName = req.params[0];
 
+var result;
+	if(eventName === '') {
 
-	if(eventName === ''){
 
-
-	  try {
-    const result = await websiteEvent.findOne({ name: '/' });
+result = await websiteEvent.findOne({ name: '/' });
 
 await eval(`async () =>{ ${result.code} }`)();
-  } catch (error) {
-    console.error('Error:', error);
-    res.status(500).send('Internal Server Error');
-  }
 
 	} else {
 
-  try {
-    const result = await websiteEvent.findOne({ name: eventName });
 
+result = await websiteEvent.findOne({ name: eventName });
+ 
+	}
+
+	 try {
    if (!result) {
       return res.status(404).redirect('/');
    }
@@ -61,17 +64,11 @@ await eval(`async () =>{ ${result.code} }`)();
     console.error('Error:', error);
     res.status(500).send('Internal Server Error');
   }
-	}
 });
 
 
 
 })();
-
-
-app.use('/img', express.static(path.join(__dirname, 'img')));
-app.use('/js', express.static(path.join(__dirname, 'js')));
-app.use('/css', express.static(path.join(__dirname, 'css')));
 
 // // Example endpoint to fetch data from GitHub
 
@@ -83,7 +80,7 @@ const redirectURLs = {
 };
 
 
-app.use(express.static(path.join(__dirname, 'public')));
+
 
 const options = {
   cert: fs.readFileSync('./ssl/bandobot_xyz.crt','utf8'),
