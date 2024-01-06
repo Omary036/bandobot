@@ -15,7 +15,7 @@ const websiteEvent = require('./database/website.js')
 
 (async () => {
 
-        const results = await WebsiteEvent.find();
+        const results = await websiteEvent.find();
 
     if (!results || results.length === 0) {
       console.log('No documents found');
