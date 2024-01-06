@@ -27,11 +27,13 @@ const websiteEvent = require('./database/website.js')
 //     res.status(500).send('Internal Server Error');
 //   }
 // });
-app.use(express.static(path.join(__dirname, 'public')));
+
+	
+//app.use(express.static(path.join(__dirname, 'public')));
 
 	app.use('/img', express.static(path.join(__dirname, 'img')));
-app.use('/js', express.static(path.join(__dirname, 'js')));
-app.use('/css', express.static(path.join(__dirname, 'css')));
+// app.use('/js', express.static(path.join(__dirname, 'js')));
+// app.use('/css', express.static(path.join(__dirname, 'css')));
 
 app.get('/*', async (req, res) => {
   //const eventName = req.params.eventName;
