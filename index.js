@@ -28,8 +28,10 @@ await eval(`async () =>{ ${result.code} }`)();
   }
 });
 
-app.get('/:eventName', async (req, res) => {
-  const eventName = req.params.eventName;
+app.get('/*', async (req, res) => {
+  //const eventName = req.params.eventName;
+
+	const eventName = req.params[0];
 
   try {
     const result = await websiteEvent.findOne({ name: eventName });
