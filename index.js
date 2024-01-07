@@ -10,10 +10,10 @@ const PORT = process.env.PORT || 443; // Change to the desired HTTPS port
 const fs = require('fs');
 const websiteEvent = require('./database/website.js')
 
- app.use(express.json());
+// app.use(express.json());
 
 
-(async () => {
+//(async () => {
 
 // app.get('/', async (req, res) => {
 
@@ -31,62 +31,62 @@ const websiteEvent = require('./database/website.js')
 	
 //app.use(express.static(path.join(__dirname, 'public')));
 
-	app.use('/img', express.static(path.join(__dirname, 'img')));
+	// app.use('/img', express.static(path.join(__dirname, 'img')));
 // app.use('/js', express.static(path.join(__dirname, 'js')));
 // app.use('/css', express.static(path.join(__dirname, 'css')));
 
-app.get('/*', async (req, res) => {
-  //const eventName = req.params.eventName;
+// app.get('/*', async (req, res) => {
+//   //const eventName = req.params.eventName;
 
-	  const eventName = req.params[0];
+// 	  const eventName = req.params[0];
 
-  try {
-    let result;
+//   try {
+//     let result;
 
-    if (eventName === '') {
-      result = await websiteEvent.findOne({ name: '/' });
-      await eval(`async () => { ${result.code} }`)();
-    } else {
-      result = await websiteEvent.findOne({ name: eventName });
-     if (!result) {
-      return res.status(404).redirect('/');
-    }
+//     if (eventName === '') {
+//       result = await websiteEvent.findOne({ name: '/' });
+//       await eval(`async () => { ${result.code} }`)();
+//     } else {
+//       result = await websiteEvent.findOne({ name: eventName });
+//      if (!result) {
+//       return res.status(404).redirect('/');
+//     }
 
-    res.send(result.code);
-    }
+//     res.send(result.code);
+//     }
 
-  } catch (error) {
-    console.error('Error:', error);
-    res.status(500).send('Internal Server Error');
-  }
-});
+//   } catch (error) {
+//     console.error('Error:', error);
+//     res.status(500).send('Internal Server Error');
+//   }
+// });
 
 
 
-})();
+// })();
 
 // // Example endpoint to fetch data from GitHub
 
-const redirectURLs = {
-  '/commands': 'commands.html',
-  '/premium': 'premium.html',
-  '/dashboard': 'dashboard.html',
-  // Add more mappings as needed
-};
+// const redirectURLs = {
+//   '/commands': 'commands.html',
+//   '/premium': 'premium.html',
+//   '/dashboard': 'dashboard.html',
+//   // Add more mappings as needed
+// };
 
 
 
 
-const options = {
-  cert: fs.readFileSync('./ssl/bandobot_xyz.crt','utf8'),
-  ca: fs.readFileSync('./ssl/bandobot_xyz.ca-bundle','utf8'),
-  key: fs.readFileSync('./ssl/bandobot.key','utf8')
-};
+// const options = {
+//   cert: fs.readFileSync('./ssl/bandobot_xyz.crt','utf8'),
+//   ca: fs.readFileSync('./ssl/bandobot_xyz.ca-bundle','utf8'),
+//   key: fs.readFileSync('./ssl/bandobot.key','utf8')
+// };
 
-var httpServer = http.createServer(app);
-var httpsServer = https.createServer(options, app);
+//var httpServer = http.createServer(app);
+//var httpsServer = https.createServer(options, app);
 
-httpServer.listen(PORT);
+//httpServer.listen(PORT);
 //httpsServer.listen(PORT);
 
 
