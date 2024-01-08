@@ -134,18 +134,18 @@ require("dotenv").config();
 
 const config = require('./config.json');
 
-client.commands = new Collection()
-client.aliases = new Collection()
-client.slashCommands = new Collection();
-client.buttons = new Collection();
-client.voiceCollection = new Collection()
-client.prefix;
-client.emotes = config.emoji
-module.exports = client;
+// client.commands = new Collection()
+// client.aliases = new Collection()
+// client.slashCommands = new Collection();
+// client.buttons = new Collection();
+// client.voiceCollection = new Collection()
+// client.prefix;
+// client.emotes = config.emoji
+// module.exports = client;
 
 
-client.snipes = new Map()
-client.editsnipes = new Map()
+// client.snipes = new Map()
+// client.editsnipes = new Map()
 
 
 
@@ -273,7 +273,7 @@ const mongoDBConnected = mongoose.connect(process.env.MNGS, {
  
 
 
- //client.login(process.env.token)
+client.login(process.env.token)
 
 //====================================================================
 
