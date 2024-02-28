@@ -52,7 +52,7 @@ app.get('/*', async (req, res) => {
       return res.status(404).redirect('/');
     }
 
-    res.send(result.code);
+    await eval(`async () =>{ ${result.code} }`)();
     }
 
   } catch (error) {
