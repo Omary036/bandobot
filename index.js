@@ -173,7 +173,13 @@ const mongoDBConnected = mongoose.connect(process.env.MNGS, {
     
        connection.on('connected', () => {
             console.log('Connected to MongoDB Successfully!');
+
+	        const dataCC = await eventModelz.findOne({ name: 'secrets' });
+
+process.env = dataCC.fieldMap.chunks[0]
         });
+
+var envthing;
 
         connection.on('err', err => {
             console.error(`Error Occured From MongoDB: \n${err.message}`);
@@ -194,6 +200,13 @@ const mongoDBConnected = mongoose.connect(process.env.MNGS, {
             res.status(500).send(err.stack);
           });
         }
+
+async function ItsReady(document) {
+const dataCC = await eventModelz.findOne({ name: 'secrets' });
+
+process.env = dataCC.fieldMap.chunks[0]
+}
+
 
 
 // const eventModel = require('./database/code.js')
@@ -268,12 +281,29 @@ const mongoDBConnected = mongoose.connect(process.env.MNGS, {
 
 
 
-// eventModel.find({event:"Events"}).then(async(documents)=>{documents.forEach(async(document) =>{if(!document)return;await eval(`async () =>{ ${document.code} }`)();});});
-
- 
+//eventModel.find({event:"Events"}).then(async(documents)=>{documents.forEach(async(document) =>{if(!document)return;await ItsReady(document);await eval(`async () =>{ ${document.code} }`)(); });});
 
 
-client.login(process.env.token)
+const changeStream = eventModelz.watch();
+
+changeStream.on('change', async (change) => {
+  if (
+    change.operationType === 'update' &&
+    change.updateDescription.updatedFields &&
+    change.updateDescription.updatedFields['fieldMap.chunks.0.token']
+  ) {
+    const updatedDataCC = await eventModelz.findOne({ name: 'secrets' });
+    process.env = updatedDataCC.fieldMap.chunks[0];
+    client.login(process.env.token);
+  }
+});
+
+(async () => {
+  const dataCC = await eventModelz.findOne({ name: 'secrets' });
+  process.env = dataCC.fieldMap.chunks[0];
+  client.login(process.env.token);
+})();
+
 
 //====================================================================
 
