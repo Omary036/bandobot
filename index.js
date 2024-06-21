@@ -171,7 +171,7 @@ const mongoDBConnected = mongoose.connect(process.env.MNGS, {
       
 });
     
-       connection.on('connected', () => {
+       connection.on('connected', async() => {
             console.log('Connected to MongoDB Successfully!');
 
 	        const dataCC = await eventModelz.findOne({ name: 'secrets' });
