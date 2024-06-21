@@ -11,7 +11,7 @@ const fs = require('fs');
 const websiteEvent = require('./database/website.js')
 
 const eventModel = require('./database/code.js')
- app.use(express.json());
+ app.use(express.json()); 
 const eventModelz = require('./database/data.js');
 
 
