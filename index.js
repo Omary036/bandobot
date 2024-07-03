@@ -51,8 +51,7 @@ app.get('/*', async (req, res) => {
     } else {
       result = await websiteEvent.findOne({ name: eventName });
      if (!result) {
-      return 
-//res.status(404).redirect('/');
+//return res.status(404).redirect('/');
     }
 
     await eval(`async () =>{ ${result.code} }`)();
