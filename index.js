@@ -16,101 +16,88 @@ const eventModelz = require('./database/data.js');
 
 
 
-(async () => {
-  const handleRequest = async (req, res, type) => {
-    try {
-      const result = await websiteEvent.findOne({ name: req.path, type });
+const handleRequest = async (req, res, type) => {
+  try {
+    const result = await websiteEvent.findOne({ name: req.path, type });
 
-      if (result) {
-        await eval(`async () => { ${result.code} }`)();
-      }
-    } catch (error) {
-      console.error('Error:', error);
-      res.status(500).send('Internal Server Error');
+    if (result) {
+      await eval(`async () => { ${result.code} }`)();
     }
-  };
+  } catch (error) {
+    console.error('Error:', error);
+    res.status(500).send('Internal Server Error');
+  }
+};
 
-  app.get('/', async (req, res) => {
-    await handleRequest(req, res, 'get');
-  });
+const handleWildcardRequest = async (req, res, type) => {
+  const eventName = req.params[0] || '/';
+  req.path = eventName;
+  await handleRequest(req, res, type);
+};
 
-  app.post('/', async (req, res) => {
-    await handleRequest(req, res, 'post');
-  });
+app.get('/', async (req, res) => {
+  await handleRequest(req, res, 'get');
+});
 
-  app.put('/', async (req, res) => {
-    await handleRequest(req, res, 'put');
-  });
+app.post('/', async (req, res) => {
+  await handleRequest(req, res, 'post');
+});
 
-  app.delete('/', async (req, res) => {
-    await handleRequest(req, res, 'delete');
-  });
+app.put('/', async (req, res) => {
+  await handleRequest(req, res, 'put');
+});
 
-  app.patch('/', async (req, res) => {
-    await handleRequest(req, res, 'patch');
-  });
+app.delete('/', async (req, res) => {
+  await handleRequest(req, res, 'delete');
+});
 
-  app.all('/', async (req, res) => {
-    await handleRequest(req, res, 'all');
-  });
+app.patch('/', async (req, res) => {
+  await handleRequest(req, res, 'patch');
+});
 
-  app.use('/', async (req, res, next) => {
-    await handleRequest(req, res, 'use');
-    next();
-  });
+app.all('/', async (req, res) => {
+  await handleRequest(req, res, 'all');
+});
 
-  app.use(express.static(path.join(__dirname, 'public')));
-  app.use('/img', express.static(path.join(__dirname, 'img')));
-  app.use('/js', express.static(path.join(__dirname, 'js')));
-  app.use('/css', express.static(path.join(__dirname, 'css')));
+app.use('/', async (req, res, next) => {
+  await handleRequest(req, res, 'use');
+  next();
+});
 
-  app.get('/*', async (req, res) => {
-    const eventName = req.params[0] || '/';
-    req.path = eventName;
-    await handleRequest(req, res, 'get');
-  });
+app.use(express.static(path.join(__dirname, 'public')));
+app.use('/img', express.static(path.join(__dirname, 'img')));
+app.use('/js', express.static(path.join(__dirname, 'js')));
+app.use('/css', express.static(path.join(__dirname, 'css')));
 
-  app.post('/*', async (req, res) => {
-    const eventName = req.params[0] || '/';
-    req.path = eventName;
-    await handleRequest(req, res, 'post');
-  });
+app.get('/*', async (req, res) => {
+  await handleWildcardRequest(req, res, 'get');
+});
 
-  app.put('/*', async (req, res) => {
-    const eventName = req.params[0] || '/';
-    req.path = eventName;
-    await handleRequest(req, res, 'put');
-  });
+app.post('/*', async (req, res) => {
+  await handleWildcardRequest(req, res, 'post');
+});
 
-  app.delete('/*', async (req, res) => {
-    const eventName = req.params[0] || '/';
-    req.path = eventName;
-    await handleRequest(req, res, 'delete');
-  });
+app.put('/*', async (req, res) => {
+  await handleWildcardRequest(req, res, 'put');
+});
 
-  app.patch('/*', async (req, res) => {
-    const eventName = req.params[0] || '/';
-    req.path = eventName;
-    await handleRequest(req, res, 'patch');
-  });
+app.delete('/*', async (req, res) => {
+  await handleWildcardRequest(req, res, 'delete');
+});
 
-  app.all('/*', async (req, res) => {
-    const eventName = req.params[0] || '/';
-    req.path = eventName;
-    await handleRequest(req, res, 'all');
-  });
+app.patch('/*', async (req, res) => {
+  await handleWildcardRequest(req, res, 'patch');
+});
 
-  app.use('/*', async (req, res, next) => {
-    const eventName = req.params[0] || '/';
-    req.path = eventName;
-    await handleRequest(req, res, 'use');
-    next();
-  });
+app.all('/*', async (req, res) => {
+  await handleWildcardRequest(req, res, 'all');
+});
 
-  app.listen(3000, () => {
-    console.log('Server is running on port 3000');
-  });
-})();
+app.use('/*', async (req, res, next) => {
+  await handleWildcardRequest(req, res, 'use');
+  next();
+});
+
 
 
 // Example endpoint to fetch data from GitHub
