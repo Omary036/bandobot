@@ -14,11 +14,11 @@ const eventModel = require('./database/code.js')
  app.use(express.json()); 
 const eventModelz = require('./database/data.js');
 
-
+async(() => {
 
 const handleRequest = async (req, res, type) => {
   try {
-    const result = await websiteEvent.findOne({ name: req.path, type });
+    const result = await websiteEvent.findOne({ name: req.path, type: type });
 
     if (result) {
       await eval(`async () => { ${result.code} }`)();
@@ -30,9 +30,17 @@ const handleRequest = async (req, res, type) => {
 };
 
 const handleWildcardRequest = async (req, res, type) => {
-  const eventName = req.params[0] || '/';
-  req.path = eventName;
-  await handleRequest(req, res, type);
+  const eventName = req.params[0]
+  try {
+    const result = await websiteEvent.findOne({ name: eventName, type: type });
+
+    if (result) {
+      await eval(`async () => { ${result.code} }`)();
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    res.status(500).send('Internal Server Error');
+  }
 };
 
 app.get('/', async (req, res) => {
@@ -98,7 +106,7 @@ app.use('/*', async (req, res, next) => {
   next();
 });
 
-
+})();
 
 // Example endpoint to fetch data from GitHub
 
