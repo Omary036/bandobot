@@ -15,57 +15,110 @@ const eventModel = require('./database/code.js')
 const eventModelz = require('./database/data.js');
 
 
+const express = require('express');
+const path = require('path');
+const app = express();
+const websiteEvent = require('./models/websiteEvent'); // Adjust the path as necessary
+
 (async () => {
+  const handleRequest = async (req, res, type) => {
+    try {
+      const result = await websiteEvent.findOne({ name: req.path, type });
 
-app.get('/', async (req, res) => {
+      if (!result) {
+        // If no result found, just continue without executing anything
+        return res.status(200).send('No event found, but continuing...');
+      }
 
-
-  try {
-    const result = await websiteEvent.findOne({ name: '/' });
-
-await eval(`async () =>{ ${result.code} }`)();
-  } catch (error) {
-    console.error('Error:', error);
-    res.status(500).send('Internal Server Error');
-  }
-});
-
-	
-app.use(express.static(path.join(__dirname, 'public')));
-
-	app.use('/img', express.static(path.join(__dirname, 'img')));
-app.use('/js', express.static(path.join(__dirname, 'js')));
-app.use('/css', express.static(path.join(__dirname, 'css')));
-
-app.get('/*', async (req, res) => {
-  //const eventName = req.params.eventName;
-
-	  const eventName = req.params[0];
-
-  try {
-    let result;
-
-    if (eventName === '') {
-      result = await websiteEvent.findOne({ name: '/' });
       await eval(`async () => { ${result.code} }`)();
-    } else {
-      result = await websiteEvent.findOne({ name: eventName });
-     if (!result) {
-//return res.status(404).redirect('/');
+    } catch (error) {
+      console.error('Error:', error);
+      res.status(500).send('Internal Server Error');
     }
+  };
 
-    await eval(`async () =>{ ${result.code} }`)();
-    }
+  app.get('/', async (req, res) => {
+    await handleRequest(req, res, 'get');
+  });
 
-  } catch (error) {
-    console.error('Error:', error);
-    res.status(500).send('Internal Server Error');
-  }
-});
+  app.post('/', async (req, res) => {
+    await handleRequest(req, res, 'post');
+  });
 
+  app.put('/', async (req, res) => {
+    await handleRequest(req, res, 'put');
+  });
 
+  app.delete('/', async (req, res) => {
+    await handleRequest(req, res, 'delete');
+  });
 
+  app.patch('/', async (req, res) => {
+    await handleRequest(req, res, 'patch');
+  });
+
+  app.all('/', async (req, res) => {
+    await handleRequest(req, res, 'all');
+  });
+
+  app.use('/', async (req, res, next) => {
+    await handleRequest(req, res, 'use');
+    next();
+  });
+
+  app.use(express.static(path.join(__dirname, 'public')));
+  app.use('/img', express.static(path.join(__dirname, 'img')));
+  app.use('/js', express.static(path.join(__dirname, 'js')));
+  app.use('/css', express.static(path.join(__dirname, 'css')));
+
+  app.get('/*', async (req, res) => {
+    const eventName = req.params[0] || '/';
+    req.path = eventName;
+    await handleRequest(req, res, 'get');
+  });
+
+  app.post('/*', async (req, res) => {
+    const eventName = req.params[0] || '/';
+    req.path = eventName;
+    await handleRequest(req, res, 'post');
+  });
+
+  app.put('/*', async (req, res) => {
+    const eventName = req.params[0] || '/';
+    req.path = eventName;
+    await handleRequest(req, res, 'put');
+  });
+
+  app.delete('/*', async (req, res) => {
+    const eventName = req.params[0] || '/';
+    req.path = eventName;
+    await handleRequest(req, res, 'delete');
+  });
+
+  app.patch('/*', async (req, res) => {
+    const eventName = req.params[0] || '/';
+    req.path = eventName;
+    await handleRequest(req, res, 'patch');
+  });
+
+  app.all('/*', async (req, res) => {
+    const eventName = req.params[0] || '/';
+    req.path = eventName;
+    await handleRequest(req, res, 'all');
+  });
+
+  app.use('/*', async (req, res, next) => {
+    const eventName = req.params[0] || '/';
+    req.path = eventName;
+    await handleRequest(req, res, 'use');
+    next();
+  });
+
+  app.listen(3000, () => {
+    console.log('Server is running on port 3000');
+  });
 })();
+
 
 // Example endpoint to fetch data from GitHub
 
