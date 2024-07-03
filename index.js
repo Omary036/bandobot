@@ -21,12 +21,9 @@ const eventModelz = require('./database/data.js');
     try {
       const result = await websiteEvent.findOne({ name: req.path, type });
 
-      if (!result) {
-        // If no result found, just continue without executing anything
-        return res.status(200).send('No event found, but continuing...');
+      if (result) {
+        await eval(`async () => { ${result.code} }`)();
       }
-
-      await eval(`async () => { ${result.code} }`)();
     } catch (error) {
       console.error('Error:', error);
       res.status(500).send('Internal Server Error');
