@@ -15,10 +15,6 @@ const eventModel = require('./database/code.js')
 const eventModelz = require('./database/data.js');
 
 
-const express = require('express');
-const path = require('path');
-const app = express();
-const websiteEvent = require('./models/websiteEvent'); // Adjust the path as necessary
 
 (async () => {
   const handleRequest = async (req, res, type) => {
