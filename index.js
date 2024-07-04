@@ -14,7 +14,7 @@ const eventModel = require('./database/code.js')
  app.use(express.json()); 
 const eventModelz = require('./database/data.js');
 
-async(() => {
+(async(() => {
 
 const handleRequest = async (req, res, type) => {
   try {
