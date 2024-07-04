@@ -18,7 +18,7 @@ async(() => {
 
 const handleRequest = async (req, res, type) => {
   try {
-    const result = await websiteEvent.findOne({ name: req.path, type: type });
+    const result = await websiteEvent.findOne({ name: '/', type: type });
 
     if (result) {
       await eval(`async () => { ${result.code} }`)();
@@ -29,8 +29,8 @@ const handleRequest = async (req, res, type) => {
   }
 };
 
-const handleWildcardRequest = async (req, res, type) => {
-  const eventName = req.params[0]
+const handleWildcardRequest = async (eventName, req, res, type) => {
+  
   try {
     const result = await websiteEvent.findOne({ name: eventName, type: type });
 
@@ -78,31 +78,38 @@ app.use('/js', express.static(path.join(__dirname, 'js')));
 app.use('/css', express.static(path.join(__dirname, 'css')));
 
 app.get('/*', async (req, res) => {
-  await handleWildcardRequest(req, res, 'get');
+	const eventName = req.params[0]
+  await handleWildcardRequest(eventName, req, res, 'get');
 });
 
 app.post('/*', async (req, res) => {
-  await handleWildcardRequest(req, res, 'post');
+ const eventName = req.params[0]
+  await handleWildcardRequest(eventName, req, res, 'post');
 });
 
 app.put('/*', async (req, res) => {
-  await handleWildcardRequest(req, res, 'put');
+  const eventName = req.params[0]
+  await handleWildcardRequest(eventName, req, res, 'put');
 });
 
 app.delete('/*', async (req, res) => {
-  await handleWildcardRequest(req, res, 'delete');
+  const eventName = req.params[0]
+  await handleWildcardRequest(eventName, req, res, 'delete');
 });
 
 app.patch('/*', async (req, res) => {
-  await handleWildcardRequest(req, res, 'patch');
+  const eventName = req.params[0]
+  await handleWildcardRequest(eventName, req, res,  'patch');
 });
 
 app.all('/*', async (req, res) => {
-  await handleWildcardRequest(req, res, 'all');
+  const eventName = req.params[0]
+  await handleWildcardRequest(eventName, req, res, 'all');
 });
 
 app.use('/*', async (req, res, next) => {
-  await handleWildcardRequest(req, res, 'use');
+ const eventName = req.params[0]
+  await handleWildcardRequest(eventName, req, res, 'use');
   next();
 });
 
