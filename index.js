@@ -14,14 +14,12 @@ const eventModel = require('./database/code.js')
  app.use(express.json()); 
 const eventModelz = require('./database/data.js');
 
-(async(() => {
-
 const handleRequest = async (req, res, type) => {
   try {
     const result = await websiteEvent.findOne({ name: '/', type: type });
 
     if (result) {
-      await eval(`async () => { ${result.code} }`)();
+      await eval(`(async () => { ${result.code} })()`);
     }
   } catch (error) {
     console.error('Error:', error);
@@ -30,12 +28,11 @@ const handleRequest = async (req, res, type) => {
 };
 
 const handleWildcardRequest = async (eventName, req, res, type) => {
-  
   try {
     const result = await websiteEvent.findOne({ name: eventName, type: type });
 
     if (result) {
-      await eval(`async () => { ${result.code} }`)();
+      await eval(`(async () => { ${result.code} })()`);
     }
   } catch (error) {
     console.error('Error:', error);
@@ -78,42 +75,44 @@ app.use('/js', express.static(path.join(__dirname, 'js')));
 app.use('/css', express.static(path.join(__dirname, 'css')));
 
 app.get('/*', async (req, res) => {
-	const eventName = req.params[0]
+  const eventName = req.params[0] || '';
   await handleWildcardRequest(eventName, req, res, 'get');
 });
 
 app.post('/*', async (req, res) => {
- const eventName = req.params[0]
+  const eventName = req.params[0] || '';
   await handleWildcardRequest(eventName, req, res, 'post');
 });
 
 app.put('/*', async (req, res) => {
-  const eventName = req.params[0]
+  const eventName = req.params[0] || '';
   await handleWildcardRequest(eventName, req, res, 'put');
 });
 
 app.delete('/*', async (req, res) => {
-  const eventName = req.params[0]
+  const eventName = req.params[0] || '';
   await handleWildcardRequest(eventName, req, res, 'delete');
 });
 
 app.patch('/*', async (req, res) => {
-  const eventName = req.params[0]
-  await handleWildcardRequest(eventName, req, res,  'patch');
+  const eventName = req.params[0] || '';
+  await handleWildcardRequest(eventName, req, res, 'patch');
 });
 
 app.all('/*', async (req, res) => {
-  const eventName = req.params[0]
+  const eventName = req.params[0] || '';
   await handleWildcardRequest(eventName, req, res, 'all');
 });
 
 app.use('/*', async (req, res, next) => {
- const eventName = req.params[0]
+  const eventName = req.params[0] || '';
   await handleWildcardRequest(eventName, req, res, 'use');
   next();
 });
 
-})();
+app.listen(3000, () => {
+  console.log('Server is running on port 3000');
+});
 
 // Example endpoint to fetch data from GitHub
 
