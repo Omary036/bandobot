@@ -12,6 +12,7 @@ const websiteEvent = require('./database/website.js')
 
 const eventModel = require('./database/code.js')
  app.use(express.json()); 
+app.use(express.urlencoded({ extended: true }));
 const eventModelz = require('./database/data.js');
 
 const handleRequest = async (req, res, type) => {
@@ -74,44 +75,62 @@ app.use('/img', express.static(path.join(__dirname, 'img')));
 app.use('/js', express.static(path.join(__dirname, 'js')));
 app.use('/css', express.static(path.join(__dirname, 'css')));
 
-app.get('/*', async (req, res) => {
-  const eventName = req.params[0] || '';
-  await handleWildcardRequest(eventName, req, res, 'get');
-});
+// app.get('/*', async (req, res) => {
+//   const eventName = req.params[0] || '';
+//   await handleWildcardRequest(eventName, req, res, 'get');
+// });
 
-app.post('/*', async (req, res) => {
-  const eventName = req.params[0] || '';
-  await handleWildcardRequest(eventName, req, res, 'post');
-});
+// app.post('/*', async (req, res) => {
+//   const eventName = req.params[0] || '';
+//   await handleWildcardRequest(eventName, req, res, 'post');
+// });
 
-app.put('/*', async (req, res) => {
-  const eventName = req.params[0] || '';
-  await handleWildcardRequest(eventName, req, res, 'put');
-});
+// app.put('/*', async (req, res) => {
+//   const eventName = req.params[0] || '';
+//   await handleWildcardRequest(eventName, req, res, 'put');
+// });
 
-app.delete('/*', async (req, res) => {
-  const eventName = req.params[0] || '';
-  await handleWildcardRequest(eventName, req, res, 'delete');
-});
+// app.delete('/*', async (req, res) => {
+//   const eventName = req.params[0] || '';
+//   await handleWildcardRequest(eventName, req, res, 'delete');
+// });
 
-app.patch('/*', async (req, res) => {
-  const eventName = req.params[0] || '';
-  await handleWildcardRequest(eventName, req, res, 'patch');
-});
+// app.patch('/*', async (req, res) => {
+//   const eventName = req.params[0] || '';
+//   await handleWildcardRequest(eventName, req, res, 'patch');
+// });
 
-app.all('/*', async (req, res) => {
-  const eventName = req.params[0] || '';
-  await handleWildcardRequest(eventName, req, res, 'all');
-});
+// app.all('/*', async (req, res) => {
+//   const eventName = req.params[0] || '';
+//   await handleWildcardRequest(eventName, req, res, 'all');
+// });
 
-app.use('/*', async (req, res, next) => {
-  const eventName = req.params[0] || '';
-  await handleWildcardRequest(eventName, req, res, 'use');
-  next();
-});
+// app.use('/*', async (req, res, next) => {
+//   const eventName = req.params[0] || '';
+//   await handleWildcardRequest(eventName, req, res, 'use');
+//   next();
+// });
 
-app.listen(3000, () => {
-  console.log('Server is running on port 3000');
+
+const initializeRoutes = async () => {
+  const routes = await websiteEvent.find({});
+  routes.forEach(route => {
+    const method = route.type.toLowerCase();
+    
+    app[method](route.name, (req, res) => {
+      const func = new Function('req', 'res', route.code);
+      func(req, res);
+    });
+  });
+};
+
+
+initializeRoutes().then(() => {
+  app.listen(3000, () => {
+    console.log(`Server running at port 3000`);
+  });
+}).catch(err => {
+  console.error('Error initializing routes:', err);
 });
 
 // Example endpoint to fetch data from GitHub
