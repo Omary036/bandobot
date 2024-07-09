@@ -15,12 +15,16 @@ const eventModel = require('./database/code.js')
 app.use(express.urlencoded({ extended: true }));
 const eventModelz = require('./database/data.js');
 
+
+// Function to handle requests based on type
 const handleRequest = async (req, res, type) => {
   try {
-    const result = await websiteEvent.findOne({ name: '/', type: type });
+    const result = await websiteEvent.findOne({ name: '/', type: type }); // Modify query as per your needs
 
     if (result) {
-      await eval(`(async () => { ${result.code} })()`);
+      await eval(`(async () => { ${result.code} })()`); // Ensure result.code is valid JavaScript
+    } else {
+      res.status(404).send('Route not found');
     }
   } catch (error) {
     console.error('Error:', error);
@@ -28,12 +32,15 @@ const handleRequest = async (req, res, type) => {
   }
 };
 
+// Function to handle wildcard requests
 const handleWildcardRequest = async (eventName, req, res, type) => {
   try {
     const result = await websiteEvent.findOne({ name: eventName, type: type });
 
     if (result) {
-      await eval(`(async () => { ${result.code} })()`);
+      await eval(`(async () => { ${result.code} })()`); // Ensure result.code is valid JavaScript
+    } else {
+      res.status(404).send('Route not found');
     }
   } catch (error) {
     console.error('Error:', error);
@@ -41,39 +48,129 @@ const handleWildcardRequest = async (eventName, req, res, type) => {
   }
 };
 
-app.get('/', async (req, res) => {
-  await handleRequest(req, res, 'get');
+// Define routes based on HTTP methods
+['get', 'post', 'put', 'delete', 'patch', 'all', 'use'].forEach(method => {
+  app[method]('/', async (req, res) => {
+    await handleRequest(req, res, method);
+  });
 });
 
-app.post('/', async (req, res) => {
-  await handleRequest(req, res, 'post');
-});
-
-app.put('/', async (req, res) => {
-  await handleRequest(req, res, 'put');
-});
-
-app.delete('/', async (req, res) => {
-  await handleRequest(req, res, 'delete');
-});
-
-app.patch('/', async (req, res) => {
-  await handleRequest(req, res, 'patch');
-});
-
-app.all('/', async (req, res) => {
-  await handleRequest(req, res, 'all');
-});
-
-app.use('/', async (req, res, next) => {
-  await handleRequest(req, res, 'use');
-  next();
-});
-
+// Additional middleware for static file serving
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/img', express.static(path.join(__dirname, 'img')));
 app.use('/js', express.static(path.join(__dirname, 'js')));
 app.use('/css', express.static(path.join(__dirname, 'css')));
+
+// Initialize routes from MongoDB and start server
+const initializeRoutes = async () => {
+  try {
+    await mongoose.connection.once('open', async () => {
+      console.log('Connected to MongoDB');
+      await websiteEvent.init(); // Initialize the model
+
+      // Assuming websiteEvent is your model and find returns the documents
+      const routes = await websiteEvent.find({});
+
+      routes.forEach(route => {
+        const method = route.type.toLowerCase(); // Ensure method is valid (get, post, etc.)
+
+        app[method](route.name, async (req, res) => {
+          const func = new Function('req', 'res', route.code);
+          await func(req, res);
+        });
+      });
+
+      // Start the server after initializing routes
+      app.listen(port, () => {
+        console.log(`Server running at http://localhost:${port}/`);
+      });
+    });
+  } catch (error) {
+    console.error('Error initializing routes:', error);
+  }
+};
+
+// Call the initializeRoutes function to start the server
+initializeRoutes();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// const handleRequest = async (req, res, type) => {
+//   try {
+//     const result = await websiteEvent.findOne({ name: '/', type: type });
+
+//     if (result) {
+//       await eval(`(async () => { ${result.code} })()`);
+//     }
+//   } catch (error) {
+//     console.error('Error:', error);
+//     res.status(500).send('Internal Server Error');
+//   }
+// };
+
+// const handleWildcardRequest = async (eventName, req, res, type) => {
+//   try {
+//     const result = await websiteEvent.findOne({ name: eventName, type: type });
+
+//     if (result) {
+//       await eval(`(async () => { ${result.code} })()`);
+//     }
+//   } catch (error) {
+//     console.error('Error:', error);
+//     res.status(500).send('Internal Server Error');
+//   }
+// };
+
+// app.get('/', async (req, res) => {
+//   await handleRequest(req, res, 'get');
+// });
+
+// app.post('/', async (req, res) => {
+//   await handleRequest(req, res, 'post');
+// });
+
+// app.put('/', async (req, res) => {
+//   await handleRequest(req, res, 'put');
+// });
+
+// app.delete('/', async (req, res) => {
+//   await handleRequest(req, res, 'delete');
+// });
+
+// app.patch('/', async (req, res) => {
+//   await handleRequest(req, res, 'patch');
+// });
+
+// app.all('/', async (req, res) => {
+//   await handleRequest(req, res, 'all');
+// });
+
+// app.use('/', async (req, res, next) => {
+//   await handleRequest(req, res, 'use');
+//   next();
+// });
+
+// app.use(express.static(path.join(__dirname, 'public')));
+// app.use('/img', express.static(path.join(__dirname, 'img')));
+// app.use('/js', express.static(path.join(__dirname, 'js')));
+// app.use('/css', express.static(path.join(__dirname, 'css')));
 
 // app.get('/*', async (req, res) => {
 //   const eventName = req.params[0] || '';
@@ -111,27 +208,6 @@ app.use('/css', express.static(path.join(__dirname, 'css')));
 //   next();
 // });
 
-
-const initializeRoutes = async () => {
-  const routes = await websiteEvent.find({});
-  routes.forEach(route => {
-    const method = route.type.toLowerCase();
-    
-    app[method](route.name, (req, res) => {
-      const func = new Function('req', 'res', route.code);
-      func(req, res);
-    });
-  });
-};
-
-
-initializeRoutes().then(() => {
-  app.listen(3000, () => {
-    console.log(`Server running at port 3000`);
-  });
-}).catch(err => {
-  console.error('Error initializing routes:', err);
-});
 
 // Example endpoint to fetch data from GitHub
 
