@@ -325,101 +325,101 @@ var envthing;
 
 
 
-// const handleRequest = async (req, res, type) => {
-//   try {
-//     const result = await websiteEvent.findOne({ name: '/', type: type });
+const handleRequest = async (req, res, type) => {
+  try {
+    const result = await websiteEvent.findOne({ name: '/', type: type });
 
-//     if (result) {
-//       await eval(`(async () => { ${result.code} })()`);
-//     }
-//   } catch (error) {
-//     console.error('Error:', error);
-//     res.status(500).send('Internal Server Error');
-//   }
-// };
+    if (result) {
+      await eval(`(async () => { ${result.code} })()`);
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    res.status(500).send('Internal Server Error');
+  }
+};
 
-// const handleWildcardRequest = async (eventName, req, res, type) => {
-//   try {
-//     const result = await websiteEvent.findOne({ name: eventName, type: type });
+const handleWildcardRequest = async (eventName, req, res, type) => {
+  try {
+    const result = await websiteEvent.findOne({ name: eventName, type: type });
 
-//     if (result) {
-//       await eval(`(async () => { ${result.code} })()`);
-//     }
-//   } catch (error) {
-//     console.error('Error:', error);
-//     res.status(500).send('Internal Server Error');
-//   }
-// };
+    if (result) {
+      await eval(`(async () => { ${result.code} })()`);
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    res.status(500).send('Internal Server Error');
+  }
+};
 
-// app.get('/', async (req, res) => {
-//   await handleRequest(req, res, 'get');
-// });
+app.get('/', async (req, res) => {
+  await handleRequest(req, res, 'get');
+});
 
-// app.post('/', async (req, res) => {
-//   await handleRequest(req, res, 'post');
-// });
+app.post('/', async (req, res) => {
+  await handleRequest(req, res, 'post');
+});
 
-// app.put('/', async (req, res) => {
-//   await handleRequest(req, res, 'put');
-// });
+app.put('/', async (req, res) => {
+  await handleRequest(req, res, 'put');
+});
 
-// app.delete('/', async (req, res) => {
-//   await handleRequest(req, res, 'delete');
-// });
+app.delete('/', async (req, res) => {
+  await handleRequest(req, res, 'delete');
+});
 
-// app.patch('/', async (req, res) => {
-//   await handleRequest(req, res, 'patch');
-// });
+app.patch('/', async (req, res) => {
+  await handleRequest(req, res, 'patch');
+});
 
-// app.all('/', async (req, res) => {
-//   await handleRequest(req, res, 'all');
-// });
+app.all('/', async (req, res) => {
+  await handleRequest(req, res, 'all');
+});
 
-// app.use('/', async (req, res, next) => {
-//   await handleRequest(req, res, 'use');
-//   next();
-// });
+app.use('/', async (req, res, next) => {
+  await handleRequest(req, res, 'use');
+  next();
+});
 
-// app.use(express.static(path.join(__dirname, 'public')));
-// app.use('/img', express.static(path.join(__dirname, 'img')));
-// app.use('/js', express.static(path.join(__dirname, 'js')));
-// app.use('/css', express.static(path.join(__dirname, 'css')));
+app.use(express.static(path.join(__dirname, 'public')));
+app.use('/img', express.static(path.join(__dirname, 'img')));
+app.use('/js', express.static(path.join(__dirname, 'js')));
+app.use('/css', express.static(path.join(__dirname, 'css')));
 
-// app.get('/*', async (req, res) => {
-//   const eventName = req.params[0] || '';
-//   await handleWildcardRequest(eventName, req, res, 'get');
-// });
+app.get('/*', async (req, res) => {
+  const eventName = req.params[0] || '';
+  await handleWildcardRequest(eventName, req, res, 'get');
+});
 
-// app.post('/*', async (req, res) => {
-//   const eventName = req.params[0] || '';
-//   await handleWildcardRequest(eventName, req, res, 'post');
-// });
+app.post('/*', async (req, res) => {
+  const eventName = req.params[0] || '';
+  await handleWildcardRequest(eventName, req, res, 'post');
+});
 
-// app.put('/*', async (req, res) => {
-//   const eventName = req.params[0] || '';
-//   await handleWildcardRequest(eventName, req, res, 'put');
-// });
+app.put('/*', async (req, res) => {
+  const eventName = req.params[0] || '';
+  await handleWildcardRequest(eventName, req, res, 'put');
+});
 
-// app.delete('/*', async (req, res) => {
-//   const eventName = req.params[0] || '';
-//   await handleWildcardRequest(eventName, req, res, 'delete');
-// });
+app.delete('/*', async (req, res) => {
+  const eventName = req.params[0] || '';
+  await handleWildcardRequest(eventName, req, res, 'delete');
+});
 
-// app.patch('/*', async (req, res) => {
-//   const eventName = req.params[0] || '';
-//   await handleWildcardRequest(eventName, req, res, 'patch');
-// });
+app.patch('/*', async (req, res) => {
+  const eventName = req.params[0] || '';
+  await handleWildcardRequest(eventName, req, res, 'patch');
+});
 
-// app.all('/*', async (req, res) => {
-//   const eventName = req.params[0] || '';
-//   await handleWildcardRequest(eventName, req, res, 'all');
-// });
+app.all('/*', async (req, res) => {
+  const eventName = req.params[0] || '';
+  await handleWildcardRequest(eventName, req, res, 'all');
+});
 
-// app.use('/*', async (req, res, next) => {
-//   const eventName = req.params[0] || '';
-//   await handleWildcardRequest(eventName, req, res, 'use');
-//   next();
-// });
+app.use('/*', async (req, res, next) => {
+  const eventName = req.params[0] || '';
+  await handleWildcardRequest(eventName, req, res, 'use');
+  next();
+});
 
 
 // Example endpoint to fetch data from GitHub
