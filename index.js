@@ -165,6 +165,9 @@ const updateRoutes = (change) => {
     const route = change.fullDocument;
     const method = route.type.toLowerCase();
 
+    // Log the change object
+    console.log('Updating route:', change);
+
     // Remove the existing route if it exists
     app._router.stack = app._router.stack.filter(layer => !layer.route || layer.route.path !== route.name);
 
@@ -177,26 +180,31 @@ const startServer = async () => {
     await initializeRoutes();
 
     // Set up Change Stream to listen for changes in the websiteEvent collection
-    const changeStreams = websiteEvent.watch();
+    const changeStream = websiteEvent.watch();
 
-    changeStreams.on('change', (change) => {
+    changeStream.on('change', (change) => {
+        // Log the entire change object
+        console.log('Change detected:', change);
+
         switch (change.operationType) {
             case 'insert':
+                console.log('Insert operation detected');
+                updateRoutes(change);
+                break;
             case 'update':
+                console.log('Update operation detected');
                 updateRoutes(change);
                 break;
             case 'delete':
+                console.log('Delete operation detected');
                 // Remove the route if it was deleted from the database
                 app._router.stack = app._router.stack.filter(layer => !layer.route || layer.route.path !== change.documentKey._id);
                 break;
             default:
+                console.log('Unknown operation detected');
                 break;
         }
     });
-
-}
-
-startServer();
 
 
 
@@ -323,7 +331,7 @@ httpServer.listen(PORT);
 //httpsServer.listen(PORT);
 
 
-
+startServer()
 
 
 const ALL_INTENTS = 
