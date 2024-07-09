@@ -93,9 +93,43 @@ const initializeRoutes = async () => {
 initializeRoutes();
 
 
+const updateRoutes = (change) => {
+  const route = change.fullDocument;
+  const method = route.type.toLowerCase();
 
+  // Remove the existing route if it exists
+  app._router.stack = app._router.stack.filter(layer => layer.route && layer.route.path !== route.name);
 
+  // Register the new route
+  app[method](route.name, async (req, res) => {
+    try {
+      // Execute the code associated with the route
+      await eval(`(async () => { ${route.code} })()`); // Ensure route.code is valid JavaScript
+    } catch (error) {
+      console.error('Error executing route code:', error);
+      res.status(500).send('Internal Server Error');
+    }
+  });
+};
 
+  const changeStream = websiteEvent.watch();
+
+  changeStream.on('change', (change) => {
+    switch (change.operationType) {
+      case 'insert':
+        updateRoutes(change);
+        break;
+      case 'update':
+        updateRoutes(change);
+        break;
+      case 'delete':
+        // Remove the route if it was deleted from the database
+        app._router.stack = app._router.stack.filter(layer => layer.route && layer.route.path !== change.documentKey._id);
+        break;
+      default:
+        break;
+    }
+  });
 
 
 
