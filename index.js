@@ -60,6 +60,116 @@ var envthing;
             console.warn('Connection Disconnected!');
         });
 
+
+
+
+
+
+// const registerRoute = (method, routeName, routeCode) => {
+//     app[method](routeName, async (req, res) => {
+//         try {
+//             await eval(`(async () => { ${routeCode} })()`); // Ensure route.code is valid JavaScript
+//         } catch (error) {
+//             console.error('Error executing route code:', error);
+//             res.status(500).send('Internal Server Error');
+//         }
+//     });
+// };
+
+// // Function to initialize routes from MongoDB
+// const initializeRoutes = async () => {
+//     try {
+//         const routes = await websiteEvent.find({});
+//         routes.forEach(route => {
+//             const method = route.type.toLowerCase(); // Ensure method is valid (get, post, etc.)
+//             registerRoute(method, route.name, route.code);
+//         });
+//     } catch (error) {
+//         console.error('Error initializing routes:', error);
+//     }
+// };
+
+// // Function to update routes dynamically
+// const updateRoutes = (route) => {
+//     const method = route.type.toLowerCase();
+
+//     // Log the route object
+//     console.log('Updating route:', route);
+
+//     // Remove the existing route if it exists
+//     app._router.stack = app._router.stack.filter(layer => !layer.route || layer.route.path !== route.name);
+
+//     // Register the new route
+//     registerRoute(method, route.name, route.code);
+// };
+
+// // Initialize routes and set up Change Stream for real-time updates
+// const startServer = async () => {
+//     await initializeRoutes();
+
+//     // Set up Change Stream to listen for changes in the websiteEvent collection
+//     const changeStreams = websiteEvent.watch([], { fullDocument: 'updateLookup' });
+
+//     changeStreams.on('change', (change) => {
+//         // Log the entire change object
+//         console.log('Change detected:', change);
+
+//         switch (change.operationType) {
+//             case 'insert':
+//                 console.log('Insert operation detected');
+//                 updateRoutes(change.fullDocument);
+//                 break;
+//             case 'update':
+//                 console.log('Update operation detected');
+//                 updateRoutes(change.fullDocument);
+//                 break;
+//             case 'delete':
+//                 console.log('Delete operation detected');
+//                 // Remove the route if it was deleted from the database
+//                 app._router.stack = app._router.stack.filter(layer => !layer.route || layer.route.path !== change.documentKey._id);
+//                 break;
+//             default:
+//                 console.log('Unknown operation detected');
+//                 break;
+//         }
+//     });
+
+
+// };
+
+// startServer();
+
+
+
+
+
+
+//=============================================================================================================================
+
+
+
+  //  const httpServer = http.createServer(app);
+    // const httpsServer = https.createServer(options, app);
+	// const HTTP_PORT = process.env.HTTP_PORT || 80;
+// const HTTPS_PORT = process.env.HTTPS_PORT || 443;
+
+   // httpServer.listen(HTTP_PORT).catch((err) => {console.error(err.stack)});
+
+	
+    //httpsServer.listen(HTTPS_PORT, () => console.log(`HTTPS Server running on port ${HTTPS_PORT}`));
+
+
+    // Set up HTTP or HTTPS server based on your configuration
+    // const options = {
+    //     cert: fs.readFileSync('./ssl/bandobot_xyz.crt', 'utf8'),
+    //     ca: fs.readFileSync('./ssl/bandobot_xyz.ca-bundle', 'utf8'),
+    //     key: fs.readFileSync('./ssl/bandobot.key', 'utf8')
+    // };
+
+
+
+
+
 // Function to handle requests based on type
 
 // Function to handle wildcard requests
@@ -169,109 +279,6 @@ var envthing;
 //         break;
 //     }
 //   });
-
-
-
-
-
-
-const registerRoute = (method, routeName, routeCode) => {
-    app[method](routeName, async (req, res) => {
-        try {
-            await eval(`(async () => { ${routeCode} })()`); // Ensure route.code is valid JavaScript
-        } catch (error) {
-            console.error('Error executing route code:', error);
-            res.status(500).send('Internal Server Error');
-        }
-    });
-};
-
-// Function to initialize routes from MongoDB
-const initializeRoutes = async () => {
-    try {
-        const routes = await websiteEvent.find({});
-        routes.forEach(route => {
-            const method = route.type.toLowerCase(); // Ensure method is valid (get, post, etc.)
-            registerRoute(method, route.name, route.code);
-        });
-    } catch (error) {
-        console.error('Error initializing routes:', error);
-    }
-};
-
-// Function to update routes dynamically
-const updateRoutes = (route) => {
-    const method = route.type.toLowerCase();
-
-    // Log the route object
-    console.log('Updating route:', route);
-
-    // Remove the existing route if it exists
-    app._router.stack = app._router.stack.filter(layer => !layer.route || layer.route.path !== route.name);
-
-    // Register the new route
-    registerRoute(method, route.name, route.code);
-};
-
-// Initialize routes and set up Change Stream for real-time updates
-const startServer = async () => {
-    await initializeRoutes();
-
-    // Set up Change Stream to listen for changes in the websiteEvent collection
-    const changeStreams = websiteEvent.watch([], { fullDocument: 'updateLookup' });
-
-    changeStreams.on('change', (change) => {
-        // Log the entire change object
-        console.log('Change detected:', change);
-
-        switch (change.operationType) {
-            case 'insert':
-                console.log('Insert operation detected');
-                updateRoutes(change.fullDocument);
-                break;
-            case 'update':
-                console.log('Update operation detected');
-                updateRoutes(change.fullDocument);
-                break;
-            case 'delete':
-                console.log('Delete operation detected');
-                // Remove the route if it was deleted from the database
-                app._router.stack = app._router.stack.filter(layer => !layer.route || layer.route.path !== change.documentKey._id);
-                break;
-            default:
-                console.log('Unknown operation detected');
-                break;
-        }
-    });
-
-
-  //  const httpServer = http.createServer(app);
-    // const httpsServer = https.createServer(options, app);
-	// const HTTP_PORT = process.env.HTTP_PORT || 80;
-// const HTTPS_PORT = process.env.HTTPS_PORT || 443;
-
-   // httpServer.listen(HTTP_PORT).catch((err) => {console.error(err.stack)});
-
-	
-    //httpsServer.listen(HTTPS_PORT, () => console.log(`HTTPS Server running on port ${HTTPS_PORT}`));
-};
-
-startServer();
-
-
-
-
-
-    // Set up HTTP or HTTPS server based on your configuration
-    // const options = {
-    //     cert: fs.readFileSync('./ssl/bandobot_xyz.crt', 'utf8'),
-    //     ca: fs.readFileSync('./ssl/bandobot_xyz.ca-bundle', 'utf8'),
-    //     key: fs.readFileSync('./ssl/bandobot.key', 'utf8')
-    // };
-
-
-
-
 
 
 
