@@ -177,9 +177,9 @@ const startServer = async () => {
     await initializeRoutes();
 
     // Set up Change Stream to listen for changes in the websiteEvent collection
-    const changeStream = websiteEvent.watch();
+    const changeStreams = websiteEvent.watch();
 
-    changeStream.on('change', (change) => {
+    changeStreams.on('change', (change) => {
         switch (change.operationType) {
             case 'insert':
             case 'update':
