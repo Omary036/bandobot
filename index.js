@@ -22,20 +22,6 @@ const eventModelz = require('./database/data.js');
 
 
 // Function to handle requests based on type
-const handleRequest = async (req, res, type) => {
-  try {
-    const result = await websiteEvent.findOne({ name: '/', type: type }); // Modify query as per your needs
-
-    if (result) {
-      await eval(`(async () => { ${result.code} })()`); // Ensure result.code is valid JavaScript
-    } else {
-      res.status(404).send('Route not found');
-    }
-  } catch (error) {
-    console.error('Error:', error);
-    res.status(500).send('Internal Server Error');
-  }
-};
 
 // Function to handle wildcard requests
 // const handleWildcardRequest = async (eventName, req, res, type) => {
@@ -54,16 +40,27 @@ const handleRequest = async (req, res, type) => {
 // };
 
 
-app.use(function(err, req, res, next) {
-    console.error(err.stack);
-    res.status(500).send('Something broke!');
-});
-// Define routes based on HTTP methods
-['get', 'post', 'put', 'delete', 'patch', 'all', 'use'].forEach(method => {
-  app[method]('/', async (req, res) => {
-    await handleRequest(req, res, method);
-  });
-});
+// ['get', 'post', 'put', 'delete', 'patch', 'all', 'use'].forEach(method => {
+//   app[method]('/', async (req, res) => 
+
+// 	  const handleRequest = async (req, res, type) => {
+//   try {
+//     const result = await websiteEvent.findOne({ name: '/', type: type }); // Modify query as per your needs
+
+//     if (result) {
+//       await eval(`(async () => { ${result.code} })()`); // Ensure result.code is valid JavaScript
+//     } else {
+//       res.status(404).send('Route not found');
+//     }
+//   } catch (error) {
+//     console.error('Error:', error);
+//     res.status(500).send('Internal Server Error');
+//   }
+// };
+
+//     await handleRequest(req, res, method);
+//   });
+// });
 
 
 // Initialize routes from MongoDB and start server
