@@ -83,8 +83,8 @@ const initializeRoutes = async () => {
     });
 
     // Start the server after initializing routes
-    app.listen(PORT, () => {
-      console.log(`Server running on port ${PORT}`);
+    app.listen(3000, () => {
+     
     });
 
   } catch (error) {
