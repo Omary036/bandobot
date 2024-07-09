@@ -64,9 +64,6 @@ app.use('/css', express.static(path.join(__dirname, 'css')));
 // Initialize routes from MongoDB and start server
 const initializeRoutes = async () => {
   try {
-    await mongoose.connection.once('open', async () => {
-      console.log('Connected to MongoDB');
-      await websiteEvent.init(); // Initialize the model
 
       // Assuming websiteEvent is your model and find returns the documents
       const routes = await websiteEvent.find({});
@@ -84,7 +81,7 @@ const initializeRoutes = async () => {
       app.listen(port, () => {
         console.log(`Server running at http://localhost:${port}/`);
       });
-    });
+
   } catch (error) {
     console.error('Error initializing routes:', error);
   }
