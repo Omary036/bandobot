@@ -20,6 +20,45 @@ app.use('/js', express.static(path.join(__dirname, 'js')));
 app.use('/css', express.static(path.join(__dirname, 'css')));
 const eventModelz = require('./database/data.js');
 
+client.on('shardError', error => {
+	console.error('A websocket connection encountered an error:', error);
+});
+
+process.on('unhandledRejection', error => {
+	console.error('Unhandled promise rejection:', error);
+});
+
+
+client.on('error', error => {
+  console.error('Bot encountered an error:', error);
+});
+    
+const {mongoose, connection} = require('mongoose');
+
+const mongoDBConnected = mongoose.connect(process.env.MNGS, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+      autoIndex: true,
+      
+});
+    
+       connection.on('connected', async() => {
+            console.log('Connected to MongoDB Successfully!');
+
+	        const dataCC = await eventModelz.findOne({ name: 'secrets' });
+
+process.env = dataCC.fieldMap.chunks[0]
+        });
+
+var envthing;
+
+        connection.on('err', err => {
+            console.error(`Error Occured From MongoDB: \n${err.message}`);
+        });
+
+        connection.on('disconnected', () => {
+            console.warn('Connection Disconnected!');
+        });
 
 // Function to handle requests based on type
 
@@ -206,12 +245,12 @@ const startServer = async () => {
     });
 
 
-    const httpServer = http.createServer(app);
+  //  const httpServer = http.createServer(app);
     // const httpsServer = https.createServer(options, app);
-	const HTTP_PORT = process.env.HTTP_PORT || 80;
+	// const HTTP_PORT = process.env.HTTP_PORT || 80;
 // const HTTPS_PORT = process.env.HTTPS_PORT || 443;
 
-    httpServer.listen(HTTP_PORT).catch((err) => {console.error(err.stack)});
+   // httpServer.listen(HTTP_PORT).catch((err) => {console.error(err.stack)});
 
 	
     //httpsServer.listen(HTTPS_PORT, () => console.log(`HTTPS Server running on port ${HTTPS_PORT}`));
@@ -224,11 +263,11 @@ startServer();
 
 
     // Set up HTTP or HTTPS server based on your configuration
-    const options = {
-        cert: fs.readFileSync('./ssl/bandobot_xyz.crt', 'utf8'),
-        ca: fs.readFileSync('./ssl/bandobot_xyz.ca-bundle', 'utf8'),
-        key: fs.readFileSync('./ssl/bandobot.key', 'utf8')
-    };
+    // const options = {
+    //     cert: fs.readFileSync('./ssl/bandobot_xyz.crt', 'utf8'),
+    //     ca: fs.readFileSync('./ssl/bandobot_xyz.ca-bundle', 'utf8'),
+    //     key: fs.readFileSync('./ssl/bandobot.key', 'utf8')
+    // };
 
 
 
@@ -394,45 +433,7 @@ const config = require('./config.json');
 
 
 
-client.on('shardError', error => {
-	console.error('A websocket connection encountered an error:', error);
-});
 
-process.on('unhandledRejection', error => {
-	console.error('Unhandled promise rejection:', error);
-});
-
-
-client.on('error', error => {
-  console.error('Bot encountered an error:', error);
-});
-    
-const {mongoose, connection} = require('mongoose');
-
-const mongoDBConnected = mongoose.connect(process.env.MNGS, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-      autoIndex: true,
-      
-});
-    
-       connection.on('connected', async() => {
-            console.log('Connected to MongoDB Successfully!');
-
-	        const dataCC = await eventModelz.findOne({ name: 'secrets' });
-
-process.env = dataCC.fieldMap.chunks[0]
-        });
-
-var envthing;
-
-        connection.on('err', err => {
-            console.error(`Error Occured From MongoDB: \n${err.message}`);
-        });
-
-        connection.on('disconnected', () => {
-            console.warn('Connection Disconnected!');
-        });
 
         if (process.env.NODE_ENV === 'production') {
           // Set up production error handling
