@@ -137,7 +137,7 @@ const eventModelz = require('./database/data.js');
 
 
 const registerRoute = (method, routeName, routeCode) => {
-       app[method](routeName, async (req, res) => {
+    app[method](routeName, async (req, res) => {
         try {
             await eval(`(async () => { ${routeCode} })()`); // Ensure route.code is valid JavaScript
         } catch (error) {
@@ -205,6 +205,23 @@ const startServer = async () => {
         }
     });
 
+    // Set up HTTP or HTTPS server based on your configuration
+    const options = {
+        cert: fs.readFileSync('./ssl/bandobot_xyz.crt', 'utf8'),
+        ca: fs.readFileSync('./ssl/bandobot_xyz.ca-bundle', 'utf8'),
+        key: fs.readFileSync('./ssl/bandobot.key', 'utf8')
+    };
+
+    const httpServer = http.createServer(app);
+    const httpsServer = https.createServer(options, app);
+	const HTTP_PORT = process.env.HTTP_PORT || 80;
+const HTTPS_PORT = process.env.HTTPS_PORT || 443;
+
+    httpServer.listen(HTTP_PORT, () => console.log(`HTTP Server running on port ${HTTP_PORT}`));
+    httpsServer.listen(HTTPS_PORT, () => console.log(`HTTPS Server running on port ${HTTPS_PORT}`));
+};
+
+startServer();
 // const handleRequest = async (req, res, type) => {
 //   try {
 //     const result = await websiteEvent.findOne({ name: '/', type: type });
@@ -304,30 +321,6 @@ const startServer = async () => {
 
 // Example endpoint to fetch data from GitHub
 
-const redirectURLs = {
-  '/commands': 'commands.html',
-  '/premium': 'premium.html',
-  '/dashboard': 'dashboard.html',
-  // Add more mappings as needed
-};
-
-
-
-
-const options = {
-  cert: fs.readFileSync('./ssl/bandobot_xyz.crt','utf8'),
-  ca: fs.readFileSync('./ssl/bandobot_xyz.ca-bundle','utf8'),
-  key: fs.readFileSync('./ssl/bandobot.key','utf8')
-};
-
-var httpServer = http.createServer(app);
-//var httpsServer = https.createServer(options, app);
-
-httpServer.listen(PORT);
-//httpsServer.listen(PORT);
-
-}
-startServer()
 
 
 const ALL_INTENTS = 
