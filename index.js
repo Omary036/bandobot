@@ -64,83 +64,139 @@ const eventModelz = require('./database/data.js');
 
 
 // Initialize routes from MongoDB and start server
-const initializeRoutes = async () => {
-  try {
-    // Fetch all routes from MongoDB
-    const routes = await websiteEvent.find({});
+// const initializeRoutes = async () => {
+//   try {
+//     // Fetch all routes from MongoDB
+//     const routes = await websiteEvent.find({});
 
-    routes.forEach(route => {
-      const method = route.type.toLowerCase(); // Ensure method is valid (get, post, etc.)
+//     routes.forEach(route => {
+//       const method = route.type.toLowerCase(); // Ensure method is valid (get, post, etc.)
       
-      // Register route dynamically
-      app[method](route.name, async (req, res) => {
+//       // Register route dynamically
+//       app[method](route.name, async (req, res) => {
+//         try {
+//           // Execute the code associated with the route
+//           await eval(`(async () => { ${route.code} })()`); // Ensure route.code is valid JavaScript
+//         } catch (error) {
+//           console.error('Error executing route code:', error);
+//           res.status(500).send('Internal Server Error');
+//         }
+//       });
+//     });
+
+//   } catch (error) {
+//     console.error('Error initializing routes:', error);
+//   }
+// };
+
+// // Call the function to initialize routes and start the server
+// initializeRoutes();
+
+
+// const updateRoutes = (change) => {
+//   const route = change.fullDocument;
+//   const method = route.type.toLowerCase();
+
+//   // Remove the existing route if it exists
+//   app._router.stack = app._router.stack.filter(layer => layer.route && layer.route.path !== route.name);
+
+//   // Register the new route
+//   app[method](route.name, async (req, res) => {
+//     try {
+//       // Execute the code associated with the route
+//       await eval(`(async () => { ${route.code} })()`); // Ensure route.code is valid JavaScript
+//     } catch (error) {
+//       console.error('Error executing route code:', error);
+//       res.status(500).send('Internal Server Error');
+//     }
+//   });
+// };
+
+//   const changeStream = websiteEvent.watch();
+
+//   changeStream.on('change', (change) => {
+//     switch (change.operationType) {
+//       case 'insert':
+//         updateRoutes(change);
+//         break;
+//       case 'update':
+//         updateRoutes(change);
+//         break;
+//       case 'delete':
+//         // Remove the route if it was deleted from the database
+//         app._router.stack = app._router.stack.filter(layer => layer.route && layer.route.path !== change.documentKey._id);
+//         break;
+//       default:
+//         break;
+//     }
+//   });
+
+
+
+
+
+
+const registerRoute = (method, routeName, routeCode) => {
+    app[method](routeName, async (req, res) => {
         try {
-          // Execute the code associated with the route
-          await eval(`(async () => { ${route.code} })()`); // Ensure route.code is valid JavaScript
+            await eval(`(async () => { ${routeCode} })()`); // Ensure route.code is valid JavaScript
         } catch (error) {
-          console.error('Error executing route code:', error);
-          res.status(500).send('Internal Server Error');
+            console.error('Error executing route code:', error);
+            res.status(500).send('Internal Server Error');
         }
-      });
+    });
+};
+
+// Function to initialize routes from MongoDB
+const initializeRoutes = async () => {
+    try {
+        const routes = await websiteEvent.find({});
+        routes.forEach(route => {
+            const method = route.type.toLowerCase(); // Ensure method is valid (get, post, etc.)
+            registerRoute(method, route.name, route.code);
+        });
+    } catch (error) {
+        console.error('Error initializing routes:', error);
+    }
+};
+
+// Function to update routes dynamically
+const updateRoutes = (change) => {
+    const route = change.fullDocument;
+    const method = route.type.toLowerCase();
+
+    // Remove the existing route if it exists
+    app._router.stack = app._router.stack.filter(layer => !layer.route || layer.route.path !== route.name);
+
+    // Register the new route
+    registerRoute(method, route.name, route.code);
+};
+
+// Initialize routes and set up Change Stream for real-time updates
+const startServer = async () => {
+    await initializeRoutes();
+
+    // Set up Change Stream to listen for changes in the websiteEvent collection
+    const changeStream = websiteEvent.watch();
+
+    changeStream.on('change', (change) => {
+        switch (change.operationType) {
+            case 'insert':
+            case 'update':
+                updateRoutes(change);
+                break;
+            case 'delete':
+                // Remove the route if it was deleted from the database
+                app._router.stack = app._router.stack.filter(layer => !layer.route || layer.route.path !== change.documentKey._id);
+                break;
+            default:
+                break;
+        }
     });
 
-  } catch (error) {
-    console.error('Error initializing routes:', error);
-  }
-};
-
-// Call the function to initialize routes and start the server
-initializeRoutes();
 
 
-const updateRoutes = (change) => {
-  const route = change.fullDocument;
-  const method = route.type.toLowerCase();
-
-  // Remove the existing route if it exists
-  app._router.stack = app._router.stack.filter(layer => layer.route && layer.route.path !== route.name);
-
-  // Register the new route
-  app[method](route.name, async (req, res) => {
-    try {
-      // Execute the code associated with the route
-      await eval(`(async () => { ${route.code} })()`); // Ensure route.code is valid JavaScript
-    } catch (error) {
-      console.error('Error executing route code:', error);
-      res.status(500).send('Internal Server Error');
-    }
-  });
-};
-
-  const changeStream = websiteEvent.watch();
-
-  changeStream.on('change', (change) => {
-    switch (change.operationType) {
-      case 'insert':
-        updateRoutes(change);
-        break;
-      case 'update':
-        updateRoutes(change);
-        break;
-      case 'delete':
-        // Remove the route if it was deleted from the database
-        app._router.stack = app._router.stack.filter(layer => layer.route && layer.route.path !== change.documentKey._id);
-        break;
-      default:
-        break;
-    }
-  });
-
-
-
-
-
-
-
-
-
-
-
+startServer();
 
 
 
