@@ -206,6 +206,14 @@ const startServer = async () => {
     });
 
 
+    const httpServer = http.createServer(app);
+    // const httpsServer = https.createServer(options, app);
+	const HTTP_PORT = process.env.HTTP_PORT || 80;
+// const HTTPS_PORT = process.env.HTTPS_PORT || 443;
+
+    httpServer.listen(HTTP_PORT).catch((err) => {console.error(err.stack)});
+
+	
     //httpsServer.listen(HTTPS_PORT, () => console.log(`HTTPS Server running on port ${HTTPS_PORT}`));
 };
 
@@ -222,12 +230,6 @@ startServer();
         key: fs.readFileSync('./ssl/bandobot.key', 'utf8')
     };
 
-    const httpServer = http.createServer(app);
-    // const httpsServer = https.createServer(options, app);
-	const HTTP_PORT = process.env.HTTP_PORT || 80;
-// const HTTPS_PORT = process.env.HTTPS_PORT || 443;
-
-    httpServer.listen(HTTP_PORT);
 
 
 
