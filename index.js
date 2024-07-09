@@ -163,6 +163,11 @@ const initializeRoutes = async () => {
 // Function to update routes dynamically
 const updateRoutes = (change) => {
     const route = change.fullDocument;
+    if (!route) {
+        console.error('No fullDocument found in change:', change);
+        return;
+    }
+
     const method = route.type.toLowerCase();
 
     // Log the change object
