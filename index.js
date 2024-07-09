@@ -84,11 +84,6 @@ const initializeRoutes = async () => {
       });
     });
 
-    // Start the server after initializing routes
-    app.listen(3000, () => {
-     
-    });
-
   } catch (error) {
     console.error('Error initializing routes:', error);
   }
