@@ -13,6 +13,11 @@ const websiteEvent = require('./database/website.js')
 const eventModel = require('./database/code.js')
  app.use(express.json()); 
 app.use(express.urlencoded({ extended: true }));
+
+app.use(express.static(path.join(__dirname, 'public')));
+app.use('/img', express.static(path.join(__dirname, 'img')));
+app.use('/js', express.static(path.join(__dirname, 'js')));
+app.use('/css', express.static(path.join(__dirname, 'css')));
 const eventModelz = require('./database/data.js');
 
 
@@ -55,39 +60,39 @@ const handleWildcardRequest = async (eventName, req, res, type) => {
   });
 });
 
-// Additional middleware for static file serving
-app.use(express.static(path.join(__dirname, 'public')));
-app.use('/img', express.static(path.join(__dirname, 'img')));
-app.use('/js', express.static(path.join(__dirname, 'js')));
-app.use('/css', express.static(path.join(__dirname, 'css')));
 
 // Initialize routes from MongoDB and start server
 const initializeRoutes = async () => {
   try {
+    // Fetch all routes from MongoDB
+    const routes = await websiteEvent.find({});
 
-      // Assuming websiteEvent is your model and find returns the documents
-      const routes = await websiteEvent.find({});
-
-      routes.forEach(route => {
-        const method = route.type.toLowerCase(); // Ensure method is valid (get, post, etc.)
-
-        app[method](route.name, async (req, res) => {
-          const func = new Function('req', 'res', route.code);
-          await func(req, res);
-        });
+    routes.forEach(route => {
+      const method = route.type.toLowerCase(); // Ensure method is valid (get, post, etc.)
+      
+      // Register route dynamically
+      app[method](route.name, async (req, res) => {
+        try {
+          // Execute the code associated with the route
+          await eval(`(async () => { ${route.code} })()`); // Ensure route.code is valid JavaScript
+        } catch (error) {
+          console.error('Error executing route code:', error);
+          res.status(500).send('Internal Server Error');
+        }
       });
+    });
 
-      // Start the server after initializing routes
-      app.listen(port, () => {
-        console.log(`Server running at http://localhost:${port}/`);
-      });
+    // Start the server after initializing routes
+    app.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}`);
+    });
 
   } catch (error) {
     console.error('Error initializing routes:', error);
   }
 };
 
-// Call the initializeRoutes function to start the server
+// Call the function to initialize routes and start the server
 initializeRoutes();
 
 
