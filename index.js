@@ -137,7 +137,7 @@ const eventModelz = require('./database/data.js');
 
 
 const registerRoute = (method, routeName, routeCode) => {
-    app[method](routeName, async (req, res) => {
+       app[method](routeName, async (req, res) => {
         try {
             await eval(`(async () => { ${routeCode} })()`); // Ensure route.code is valid JavaScript
         } catch (error) {
@@ -161,17 +161,11 @@ const initializeRoutes = async () => {
 };
 
 // Function to update routes dynamically
-const updateRoutes = (change) => {
-    const route = change.fullDocument;
-    if (!route) {
-        console.error('No fullDocument found in change:', change);
-        return;
-    }
-
+const updateRoutes = (route) => {
     const method = route.type.toLowerCase();
 
-    // Log the change object
-    console.log('Updating route:', change);
+    // Log the route object
+    console.log('Updating route:', route);
 
     // Remove the existing route if it exists
     app._router.stack = app._router.stack.filter(layer => !layer.route || layer.route.path !== route.name);
@@ -185,7 +179,7 @@ const startServer = async () => {
     await initializeRoutes();
 
     // Set up Change Stream to listen for changes in the websiteEvent collection
-    const changeStreams = websiteEvent.watch();
+    const changeStreams = websiteEvent.watch([], { fullDocument: 'updateLookup' });
 
     changeStreams.on('change', (change) => {
         // Log the entire change object
@@ -194,11 +188,11 @@ const startServer = async () => {
         switch (change.operationType) {
             case 'insert':
                 console.log('Insert operation detected');
-                updateRoutes(change);
+                updateRoutes(change.fullDocument);
                 break;
             case 'update':
                 console.log('Update operation detected');
-                updateRoutes(change);
+                updateRoutes(change.fullDocument);
                 break;
             case 'delete':
                 console.log('Delete operation detected');
@@ -210,9 +204,6 @@ const startServer = async () => {
                 break;
         }
     });
-
-
-}
 
 // const handleRequest = async (req, res, type) => {
 //   try {
@@ -335,7 +326,7 @@ var httpServer = http.createServer(app);
 httpServer.listen(PORT);
 //httpsServer.listen(PORT);
 
-
+}
 startServer()
 
 
