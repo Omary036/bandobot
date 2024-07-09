@@ -205,6 +205,16 @@ const startServer = async () => {
         }
     });
 
+
+    //httpsServer.listen(HTTPS_PORT, () => console.log(`HTTPS Server running on port ${HTTPS_PORT}`));
+};
+
+startServer();
+
+
+
+
+
     // Set up HTTP or HTTPS server based on your configuration
     const options = {
         cert: fs.readFileSync('./ssl/bandobot_xyz.crt', 'utf8'),
@@ -213,15 +223,18 @@ const startServer = async () => {
     };
 
     const httpServer = http.createServer(app);
-    const httpsServer = https.createServer(options, app);
+    // const httpsServer = https.createServer(options, app);
 	const HTTP_PORT = process.env.HTTP_PORT || 80;
-const HTTPS_PORT = process.env.HTTPS_PORT || 443;
+// const HTTPS_PORT = process.env.HTTPS_PORT || 443;
 
-    httpServer.listen(HTTP_PORT, () => console.log(`HTTP Server running on port ${HTTP_PORT}`));
-    httpsServer.listen(HTTPS_PORT, () => console.log(`HTTPS Server running on port ${HTTPS_PORT}`));
-};
+    httpServer.listen(HTTP_PORT);
 
-startServer();
+
+
+
+
+
+
 // const handleRequest = async (req, res, type) => {
 //   try {
 //     const result = await websiteEvent.findOne({ name: '/', type: type });
