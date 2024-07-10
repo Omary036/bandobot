@@ -11,8 +11,8 @@ const fs = require('fs');
 const websiteEvent = require('./database/website.js')
 
 const eventModel = require('./database/code.js')
- app.use(express.json()); 
-app.use(express.urlencoded({ extended: true }));
+ // app.use(express.json()); 
+// app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/img', express.static(path.join(__dirname, 'img')));
