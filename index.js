@@ -342,10 +342,16 @@ const handleRequest = async (req, res, type) => {
 
 const handleWildcardRequest = async (eventName, req, res, type) => {
   try {
-    const result = await websiteEvent.findOne({ name: eventName, type: type });
+    // Create a regular expression to match event names that start with the given eventName
+    const regex = new RegExp(`^${eventName}`);
+
+    // Find the event with the matching name and type
+    const result = await websiteEvent.findOne({ name: { $regex: regex }, type: type });
 
     if (result) {
       await eval(`(async () => { ${result.code} })()`);
+    } else {
+      res.status(404).send('Event not found');
     }
   } catch (error) {
     console.error('Error:', error);
