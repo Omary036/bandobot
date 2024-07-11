@@ -345,14 +345,18 @@ const handleWildcardRequest = async (eventName, req, res, type) => {
     // Retrieve all events of the specified type
     const events = await websiteEvent.find({ type: type });
 
-    // Filter events to find the first one that starts with the eventName  && !event.name.includes(`/${stop}`)
-    const result = events.find(event => eventName.startsWith(event.name) && event.name.includes('*'));
-    const result2 = events.find(event => eventName === event.name);
+    // Filter events to find the first one that matches the eventName
+    let result = events.find(event => {
+      // Check if event.name ends with '*' and matches the beginning of eventName
+      if (event.name.endsWith('*')) {
+        const prefix = event.name.slice(0, -1); // Remove the '*' from the end
+        return eventName.startsWith(prefix);
+      }
+      // Check for exact match without the wildcard
+      return eventName === event.name;
+    });
 
-console.log(result, result2)
-
-
-    if (result || result2) {
+    if (result) {
       await eval(`(async () => { ${result.code} })()`);
     } else {
       res.status(404).send('Event not found');
@@ -362,6 +366,7 @@ console.log(result, result2)
     res.status(500).send('Internal Server Error');
   }
 };
+
 
 app.get('/', async (req, res) => {
   await handleRequest(req, res, 'get');
