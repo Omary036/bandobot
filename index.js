@@ -394,7 +394,7 @@ app.use('/', async (req, res, next) => {
 // app.use('/css', express.static(path.join(__dirname, 'css')));
 
 app.get('/*', async (req, res) => {
-  const eventName = req.params[0] + '*' || '';
+  const eventName = req.params[0] || '';
   await handleWildcardRequest(eventName, req, res, 'get');
 });
 
