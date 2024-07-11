@@ -347,13 +347,18 @@ const handleWildcardRequest = async (eventName, req, res, type) => {
 
     // Filter events to find the first one that matches the eventName
     let result = events.find(event => {
-      // Check if event.name ends with '*' and matches the beginning of eventName
+
+
       if (event.name.endsWith('*')) {
         const prefix = event.name.slice(0, -1); // Remove the '*' from the end
         return eventName.startsWith(prefix);
       }
       // Check for exact match without the wildcard
-      return eventName === event.name.replace('*', '');
+if(event.name.endsWith('/') {
+ return eventName.slice(0, -1) === event.name
+}
+      return eventName === event.name
+	
     });
 
     if (result) {
@@ -404,7 +409,6 @@ app.use('/', async (req, res, next) => {
 
 app.get('/*', async (req, res) => {
   const eventName = req.params[0] || '';
-	console.log(eventName)
   await handleWildcardRequest(eventName, req, res, 'get');
 });
 
@@ -557,25 +561,25 @@ process.env = dataCC.fieldMap.chunks[0]
 //eventModel.find({event:"Events"}).then(async(documents)=>{documents.forEach(async(document) =>{if(!document)return;await ItsReady(document);await eval(`async () =>{ ${document.code} }`)(); });});
 
 
-// const changeStream = eventModelz.watch();
+const changeStream = eventModelz.watch();
 
-// changeStream.on('change', async (change) => {
-//   if (
-//     change.operationType === 'update' &&
-//     change.updateDescription.updatedFields &&
-//     change.updateDescription.updatedFields['fieldMap.chunks.0.token']
-//   ) {
-//     const updatedDataCC = await eventModelz.findOne({ name: 'secrets' });
-//     process.env = updatedDataCC.fieldMap.chunks[0];
-//     client.login(process.env.token);
-//   }
-// });
+changeStream.on('change', async (change) => {
+  if (
+    change.operationType === 'update' &&
+    change.updateDescription.updatedFields &&
+    change.updateDescription.updatedFields['fieldMap.chunks.0.token']
+  ) {
+    const updatedDataCC = await eventModelz.findOne({ name: 'secrets' });
+    process.env = updatedDataCC.fieldMap.chunks[0];
+    client.login(process.env.token);
+  }
+});
 
-// (async () => {
-//   const dataCC = await eventModelz.findOne({ name: 'secrets' });
-//   process.env = dataCC.fieldMap.chunks[0];
-//   client.login(process.env.token);
-// })();
+(async () => {
+  const dataCC = await eventModelz.findOne({ name: 'secrets' });
+  process.env = dataCC.fieldMap.chunks[0];
+  client.login(process.env.token);
+})();
 
 
 //====================================================================
