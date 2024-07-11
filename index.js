@@ -346,7 +346,7 @@ const handleWildcardRequest = async (eventName, req, res, type) => {
     const events = await websiteEvent.find({ type: type });
 
     // Filter events to find the first one that starts with the eventName  && !event.name.includes(`/${stop}`)
-    const result = events.find(event => event.name.startsWith(eventName));
+    const result = events.find(event => eventName.startsWith(event.name));
 
     if (result) {
       await eval(`(async () => { ${result.code} })()`);
