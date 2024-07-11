@@ -353,7 +353,7 @@ const handleWildcardRequest = async (eventName, req, res, type) => {
         return eventName.startsWith(prefix);
       }
       // Check for exact match without the wildcard
-      return eventName === event.name;
+      return eventName === event.name.replace('*', '');
     });
 
     if (result) {
