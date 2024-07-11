@@ -350,7 +350,7 @@ const handleWildcardRequest = async (eventName, req, res, type) => {
 
     const ResultIncludes = result.name.includes('*');
 
-    if (ResultIncludes || result.name === eventName) {
+    if (result && (ResultIncludes || result.name === eventName)) {
       await eval(`(async () => { ${result.code} })()`);
     } else {
       res.status(404).send('Event not found');
