@@ -193,7 +193,7 @@ var envthing;
   const httpServer = http.createServer(app);
     // const httpsServer = https.createServer(options, app);
 	// const HTTP_PORT = process.env.HTTP_PORT || 80;
-const HTTPS_PORT = 8080
+const HTTP_PORT = 8080
 try{
    httpServer.listen(HTTP_PORT)
 }catch(err) {
