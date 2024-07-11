@@ -196,7 +196,7 @@ var envthing;
 const HTTPS_PORT = 8080
 try{
    httpServer.listen(HTTP_PORT)
-}catch(err) => {
+}catch(err) {
 	console.error(err.stack)
 }
 	
