@@ -347,7 +347,7 @@ const handleWildcardRequest = async (eventName, req, res, type) => {
 
     // Find the event with the matching name and type
     const result = await websiteEvent.findOne({
-      name: { $regex: regex, $not: new RegExp(`/\\${stop}`) },
+      name: { $regex: regex },
       type: type
     });
 
