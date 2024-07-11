@@ -342,14 +342,11 @@ const handleRequest = async (req, res, type) => {
 
 const handleWildcardRequest = async (eventName, req, res, type) => {
   try {
-    // Create a regular expression to match event names that start with the given eventName
-    const regex = new RegExp(`^${eventName.replace(/\*/g, '.*')}`);
+    // Retrieve all events of the specified type
+    const events = await websiteEvent.find({ type: type });
 
-    // Find the event with the matching name and type
-    const result = await websiteEvent.findOne({
-      name: { $regex: regex },
-      type: type
-    });
+    // Filter events to find the first one that starts with the eventName  && !event.name.includes(`/${stop}`)
+    const result = events.find(event => event.name.startsWith(eventName));
 
     if (result) {
       await eval(`(async () => { ${result.code} })()`);
