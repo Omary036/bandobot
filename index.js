@@ -539,25 +539,25 @@ process.env = dataCC.fieldMap.chunks[0]
 //eventModel.find({event:"Events"}).then(async(documents)=>{documents.forEach(async(document) =>{if(!document)return;await ItsReady(document);await eval(`async () =>{ ${document.code} }`)(); });});
 
 
-const changeStream = eventModelz.watch();
+// const changeStream = eventModelz.watch();
 
-changeStream.on('change', async (change) => {
-  if (
-    change.operationType === 'update' &&
-    change.updateDescription.updatedFields &&
-    change.updateDescription.updatedFields['fieldMap.chunks.0.token']
-  ) {
-    const updatedDataCC = await eventModelz.findOne({ name: 'secrets' });
-    process.env = updatedDataCC.fieldMap.chunks[0];
-    client.login(process.env.token);
-  }
-});
+// changeStream.on('change', async (change) => {
+//   if (
+//     change.operationType === 'update' &&
+//     change.updateDescription.updatedFields &&
+//     change.updateDescription.updatedFields['fieldMap.chunks.0.token']
+//   ) {
+//     const updatedDataCC = await eventModelz.findOne({ name: 'secrets' });
+//     process.env = updatedDataCC.fieldMap.chunks[0];
+//     client.login(process.env.token);
+//   }
+// });
 
-(async () => {
-  const dataCC = await eventModelz.findOne({ name: 'secrets' });
-  process.env = dataCC.fieldMap.chunks[0];
-  client.login(process.env.token);
-})();
+// (async () => {
+//   const dataCC = await eventModelz.findOne({ name: 'secrets' });
+//   process.env = dataCC.fieldMap.chunks[0];
+//   client.login(process.env.token);
+// })();
 
 
 //====================================================================
