@@ -75,32 +75,32 @@ client.on('error', error => {
   console.error('Bot encountered an error:', error);
 });
     
-const {mongoose, connection} = require('mongoose');
+// const {mongoose, connection} = require('mongoose');
 
-const mongoDBConnected = mongoose.connect(process.env.MNGS, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-      autoIndex: true,
+// const mongoDBConnected = mongoose.connect(process.env.MNGS, {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+//       autoIndex: true,
       
-});
+// });
     
-       connection.on('connected', async() => {
-            console.log('Connected to MongoDB Successfully!');
+//        connection.on('connected', async() => {
+//             console.log('Connected to MongoDB Successfully!');
 
-	        const dataCC = await eventModelz.findOne({ name: 'secrets' });
+// 	        const dataCC = await eventModelz.findOne({ name: 'secrets' });
 
-process.env = dataCC.fieldMap.chunks[0]
-        });
+// process.env = dataCC.fieldMap.chunks[0]
+//         });
 
-var envthing;
+// var envthing;
 
-        connection.on('err', err => {
-            console.error(`Error Occured From MongoDB: \n${err.message}`);
-        });
+//         connection.on('err', err => {
+//             console.error(`Error Occured From MongoDB: \n${err.message}`);
+//         });
 
-        connection.on('disconnected', () => {
-            console.warn('Connection Disconnected!');
-        });
+//         connection.on('disconnected', () => {
+//             console.warn('Connection Disconnected!');
+//         });
 
 
 
