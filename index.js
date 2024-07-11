@@ -346,11 +346,13 @@ const handleWildcardRequest = async (eventName, req, res, type) => {
     const events = await websiteEvent.find({ type: type });
 
     // Filter events to find the first one that starts with the eventName  && !event.name.includes(`/${stop}`)
-    const result = events.find(event => eventName.startsWith(event.name));
+    const result = events.find(event => eventName.startsWith(event.name) && event.name.includes('*'));
+    const result2 = events.find(event => eventName === event.name);
 
-    const ResultIncludes = result.name.includes('*');
+console.log(result, result2)
 
-    if (result && (ResultIncludes || result.name === eventName)) {
+
+    if (result || result2) {
       await eval(`(async () => { ${result.code} })()`);
     } else {
       res.status(404).send('Event not found');
