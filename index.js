@@ -6,7 +6,7 @@ const fetch = require('node-fetch');
 const https = require('https');
 const http = require('http');
 const app = express();
-const PORT = process.env.PORT || 443; // Change to the desired HTTPS port
+const PORT = process.env.PORT || 8080; // Change to the desired HTTPS port
 const fs = require('fs');
 const websiteEvent = require('./database/website.js')
 
@@ -75,32 +75,32 @@ client.on('error', error => {
   console.error('Bot encountered an error:', error);
 });
     
-// const {mongoose, connection} = require('mongoose');
+const {mongoose, connection} = require('mongoose');
 
-// const mongoDBConnected = mongoose.connect(process.env.MNGS, {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true,
-//       autoIndex: true,
+const mongoDBConnected = mongoose.connect(process.env.MNGS, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+      autoIndex: true,
       
-// });
+});
     
-//        connection.on('connected', async() => {
-//             console.log('Connected to MongoDB Successfully!');
+       connection.on('connected', async() => {
+            console.log('Connected to MongoDB Successfully!');
 
-// 	        const dataCC = await eventModelz.findOne({ name: 'secrets' });
+	        const dataCC = await eventModelz.findOne({ name: 'secrets' });
 
-// process.env = dataCC.fieldMap.chunks[0]
-//         });
+process.env = dataCC.fieldMap.chunks[0]
+        });
 
-// var envthing;
+var envthing;
 
-//         connection.on('err', err => {
-//             console.error(`Error Occured From MongoDB: \n${err.message}`);
-//         });
+        connection.on('err', err => {
+            console.error(`Error Occured From MongoDB: \n${err.message}`);
+        });
 
-//         connection.on('disconnected', () => {
-//             console.warn('Connection Disconnected!');
-//         });
+        connection.on('disconnected', () => {
+            console.warn('Connection Disconnected!');
+        });
 
 
 
@@ -190,13 +190,15 @@ client.on('error', error => {
 
 
 
-  //  const httpServer = http.createServer(app);
+  const httpServer = http.createServer(app);
     // const httpsServer = https.createServer(options, app);
 	// const HTTP_PORT = process.env.HTTP_PORT || 80;
-// const HTTPS_PORT = process.env.HTTPS_PORT || 443;
-
-   // httpServer.listen(HTTP_PORT).catch((err) => {console.error(err.stack)});
-
+const HTTPS_PORT = 8080
+try{
+   httpServer.listen(HTTP_PORT)
+}catch(err) => {
+	console.error(err.stack)
+}
 	
     //httpsServer.listen(HTTPS_PORT, () => console.log(`HTTPS Server running on port ${HTTPS_PORT}`));
 
