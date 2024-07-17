@@ -354,7 +354,7 @@ const handleWildcardRequest = async (eventName, req, res, type) => {
         return eventName.startsWith(prefix);
       }
       // Check for exact match without the wildcard
-if(event.name.endsWith('/') {
+if(event.name.endsWith('/')) {
  return eventName.slice(0, -1) === event.name
 }
       return eventName === event.name
