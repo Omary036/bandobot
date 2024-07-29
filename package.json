@@ -25,7 +25,7 @@
     "express": "^4.18.2",
     "file-type": "^18.5.0",
     "fluent-ffmpeg": "^2.1.2",
-    "ffmpeg-static": "^5.0.0"
+    "ffmpeg-static": "^5.0.0",
     "form-data": "^4.0.0",
     "fs": "^0.0.1-security",
     "google": "^2.1.0",
