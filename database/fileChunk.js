@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const chunkSchema = new mongoose.Schema({
   key: String,
   data: Array,
+  thumbnail: Array,
   mapzz: String,
   extension: String,
   url: String,
