@@ -12,6 +12,11 @@ const websiteEvent = require('./database/website.js')
 const bodyParser = require('body-parser');
 
 const eventModel = require('./database/code.js')
+const cors = require('cors');
+
+// Use the cors middleware
+app.use(cors());
+
 app.use(express.json()); 
 app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());
