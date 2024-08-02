@@ -25,6 +25,11 @@ const cors = require('cors');
 
 const { createProxyMiddleware } = require('http-proxy-middleware');
 
+const options = {
+    key: fs.readFileSync(path.join(__dirname, 'path/to/your/private.key')),
+    cert: fs.readFileSync(path.join(__dirname, 'path/to/your/certificate.crt'))
+};
+
 const corsProxy = createProxyMiddleware({
     target: 'https://cdn.discordapp.com',
     changeOrigin: true,
@@ -37,6 +42,7 @@ const corsProxy = createProxyMiddleware({
 });
 
 app.use('/proxy', corsProxy);
+
 
 app.use(express.json()); 
 app.use(express.urlencoded({ extended: true }));
@@ -211,21 +217,23 @@ var envthing;
 
 
 
-
+https.createServer(options, app).listen(8080, () => {
+    console.log('CORS Proxy server running on https://localhost:3000');
+});
 
 //=============================================================================================================================
 
 
 
-  const httpServer = http.createServer(app);
+ // const httpServer = http.createServer(app);
     // const httpsServer = https.createServer(options, app);
 	// const HTTP_PORT = process.env.HTTP_PORT || 80;
-const HTTP_PORT = 8080
-try{
-   httpServer.listen(HTTP_PORT)
-}catch(err) {
-	console.error(err.stack)
-}
+//const HTTP_PORT = 8080
+//try{
+ //  httpServer.listen(HTTP_PORT)
+//}catch(err) {
+//	console.error(err.stack)
+//}
 	
     //httpsServer.listen(HTTPS_PORT, () => console.log(`HTTPS Server running on port ${HTTPS_PORT}`));
 
