@@ -47,6 +47,7 @@
     "google-translate-api": "^2.3.0",
     "googleapis": "^126.0.1",
     "googlephotos": "^0.3.5",
+    "http-proxy-middleware": "^3.0.0",
     "imgur": "^2.3.0",
     "jimp": "^0.22.12",
     "libsodium-wrappers": "^0.7.10",
