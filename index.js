@@ -17,11 +17,26 @@ const cors = require('cors');
 // Use the cors middleware
 //app.use(cors());
 //app.use(cors({ origin: '*' }));
-app.use(cors({
-    origin: '*', // Allows all origins
-    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed HTTP methods
-    allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers
-}));
+//app.use(cors({
+  //  origin: '*', // Allows all origins
+  //  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed HTTP methods
+ //   allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers
+//}));
+
+const { createProxyMiddleware } = require('http-proxy-middleware');
+
+const corsProxy = createProxyMiddleware({
+    target: 'https://cdn.discordapp.com',
+    changeOrigin: true,
+    pathRewrite: {
+        '^/proxy': '', // remove /proxy from the URL path
+    },
+    onProxyRes: (proxyRes) => {
+        proxyRes.headers['Access-Control-Allow-Origin'] = '*'; // Allow CORS
+    }
+});
+
+app.use('/proxy', corsProxy);
 
 app.use(express.json()); 
 app.use(express.urlencoded({ extended: true }));
