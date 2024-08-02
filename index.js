@@ -17,10 +17,12 @@ const cors = require('cors');
 // Use the cors middleware
 //app.use(cors());
 //app.use(cors({ origin: '*' }));
-app.use(cors({
-  origin: 'https://bandobot.xyz/proxy',
-  credentials: true
-  }));
+app.use(cors());
+
+//{
+  //origin: 'https://bandobot.xyz/proxy',
+  //credentials: true
+ // }
 
 
 
