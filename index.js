@@ -18,7 +18,7 @@ const cors = require('cors');
 //app.use(cors());
 //app.use(cors({ origin: '*' }));
 app.use(cors({
-  origin: '/proxy',
+  origin: 'https://bandobot.xyz/proxy',
   credentials: true
   }));
 
