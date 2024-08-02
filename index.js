@@ -26,8 +26,8 @@ const cors = require('cors');
 const { createProxyMiddleware } = require('http-proxy-middleware');
 
 const options = {
-    key: fs.readFileSync(path.join(__dirname, 'path/to/your/private.key')),
-    cert: fs.readFileSync(path.join(__dirname, 'path/to/your/certificate.crt'))
+    key: fs.readFileSync(path.join(__dirname, './ssl/bandobot.key')),
+    cert: fs.readFileSync(path.join(__dirname, './ssl/bandobot.crt'))
 };
 
 const corsProxy = createProxyMiddleware({
