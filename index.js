@@ -17,31 +17,11 @@ const cors = require('cors');
 // Use the cors middleware
 //app.use(cors());
 //app.use(cors({ origin: '*' }));
-//app.use(cors({
-  //  origin: '*', // Allows all origins
-  //  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed HTTP methods
- //   allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers
-//}));
+app.use(cors({
+  origin: '/proxy',
+  credentials: true
+  }));
 
-const { createProxyMiddleware } = require('http-proxy-middleware');
-
-const options = {
-    key: fs.readFileSync(path.join(__dirname, './ssl/bandobot.key')),
-    cert: fs.readFileSync(path.join(__dirname, './ssl/bandobot.crt'))
-};
-
-const corsProxy = createProxyMiddleware({
-    target: 'https://cdn.discordapp.com',
-    changeOrigin: true,
-    pathRewrite: {
-        '^/proxy': '', // remove /proxy from the URL path
-    },
-    onProxyRes: (proxyRes) => {
-        proxyRes.headers['Access-Control-Allow-Origin'] = '*'; // Allow CORS
-    }
-});
-
-app.use('/proxy', corsProxy);
 
 
 app.use(express.json()); 
@@ -217,10 +197,6 @@ var envthing;
 
 
 
-https.createServer(options, app).listen(8080, () => {
-    console.log('CORS Proxy server running on https://localhost:3000');
-});
-
 //=============================================================================================================================
 
 
@@ -228,9 +204,9 @@ https.createServer(options, app).listen(8080, () => {
  // const httpServer = http.createServer(app);
     // const httpsServer = https.createServer(options, app);
 	// const HTTP_PORT = process.env.HTTP_PORT || 80;
-//const HTTP_PORT = 8080
+const HTTP_PORT = 8080
 //try{
- //  httpServer.listen(HTTP_PORT)
+httpServer.listen(HTTP_PORT)
 //}catch(err) {
 //	console.error(err.stack)
 //}
