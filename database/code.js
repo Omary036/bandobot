@@ -11,6 +11,8 @@ userPerms: String || 'Default',
 botPerms: String || 'Default',
 usage: String || 'No usage',
 set: String || 'Enable',
+cooldown: String || '0',
+category: String || 'No category',
 });
 
 const test = mongoose.model("discord", result);
