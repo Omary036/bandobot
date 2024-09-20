@@ -26,7 +26,7 @@ const eventModel = require('./database/code.js')
 
 app.use(express.json()); 
 app.use(express.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+//app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/img', express.static(path.join(__dirname, 'img')));
 app.use('/js', express.static(path.join(__dirname, 'js')));
