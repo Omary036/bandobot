@@ -9,15 +9,13 @@ const app = express();
 const PORT = process.env.PORT || 8080; // Change to the desired HTTPS port
 const fs = require('fs');
 const websiteEvent = require('./database/website.js')
-const bodyParser = require('body-parser');
+//const bodyParser = require('body-parser');
 
 const eventModel = require('./database/code.js')
-const cors = require('cors');
+//const cors = require('cors');
 
-// Use the cors middleware
-//app.use(cors());
 //app.use(cors({ origin: '*' }));
-app.use(cors());
+//app.use(cors());
 
 //{
   //origin: 'https://bandobot.xyz/proxy',
@@ -203,8 +201,8 @@ var envthing;
 
 
 
- // const httpServer = http.createServer(app);
-    // const httpsServer = https.createServer(options, app);
+const httpServer = http.createServer(app);
+const httpsServer = https.createServer(options, app);
 	// const HTTP_PORT = process.env.HTTP_PORT || 80;
 const HTTP_PORT = 8080
 //try{
