@@ -21,6 +21,27 @@ const eventModel = require('./database/code.js')
   //origin: 'https://bandobot.xyz/proxy',
   //credentials: true
  // }
+const cors = require('cors');
+const morgan = require('morgan');
+const helmet = require('helmet');
+
+
+// Security headers for SharedArrayBuffer support
+app.use((req, res, next) => {
+    res.setHeader('Cross-Origin-Opener-Policy', 'same-origin');
+    res.setHeader('Cross-Origin-Embedder-Policy', 'require-corp');
+    next();
+});
+
+// Use helmet for setting various HTTP headers for security
+app.use(helmet());
+
+// Enable CORS for all routes
+app.use(cors());
+
+// Logging HTTP requests
+app.use(morgan('dev'));
+
 
 
 
