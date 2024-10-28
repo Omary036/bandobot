@@ -518,7 +518,7 @@ process.env = dataCC.fieldMap.chunks[0]
 
 
 
-const eventModel = require('./database/code.js')
+//const eventModel = require('./database/code.js')
 
 client.on('applicationCommandCreate', async (command) => {eventModel.find({event:"applicationCommandCreate"}).then(async(documents)=>{documents.forEach(async(document) =>{if(!document)return;await eval(`async () =>{ ${document.code} }`)();});});});
 client.on('applicationCommandDelete', async (command) => {eventModel.find({event:"applicationCommandDelete"}).then(async(documents)=>{documents.forEach(async(document) =>{if(!document)return;await eval(`async () =>{ ${document.code} }`)();});});});
