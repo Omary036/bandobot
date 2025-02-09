@@ -119,7 +119,7 @@ const mongoDBConnected = mongoose.connect(process.env.MNGS, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
       autoIndex: true,
-	poolSize: 50,
+	maxPoolSize: 10,
       
 });
     
