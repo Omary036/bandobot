@@ -119,6 +119,7 @@ const mongoDBConnected = mongoose.connect(process.env.MNGS, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
       autoIndex: true,
+	poolSize: 50,
       
 });
     
@@ -521,7 +522,7 @@ process.env = dataCC.fieldMap.chunks[0]
 }
 
 async function ping2(message) {
-    if(message.content === 'bndping2') {
+    if(message.content.toLowerCase() === 'bndping2') {
         await message.channel.send(`🏓Latency is ${Date.now() - message.createdTimestamp}ms. API Latency is ${Math.round(client.ws.ping)}ms`);
     }
 }
